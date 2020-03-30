@@ -8,7 +8,6 @@ const Toolbar = props => {
     <PageHeader
       ghost={false}
       title="Melodious"
-      subTitle="This is a subtitle"
       className="toolbar__container"
     />
   );

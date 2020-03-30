@@ -6,7 +6,7 @@ const playlistId   = 7452608704;
 
 const playlist = async () => {
   const res = await axios.get(`${deezerApiUrl}/playlist/${playlistId}`);
-  console.log(res.data);
+  return res;
 }
 
 export default {

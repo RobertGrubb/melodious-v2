@@ -16,7 +16,10 @@ export default {
     volume: 100
   },
 
-  tracks: [],
+  trackData: {
+    fetched: false,
+    tracks: []
+  },
 
   ...actions
 };

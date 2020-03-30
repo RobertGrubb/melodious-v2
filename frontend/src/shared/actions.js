@@ -4,8 +4,24 @@
  * ==============================
  */
 
+export const setTrack = key => state => {
+  return {
+    player: {
+      ...state.player,
+      currentTrack: key,
+      playing: true
+    }
+  }
+}
+
  export const setTracks = tracks => state => {
-   return { tracks };
+   let newTracks = {
+     ...state.trackData,
+     fetched: true,
+     tracks: tracks
+   };
+
+   return { trackData: newTracks };
  }
 
 /**
@@ -28,28 +44,57 @@ export const updateTime = seconds => state => {
 
 export const nextTrack = () => state => {
   let player = state.player;
-  if (player.currentTrack === false) player.currentTrack = 0;
-  else player.currentTrack++;
-  if (player.currentTrack > player.tracks.length) player.currentTrack = 0;
-  return { player };
+  let currentTrack = player.currentTrack;
+
+  if (currentTrack === false) currentTrack = 0;
+  else currentTrack++;
+  if (currentTrack > (state.trackData.tracks.length - 1)) currentTrack = 0;
+
+  return {
+    player: {
+      ...state.player,
+      playing: true,
+      currentTrack: currentTrack
+    }
+  };
 }
 
-export const previosTrack = () => state => {
+export const previousTrack = () => state => {
   let player = state.player;
-  if (player.currentTrack === false) player.currentTrack = 0;
-  else player.currentTrack--;
-  if (player.currentTrack < 0) player.currentTrack = (player.tracks.length -1);
-  return { player };
+  let currentTrack = player.currentTrack;
+
+  if (currentTrack === false) currentTrack = 0;
+  else currentTrack--;
+  if (currentTrack < 0) currentTrack = (state.trackData.tracks.length -1);
+
+  return {
+    player: {
+      ...state.player,
+      playing: true,
+      currentTrack: currentTrack
+    }
+  };
 }
 
 export const play = () => state => {
-  let player = state.player;
-  player.playing = true;
-  return { player };
+  let currentTrack = state.player.currentTrack;
+
+  if (currentTrack === false) currentTrack = 0;
+
+  return {
+    player: {
+      ...state.player,
+      playing: true,
+      currentTrack: currentTrack
+    }
+  };
 }
 
 export const pause = () => state => {
-  let player = state.player;
-  player.playing = false;
-  return { player };
+  return {
+    player: {
+      ...state.player,
+      playing: false
+    }
+  };
 }

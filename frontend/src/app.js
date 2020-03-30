@@ -1,19 +1,30 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRoutes } from 'hookrouter';
+import { subscribe } from 'react-contextual';
 import Layout from './layout';
 import routes from './routes';
-
 import deezer from './shared/libs/deezer';
 
-const App = () => {
+const App = props => {
   const route = useRoutes(routes);
+  const [loading, setLoading] = useState(false);
 
-  const test = async () => {
-    await deezer.playlist();
+  const retrieveTracks = async () => {
+    if (!props.trackData.fetched) {
+      setLoading(true);
+      const playlistData = await deezer.playlist();
+      props.setTracks(playlistData.data.tracks.data);
+
+      setLoading(false);
+    }
+  }
+
+  const playerLoaded = () => {
+
   }
 
   useEffect(() => {
-    test();
+    retrieveTracks();
   }, []);
 
   return (
@@ -23,4 +34,4 @@ const App = () => {
   );
 }
 
-export default App;
+export default subscribe()(App);

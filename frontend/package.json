@@ -10,6 +10,8 @@
     "axios": "^0.19.2",
     "deezer-public-api": "^1.0.1",
     "hookrouter": "^1.2.3",
+    "moment": "^2.24.0",
+    "moment-duration-format": "^2.3.2",
     "node-sass": "^4.13.1",
     "react": "^16.13.1",
     "react-contextual": "^5.0.2",

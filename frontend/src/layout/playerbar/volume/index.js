@@ -1,4 +1,5 @@
 import React from 'react';
+import { subscribe } from 'react-contextual';
 import { Slider, Row, Col} from 'antd';
 import { SoundOutlined } from '@ant-design/icons';
 import './volume.scss';
@@ -11,11 +12,11 @@ const Volume = props => {
           <SoundOutlined style={{position: 'relative', top: 4}} />
         </Col>
         <Col span={20}>
-          <Slider defaultValue={30} />
+          <Slider defaultValue={props.player.volume} />
         </Col>
       </Row>
     </div>
   );
 }
 
-export default Volume;
+export default subscribe()(Volume);
