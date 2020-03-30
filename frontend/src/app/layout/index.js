@@ -1,10 +1,9 @@
 import React from 'react';
-
-import styles from './layout.scss';
+import './layout.scss';
 
 const Layout = props => {
   return (
-    <div className={styles.main}>
+    <div className="root">
       {props.children}
     </div>
   );
