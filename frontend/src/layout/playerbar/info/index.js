@@ -1,16 +1,17 @@
 import React from 'react';
+import { subscribe } from 'react-contextual';
 import './info.scss';
 
 const Info = props => {
   return (
     <div className="info__container">
-      <img className="cover" src="//placehold.it/120x120" />
+      <img className="cover" src={props.songInfo.cover} />
       <div className="label">
-        <div className="title">Something Here</div>
-        <div className="artist">Artist Name</div>
+        <div className="title">{props.songInfo.title}</div>
+        <div className="artist">{props.songInfo.artist}</div>
       </div>
     </div>
   );
 }
 
-export default Info;
+export default subscribe()(Info);
