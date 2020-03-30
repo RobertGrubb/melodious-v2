@@ -1,4 +1,5 @@
 import React from 'react';
+import { navigate } from 'hookrouter';
 import './navigation.scss';
 import { Menu, Button } from 'antd';
 import {
@@ -8,6 +9,11 @@ import {
 } from '@ant-design/icons';
 
 const Navigation = props => {
+
+  const goTo = (url) => {
+    navigate(url);
+  };
+
   return (
     <div className="navigation__container">
       <div className="logo" />
@@ -17,11 +23,11 @@ const Navigation = props => {
           mode="inline"
           theme="dark"
         >
-        <Menu.Item key="1">
+        <Menu.Item key="1" onClick={goTo.bind(this, '/')}>
           <HomeOutlined />
           <span>Home</span>
         </Menu.Item>
-        <Menu.Item key="2">
+        <Menu.Item key="2" onClick={goTo.bind(this, '/test')}>
           <SearchOutlined />
           <span>Browse</span>
         </Menu.Item>
