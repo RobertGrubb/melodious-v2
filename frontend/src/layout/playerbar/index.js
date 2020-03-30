@@ -8,14 +8,14 @@ import './playerbar.scss';
 const PlayerBar = props => {
   return (
     <div className="playerbar__container">
-      <Row>
-        <Col span={8} className="playerbar__column info">
+      <Row type="flex" style={{alignItems: 'center'}}>
+        <Col span={6} className="playerbar__column info">
           <Info />
         </Col>
-        <Col span={8} className="playerbar__column controls">
+        <Col span={12} className="playerbar__column controls">
           <Controls />
         </Col>
-        <Col span={8} className="playerbar__column volume">
+        <Col span={6} className="playerbar__column volume">
           <Volume />
         </Col>
       </Row>

@@ -7,14 +7,15 @@
 
   .playerbar__column {
     color: #fff;
+    padding: 25px;
 
     &.info {
       text-align: left;
-      padding: 25px;
     }
 
     &.controls {
       text-align: center;
+      padding: 5px 25px;
     }
 
     &.volume {
