@@ -34,12 +34,6 @@ export const setTrack = key => state => {
  * ==============================
  */
 
-export const updateVolume = percent => state => {
-  let player = state.player;
-  player.volume = percent;
-  return { player };
-}
-
 export const updateTime = seconds => state => {
   let player = state.player;
   player.currentTime = seconds;
