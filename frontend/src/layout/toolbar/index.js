@@ -3,6 +3,7 @@ import { PageHeader } from 'antd';
 import './toolbar.scss';
 
 const Toolbar = props => {
+  console.log(process.env);
   return (
     <PageHeader
       ghost={false}

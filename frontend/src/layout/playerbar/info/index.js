@@ -5,7 +5,7 @@ import './info.scss';
 const Info = props => {
   return (
     <div className="info__container">
-      <img className="cover" src={props.songInfo.cover} />
+      <img src="Artist Cover" className="cover" src={props.songInfo.cover} />
       <div className="label">
         <div className="title">{props.songInfo.title}</div>
         <div className="artist">{props.songInfo.artist}</div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Slider, Row, Col, Icon } from 'antd';
+import { Slider, Row, Col} from 'antd';
 import { SoundOutlined } from '@ant-design/icons';
 import './volume.scss';
 

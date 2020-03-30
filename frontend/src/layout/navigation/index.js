@@ -1,7 +1,7 @@
 import React from 'react';
 import { navigate } from 'hookrouter';
 import './navigation.scss';
-import { Menu, Button } from 'antd';
+import { Menu } from 'antd';
 import {
   HomeOutlined,
   SearchOutlined,
@@ -19,7 +19,6 @@ const Navigation = props => {
       <div className="logo" />
       <Menu
           defaultSelectedKeys={['1']}
-          defaultOpenKeys={['sub1']}
           mode="inline"
           theme="dark"
         >
