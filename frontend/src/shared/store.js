@@ -1,3 +1,7 @@
+import * as actions from './actions';
+
 export default {
-  appTitle: 'Melodious'
+  appTitle: 'Melodious',
+
+  ...actions
 };

@@ -8734,6 +8734,13 @@ react-app-polyfill@^1.0.6:
     regenerator-runtime "^0.13.3"
     whatwg-fetch "^3.0.0"
 
+react-contextual@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/react-contextual/-/react-contextual-5.0.2.tgz#039c8ac9368af71049bb0433b2bf4cde63393721"
+  integrity sha512-BxlI+lT0BLcNX9mNKaNNrQAWO+MCEbmCrEZxlObBOJdk6PhbY+9ww3AVbO8/K6gDNt1GioNO4I6zKVVKMGePCg==
+  dependencies:
+    tiny-uuid "^1.0.0"
+
 react-dev-utils@^10.2.1:
   version "10.2.1"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-10.2.1.tgz#f6de325ae25fa4d546d09df4bb1befdc6dd19c19"
@@ -10252,6 +10259,11 @@ timsort@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/timsort/-/timsort-0.3.0.tgz#405411a8e7e6339fe64db9a234de11dc31e02bd4"
   integrity sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=
+
+tiny-uuid@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/tiny-uuid/-/tiny-uuid-1.0.0.tgz#aea34a2f89c7b71435eb38af3139aa3a025351ca"
+  integrity sha1-rqNKL4nHtxQ16zivMTmqOgJTUco=
 
 tmp@^0.0.33:
   version "0.0.33"

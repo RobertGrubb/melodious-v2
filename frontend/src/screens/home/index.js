@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { subscribe } from 'react-contextual';
 import './home.scss';
 
 const Home = props => {
@@ -7,4 +8,4 @@ const Home = props => {
   );
 }
 
-export default Home;
+export default subscribe()(Home);

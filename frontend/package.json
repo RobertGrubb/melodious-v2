@@ -9,6 +9,7 @@
     "hookrouter": "^1.2.3",
     "node-sass": "^4.13.1",
     "react": "^16.13.1",
+    "react-contextual": "^5.0.2",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1"
   },
