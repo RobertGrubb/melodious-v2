@@ -3,7 +3,7 @@ import { useRoutes } from 'hookrouter';
 import { subscribe } from 'react-contextual';
 import Layout from './layout';
 import routes from './routes';
-import deezer from './shared/libs/deezer';
+import api from './shared/libs/api';
 
 const App = props => {
   const route = useRoutes(routes);
@@ -12,9 +12,8 @@ const App = props => {
   const retrieveTracks = async () => {
     if (!props.trackData.fetched) {
       setLoading(true);
-      const playlistData = await deezer.playlist();
-      props.setTracks(playlistData.data.tracks.data);
-
+      const trackData = await api.tracks();
+      props.setTracks(trackData);
       setLoading(false);
     }
   }

@@ -5,11 +5,15 @@
  */
 
 export const setTrack = key => state => {
+  if (state.player.audio) state.player.audio.pause();
+
   return {
     player: {
       ...state.player,
       currentTrack: key,
-      playing: true
+      currentTime: 0,
+      state: 'play',
+      audio: new Audio(`${state.trackData.tracks[key].lqMediaUrl}`)
     }
   }
 }
@@ -44,6 +48,9 @@ export const updateTime = seconds => state => {
 
 export const nextTrack = () => state => {
   let player = state.player;
+
+  if (player.audio) player.audio.pause();
+
   let currentTrack = player.currentTrack;
 
   if (currentTrack === false) currentTrack = 0;
@@ -53,8 +60,10 @@ export const nextTrack = () => state => {
   return {
     player: {
       ...state.player,
-      playing: true,
-      currentTrack: currentTrack
+      state: 'play',
+      currentTrack: currentTrack,
+      currentTime: 0,
+      audio: new Audio(`${state.trackData.tracks[currentTrack].lqMediaUrl}`)
     }
   };
 }
@@ -63,6 +72,8 @@ export const previousTrack = () => state => {
   let player = state.player;
   let currentTrack = player.currentTrack;
 
+  if (player.audio) player.audio.pause();
+
   if (currentTrack === false) currentTrack = 0;
   else currentTrack--;
   if (currentTrack < 0) currentTrack = (state.trackData.tracks.length -1);
@@ -70,8 +81,10 @@ export const previousTrack = () => state => {
   return {
     player: {
       ...state.player,
-      playing: true,
-      currentTrack: currentTrack
+      state: 'play',
+      currentTrack: currentTrack,
+      currentTime: 0,
+      audio: new Audio(`${state.trackData.tracks[currentTrack].lqMediaUrl}`)
     }
   };
 }
@@ -84,7 +97,7 @@ export const play = () => state => {
   return {
     player: {
       ...state.player,
-      playing: true,
+      state: 'play',
       currentTrack: currentTrack
     }
   };
@@ -94,7 +107,7 @@ export const pause = () => state => {
   return {
     player: {
       ...state.player,
-      playing: false
+      state: 'pause'
     }
   };
 }

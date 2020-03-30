@@ -10,10 +10,11 @@ export default {
   },
 
   player: {
-    playing: false,
+    state: 'stopped',
     currentTrack: false,
     currentTime: 0,
-    volume: 100
+    volume: 100,
+    audio: null
   },
 
   trackData: {

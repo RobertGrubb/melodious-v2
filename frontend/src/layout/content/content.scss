@@ -3,10 +3,13 @@
 .content__container {
   width: calc(100% - 250px);
   height: calc(100vh - 100px);
+  overflow: hidden;
   background: #fff;
   float: left;
 
   .inner {
+    height: calc(100% - 64px);
     padding: 15px;
+    overflow-y: scroll;
   }
 }
