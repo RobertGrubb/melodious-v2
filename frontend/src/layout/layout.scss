@@ -1,3 +1,11 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 body {
   margin: 0;
   overflow: hidden;
@@ -7,4 +15,10 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+}
+
+.clear {
+  content: ' ';
+  clear: both;
+  width: 100%;
 }

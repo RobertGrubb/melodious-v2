@@ -1,0 +1,24 @@
+@import '../../shared/styles/variables';
+
+.playerbar__container {
+  height: $playerBarHeight;
+  width: 100%;
+  background: #002141;
+
+  .playerbar__column {
+    color: #fff;
+
+    &.info {
+      text-align: left;
+      padding: 25px;
+    }
+
+    &.controls {
+      text-align: center;
+    }
+
+    &.volume {
+      text-align: center;
+    }
+  }
+}

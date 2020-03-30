@@ -1,0 +1,12 @@
+@import '../../shared/styles/variables';
+
+.content__container {
+  width: calc(100% - 250px);
+  height: calc(100vh - 100px);
+  background: #fff;
+  float: left;
+
+  .inner {
+    padding: 15px;
+  }
+}

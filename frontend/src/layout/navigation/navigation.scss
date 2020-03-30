@@ -1,0 +1,14 @@
+@import '../../shared/styles/variables';
+
+.navigation__container {
+  width: 250px;
+  height: calc(100vh - 100px);
+  float: left;
+  background: #001529;
+
+  .logo {
+    height: 30px;
+    margin: 10px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+}

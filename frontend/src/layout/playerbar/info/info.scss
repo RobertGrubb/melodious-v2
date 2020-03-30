@@ -1,0 +1,21 @@
+.info__container {
+
+  .cover {
+    width: 50px;
+    height: 50px;
+    float: left;
+  }
+
+  .label {
+    padding-left: 15px;
+    display: inline-block;
+
+    .title {
+      font-size: 18px;
+    }
+
+    .artist {
+      font-size: 13px;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { subscribe } from 'react-contextual';
 import './home.scss';
 
