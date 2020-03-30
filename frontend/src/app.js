@@ -4,11 +4,11 @@ import Layout from './layout';
 import routes from './routes';
 
 const App = () => {
-  const routeResult = useRoutes(routes);
+  const route = useRoutes(routes);
 
   return (
     <Layout>
-      {routeResult}
+      {route}
     </Layout>
   );
 }
