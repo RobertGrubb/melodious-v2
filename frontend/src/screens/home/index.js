@@ -32,11 +32,18 @@ const Home = props => {
       key: index,
       track: track.title,
       artist: track.artist.name,
-      duration: length
+      duration: length,
+      cover: '//placehold.it/24x24'
     }
   });
 
   const columns = [
+    {
+      title: '',
+      dataIndex: 'cover',
+      key: 'cover',
+      render: image => <img src={image} height={24} width={24} />
+    },
     {
       title: 'Track',
       dataIndex: 'track',
