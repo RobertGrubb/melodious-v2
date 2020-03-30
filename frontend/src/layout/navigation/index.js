@@ -10,9 +10,7 @@ import {
 
 const Navigation = props => {
 
-  const goTo = (url) => {
-    navigate(url);
-  };
+  const goTo = (url) => navigate(url);
 
   return (
     <div className="navigation__container">

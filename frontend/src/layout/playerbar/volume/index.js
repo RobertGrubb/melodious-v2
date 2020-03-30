@@ -7,11 +7,13 @@ import './volume.scss';
 const Volume = props => {
   const [volume, setVolume] = useState(0.5);
 
+  // Update the volume, but first convert it to a decimal.
   const updateVolume = (val) => {
     setVolume((val ? (val / 100) : 0))
     if (props.player.audo) props.player.audio.volume = (val ? (val / 100) : 0);
   }
 
+  // If there is an audio object, set the volume.
   useEffect(() => {
     if (props.player.audio) props.player.audio.volume = volume;
   }, [props.player.audio, volume])
