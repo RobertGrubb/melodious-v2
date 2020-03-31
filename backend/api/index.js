@@ -49,17 +49,7 @@ app.options('*', cors(corsOptions));
 app.get('/tracks', cors(corsOptions), async (req, res) => {
   const data = db.get('tracks').value();
 
-  response = data.map((track, index) => {
-    return {
-      id: track.raw.id,
-      artist: track.raw.snippet.channelTitle,
-      title: track.raw.snippet.title,
-      duration: youtube.convertTime(track.raw.contentDetails.duration),
-      cover: track.raw.snippet.thumbnails.default
-    }
-  });
-
-  return res.status(200).json(response);
+  return res.status(200).json(data);
 })
 
 /**

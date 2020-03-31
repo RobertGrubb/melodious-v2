@@ -24,6 +24,36 @@ const data = async (id) => {
   }
 }
 
+const video = async (id) => {
+
+  try {
+    const res = await youtube.getVideoByID(id);
+    return res;
+  } catch (error) {
+    return error;
+  }
+}
+
+const channelData = async (channelId) => {
+
+  try {
+    const res = await youtube.getChannelByID(channelId);
+    return res;
+  } catch (error) {
+    return error;
+  }
+}
+
+const playlistData = async (playlistId) => {
+
+  try {
+    const res = await youtube.getPlaylistByID(playlistId);
+    return res;
+  } catch (error) {
+    return error;
+  }
+}
+
 /**
  * Converts duration string from youtube api into seconds
  * @param {int} duration
@@ -64,5 +94,8 @@ const convertTime = (duration) => {
 
 module.exports = {
   data,
+  video,
+  channelData,
+  playlistData,
   convertTime
 }

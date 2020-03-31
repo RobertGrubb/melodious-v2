@@ -16,10 +16,16 @@ const Toolbar = props => {
     ];
   }
 
+  let title = "Popular Songs";
+
+  if (props.trackData.fetched && props.trackData.tracks) {
+    title += ` (${props.trackData.tracks.length})`;
+  }
+
   return (
     <PageHeader
       ghost={false}
-      title="Popular Songs"
+      title={title}
       className="toolbar__container"
       extra={buttons}
     />

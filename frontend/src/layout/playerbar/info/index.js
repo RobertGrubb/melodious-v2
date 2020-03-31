@@ -5,12 +5,17 @@ import './info.scss';
 const Info = props => {
 
   let title = "";
+  let artist = "";
 
-  if (props.player.currentTrack !== false)
+  if (props.player.currentTrack !== false) {
     title = props.trackData.tracks[props.player.currentTrack].title;
+    artist = props.trackData.tracks[props.player.currentTrack].artist;
+  }
 
-  if (title.length >= 25)
+  if (title.length >= 25) {
     title = title.substring(0, 25) + '...';
+    artist = artist.substring(0, 25) + '...';
+  }
 
   return (
     <>
@@ -21,7 +26,7 @@ const Info = props => {
             <img className="cover" src={props.trackData.tracks[props.player.currentTrack].cover.url} height={50} width="auto" />
             <div className="label">
               <div className="title">{title}</div>
-              <div className="artist">{props.trackData.tracks[props.player.currentTrack].artist}</div>
+              <div className="artist">{artist}</div>
             </div>
           </div>
         )
