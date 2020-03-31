@@ -1,15 +1,19 @@
 const axios = require('axios');
-const {
-  config
-} = require('dotenv');
+const { config } = require('dotenv');
 const YouTube = require('simple-youtube-api');
 
-
+// Configure .env
 config();
 
+// Setup new youtube client
 const youtube = new YouTube(process.env.YOUTUBE_API_KEY);
 
+/**
+ * Gets data for a youtube video
+ * @param {string} id
+ */
 const data = async (id) => {
+  // Setup the video url
   const videoUrl = 'https://www.youtube.com/watch?v=' + id;
 
   try {
@@ -20,6 +24,10 @@ const data = async (id) => {
   }
 }
 
+/**
+ * Converts duration string from youtube api into seconds
+ * @param {int} duration
+ */
 const convertTime = (duration) => {
   var a = duration.match(/\d+/g);
 
