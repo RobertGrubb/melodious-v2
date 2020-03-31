@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-contextual';
+
 import App from './app';
 import * as serviceWorker from './serviceWorker';
 import store from './shared/store';
