@@ -1,11 +1,21 @@
 const http = require('http');
 const express = require('express');
 const cors = require('cors');
+const youtubeAudioStream = require('@isolution/youtube-audio-stream');
+const low = require('lowdb');
+const FileSync = require('lowdb/adapters/FileSync');
+
 const errors = require('./errors');
-const es = require('./libs/epidemicSound.js');
+const youtube = require('./libs/youtube');
+
 
 const app = express();
 const port = 3007;
+
+const adapter = new FileSync('db.json');
+const db = low(adapter);
+
+db.defaults({ tracks: [] }).write()
 
 const whitelist = [
   'http://localhost:3000'
@@ -22,10 +32,41 @@ const corsOptions = {
 app.options('*', cors(corsOptions));
 
 app.get('/tracks', cors(corsOptions), async (req, res) => {
-  const genre = req.query.genre;
-  console.log(`Called for genre ${genre}`);
-  const data = await es.tracksByGenre(genre);
-  return res.status(200).json(data);
+  const data = db.get('tracks').value();
+
+  response = data.map((track, index) => {
+    return {
+      id: track.raw.id,
+      artist: track.raw.snippet.channelTitle,
+      title: track.raw.snippet.title,
+      duration: youtube.convertTime(track.raw.contentDetails.duration),
+      cover: track.raw.snippet.thumbnails.default
+    }
+  });
+
+  return res.status(200).json(response);
+})
+
+app.get('/track/add/:id', cors(corsOptions), async (req, res) => {
+  const id = req.params.id;
+  const data = await youtube.data(id);
+  db.get('tracks').push(data).write();
+  return res.status(200).json({success: true});
+})
+
+app.get('/stream/:id', async (req, res) => {
+  const requestUrl = `http://youtube.com/watch?v=${req.params.id}`;
+  youtubeAudioStream(requestUrl)
+    .then(stream => {
+      console.log('test');
+      stream.emitter.on('error', err => {
+        console.log(err);
+      });
+      stream.pipe(res);
+    })
+    .catch(err => {
+      console.log(err);
+    });
 })
 
 // ===================================

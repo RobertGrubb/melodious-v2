@@ -13,7 +13,7 @@ const Controls = props => {
 
   // Play the track
   const play = async () => {
-    await props.setTrack(props.player.currentTrack ? props.player.currentTrack : 0);
+    await props.setTrack(props.player.currentTrack !== false ? props.player.currentTrack : 0);
   };
 
   // Pause the track
@@ -136,10 +136,10 @@ const Controls = props => {
           <Slider
             tooltipVisible={false}
             onChange={setAudioTime}
-            disabled={!props.player.currentTrack}
+            disabled={props.player.currentTrack === false}
             value={time}
             min={0}
-            max={props.player.currentTrack ? props.trackData.tracks[props.player.currentTrack].duration : 0}
+            max={props.player.currentTrack !== false ? props.trackData.tracks[props.player.currentTrack].duration : 0}
           />
         </Col>
         <Col span={6} style={{textAlign: 'right', fontSize: 9}}><span>{(length !== '00:00' ? length : '')}</span></Col>

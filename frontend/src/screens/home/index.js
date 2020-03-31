@@ -33,10 +33,11 @@ const Home = props => {
     // Return the data in an object that columns can easily use.
     return {
       key: index,
+      id: track.id,
       track: track.title,
-      artist: track.artist.name,
+      artist: track.artist,
       duration: length,
-      cover: '//placehold.it/24x24'
+      cover: track.cover.url
     }
   });
 
@@ -45,7 +46,7 @@ const Home = props => {
       title: '',
       dataIndex: 'cover',
       key: 'cover',
-      render: image => <img alt="cover" src={image} height={24} width={24} />
+      render: image => <img alt="cover" src={image} height={24} width="auto" />
     },
     {
       title: 'Track',

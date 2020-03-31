@@ -13,7 +13,7 @@ export const setTrack = key => state => {
       currentTrack: key,
       currentTime: 0,
       state: 'play',
-      audio: new Audio(`${state.trackData.tracks[key].lqMediaUrl}`)
+      audio: new Audio(`${process.env.REACT_APP_API_URL}/stream/${state.trackData.tracks[key].id}`)
     }
   }
 }
@@ -54,7 +54,7 @@ export const nextTrack = () => state => {
       state: 'play',
       currentTrack: currentTrack,
       currentTime: 0,
-      audio: new Audio(`${state.trackData.tracks[currentTrack].lqMediaUrl}`)
+      audio: new Audio(`${process.env.REACT_APP_API_URL}/stream/${state.trackData.tracks[currentTrack].id}`)
     }
   };
 }
@@ -73,7 +73,7 @@ export const previousTrack = () => state => {
       state: 'play',
       currentTrack: currentTrack,
       currentTime: 0,
-      audio: new Audio(`${state.trackData.tracks[currentTrack].lqMediaUrl}`)
+      audio: new Audio(`${process.env.REACT_APP_API_URL}/stream/${state.trackData.tracks[currentTrack].id}`)
     }
   };
 }

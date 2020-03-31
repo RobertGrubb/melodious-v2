@@ -1,0 +1,524 @@
+{
+  "tracks": [
+    {
+      "type": "video",
+      "raw": {
+        "kind": "youtube#video",
+        "etag": "\"ksCrgYQhtFrXgbHAhi9Fo5t0C2I/LRp_-juMOWUUkzjLcNDMUYyxGK4\"",
+        "id": "K4DyBUG242c",
+        "snippet": {
+          "publishedAt": "2015-07-09T16:34:35.000Z",
+          "channelId": "UC_aEa8K-EOJ3D6gOs7HcyNg",
+          "title": "Cartoon - On & On (feat. Daniel Levi) [NCS Release]",
+          "description": "NCS: Music Without Limitations\n\nNCS Spotify: http://spoti.fi/NCS\n\nFree Download / Stream: http://ncs.io/onandon\n\n▽ Connect with NCS\nFacebook http://facebook.com/NoCopyrightSounds\nTwitch http://twitch.tv/nocopyrightsounds\nTwitter http://twitter.com/NCSounds\nSpotify http://spoti.fi/NCS\nSoundCloud http://soundcloud.com/nocopyrightsounds\nGoogle+ http://google.com/+nocopyrightsounds\nInstagram http://instagram.com/nocopyrightsounds_\n\n▽ Follow Cartoon\nSoundCloud https://soundcloud.com/cartoonbaboon\nFacebook https://www.facebook.com/cartoondband\n\n▽ Follow Daniel Levi (vocalist)\nYoutube https://www.youtube.com/user/danielleviband/\nFacebook http://facebook.com/daniellevimusic\nInstagram https://www.instagram.com/danielleviviinalass/\nYouTube https://www.youtube.com/user/danielleviband/\nSpotify https://spoti.fi/2S8Jf5Y \n\n▽ NCS YouTube Playlists\nALL NCS Music Playlist: http://bit.ly/ALLNCSmusic\nNCS Drumstep:  http://bit.ly/NCSdrumstep\nNCS Melodic Dubstep:  http://bit.ly/MelodicDubstepNCS\nNCS House: http://bit.ly/NCShouse\nNCS Dubstep: http://bit.ly/NCSdubstep\nNCS Drum&Bass: http://bit.ly/NCSdrumandbass\nNCS Trap: http://bit.ly/NCStrap\nNCS Hardstyle: http://bit.ly/NCShardstyle\n\n🔑 Become a SuperFan → http://ncs.io/SuperFan\n🛍 NCS Merchandise → http://ncs.io/StoreID\n\n© Check out our Usage Policy on how to use NCS music in your videos: http://ncs.io/UsagePolicy\n\nTo request a commercial license visit: http://ncs.io/Commercial",
+          "thumbnails": {
+            "default": {
+              "url": "https://i.ytimg.com/vi/K4DyBUG242c/default.jpg",
+              "width": 120,
+              "height": 90
+            },
+            "medium": {
+              "url": "https://i.ytimg.com/vi/K4DyBUG242c/mqdefault.jpg",
+              "width": 320,
+              "height": 180
+            },
+            "high": {
+              "url": "https://i.ytimg.com/vi/K4DyBUG242c/hqdefault.jpg",
+              "width": 480,
+              "height": 360
+            },
+            "standard": {
+              "url": "https://i.ytimg.com/vi/K4DyBUG242c/sddefault.jpg",
+              "width": 640,
+              "height": 480
+            }
+          },
+          "channelTitle": "NoCopyrightSounds",
+          "tags": [
+            "Cartoon On & On (feat. Daniel Levi)",
+            "Cartoon - On & On",
+            "Cartoon",
+            "On & On",
+            "NCS",
+            "nocopyrightsounds",
+            "electronic"
+          ],
+          "categoryId": "10",
+          "liveBroadcastContent": "none",
+          "localized": {
+            "title": "Cartoon - On & On (feat. Daniel Levi) [NCS Release]",
+            "description": "NCS: Music Without Limitations\n\nNCS Spotify: http://spoti.fi/NCS\n\nFree Download / Stream: http://ncs.io/onandon\n\n▽ Connect with NCS\nFacebook http://facebook.com/NoCopyrightSounds\nTwitch http://twitch.tv/nocopyrightsounds\nTwitter http://twitter.com/NCSounds\nSpotify http://spoti.fi/NCS\nSoundCloud http://soundcloud.com/nocopyrightsounds\nGoogle+ http://google.com/+nocopyrightsounds\nInstagram http://instagram.com/nocopyrightsounds_\n\n▽ Follow Cartoon\nSoundCloud https://soundcloud.com/cartoonbaboon\nFacebook https://www.facebook.com/cartoondband\n\n▽ Follow Daniel Levi (vocalist)\nYoutube https://www.youtube.com/user/danielleviband/\nFacebook http://facebook.com/daniellevimusic\nInstagram https://www.instagram.com/danielleviviinalass/\nYouTube https://www.youtube.com/user/danielleviband/\nSpotify https://spoti.fi/2S8Jf5Y \n\n▽ NCS YouTube Playlists\nALL NCS Music Playlist: http://bit.ly/ALLNCSmusic\nNCS Drumstep:  http://bit.ly/NCSdrumstep\nNCS Melodic Dubstep:  http://bit.ly/MelodicDubstepNCS\nNCS House: http://bit.ly/NCShouse\nNCS Dubstep: http://bit.ly/NCSdubstep\nNCS Drum&Bass: http://bit.ly/NCSdrumandbass\nNCS Trap: http://bit.ly/NCStrap\nNCS Hardstyle: http://bit.ly/NCShardstyle\n\n🔑 Become a SuperFan → http://ncs.io/SuperFan\n🛍 NCS Merchandise → http://ncs.io/StoreID\n\n© Check out our Usage Policy on how to use NCS music in your videos: http://ncs.io/UsagePolicy\n\nTo request a commercial license visit: http://ncs.io/Commercial"
+          },
+          "defaultAudioLanguage": "en-US"
+        },
+        "contentDetails": {
+          "duration": "PT3M28S",
+          "dimension": "2d",
+          "definition": "hd",
+          "caption": "false",
+          "licensedContent": true,
+          "projection": "rectangular"
+        }
+      },
+      "full": true,
+      "kind": "youtube#video",
+      "id": "K4DyBUG242c",
+      "title": "Cartoon - On & On (feat. Daniel Levi) [NCS Release]",
+      "description": "NCS: Music Without Limitations\n\nNCS Spotify: http://spoti.fi/NCS\n\nFree Download / Stream: http://ncs.io/onandon\n\n▽ Connect with NCS\nFacebook http://facebook.com/NoCopyrightSounds\nTwitch http://twitch.tv/nocopyrightsounds\nTwitter http://twitter.com/NCSounds\nSpotify http://spoti.fi/NCS\nSoundCloud http://soundcloud.com/nocopyrightsounds\nGoogle+ http://google.com/+nocopyrightsounds\nInstagram http://instagram.com/nocopyrightsounds_\n\n▽ Follow Cartoon\nSoundCloud https://soundcloud.com/cartoonbaboon\nFacebook https://www.facebook.com/cartoondband\n\n▽ Follow Daniel Levi (vocalist)\nYoutube https://www.youtube.com/user/danielleviband/\nFacebook http://facebook.com/daniellevimusic\nInstagram https://www.instagram.com/danielleviviinalass/\nYouTube https://www.youtube.com/user/danielleviband/\nSpotify https://spoti.fi/2S8Jf5Y \n\n▽ NCS YouTube Playlists\nALL NCS Music Playlist: http://bit.ly/ALLNCSmusic\nNCS Drumstep:  http://bit.ly/NCSdrumstep\nNCS Melodic Dubstep:  http://bit.ly/MelodicDubstepNCS\nNCS House: http://bit.ly/NCShouse\nNCS Dubstep: http://bit.ly/NCSdubstep\nNCS Drum&Bass: http://bit.ly/NCSdrumandbass\nNCS Trap: http://bit.ly/NCStrap\nNCS Hardstyle: http://bit.ly/NCShardstyle\n\n🔑 Become a SuperFan → http://ncs.io/SuperFan\n🛍 NCS Merchandise → http://ncs.io/StoreID\n\n© Check out our Usage Policy on how to use NCS music in your videos: http://ncs.io/UsagePolicy\n\nTo request a commercial license visit: http://ncs.io/Commercial",
+      "thumbnails": {
+        "default": {
+          "url": "https://i.ytimg.com/vi/K4DyBUG242c/default.jpg",
+          "width": 120,
+          "height": 90
+        },
+        "medium": {
+          "url": "https://i.ytimg.com/vi/K4DyBUG242c/mqdefault.jpg",
+          "width": 320,
+          "height": 180
+        },
+        "high": {
+          "url": "https://i.ytimg.com/vi/K4DyBUG242c/hqdefault.jpg",
+          "width": 480,
+          "height": 360
+        },
+        "standard": {
+          "url": "https://i.ytimg.com/vi/K4DyBUG242c/sddefault.jpg",
+          "width": 640,
+          "height": 480
+        }
+      },
+      "publishedAt": "2015-07-09T16:34:35.000Z",
+      "channel": {
+        "type": "channel",
+        "raw": {
+          "kind": "youtube#video",
+          "etag": "\"ksCrgYQhtFrXgbHAhi9Fo5t0C2I/LRp_-juMOWUUkzjLcNDMUYyxGK4\"",
+          "id": "K4DyBUG242c",
+          "snippet": {
+            "publishedAt": "2015-07-09T16:34:35.000Z",
+            "channelId": "UC_aEa8K-EOJ3D6gOs7HcyNg",
+            "title": "Cartoon - On & On (feat. Daniel Levi) [NCS Release]",
+            "description": "NCS: Music Without Limitations\n\nNCS Spotify: http://spoti.fi/NCS\n\nFree Download / Stream: http://ncs.io/onandon\n\n▽ Connect with NCS\nFacebook http://facebook.com/NoCopyrightSounds\nTwitch http://twitch.tv/nocopyrightsounds\nTwitter http://twitter.com/NCSounds\nSpotify http://spoti.fi/NCS\nSoundCloud http://soundcloud.com/nocopyrightsounds\nGoogle+ http://google.com/+nocopyrightsounds\nInstagram http://instagram.com/nocopyrightsounds_\n\n▽ Follow Cartoon\nSoundCloud https://soundcloud.com/cartoonbaboon\nFacebook https://www.facebook.com/cartoondband\n\n▽ Follow Daniel Levi (vocalist)\nYoutube https://www.youtube.com/user/danielleviband/\nFacebook http://facebook.com/daniellevimusic\nInstagram https://www.instagram.com/danielleviviinalass/\nYouTube https://www.youtube.com/user/danielleviband/\nSpotify https://spoti.fi/2S8Jf5Y \n\n▽ NCS YouTube Playlists\nALL NCS Music Playlist: http://bit.ly/ALLNCSmusic\nNCS Drumstep:  http://bit.ly/NCSdrumstep\nNCS Melodic Dubstep:  http://bit.ly/MelodicDubstepNCS\nNCS House: http://bit.ly/NCShouse\nNCS Dubstep: http://bit.ly/NCSdubstep\nNCS Drum&Bass: http://bit.ly/NCSdrumandbass\nNCS Trap: http://bit.ly/NCStrap\nNCS Hardstyle: http://bit.ly/NCShardstyle\n\n🔑 Become a SuperFan → http://ncs.io/SuperFan\n🛍 NCS Merchandise → http://ncs.io/StoreID\n\n© Check out our Usage Policy on how to use NCS music in your videos: http://ncs.io/UsagePolicy\n\nTo request a commercial license visit: http://ncs.io/Commercial",
+            "thumbnails": {
+              "default": {
+                "url": "https://i.ytimg.com/vi/K4DyBUG242c/default.jpg",
+                "width": 120,
+                "height": 90
+              },
+              "medium": {
+                "url": "https://i.ytimg.com/vi/K4DyBUG242c/mqdefault.jpg",
+                "width": 320,
+                "height": 180
+              },
+              "high": {
+                "url": "https://i.ytimg.com/vi/K4DyBUG242c/hqdefault.jpg",
+                "width": 480,
+                "height": 360
+              },
+              "standard": {
+                "url": "https://i.ytimg.com/vi/K4DyBUG242c/sddefault.jpg",
+                "width": 640,
+                "height": 480
+              }
+            },
+            "channelTitle": "NoCopyrightSounds",
+            "tags": [
+              "Cartoon On & On (feat. Daniel Levi)",
+              "Cartoon - On & On",
+              "Cartoon",
+              "On & On",
+              "NCS",
+              "nocopyrightsounds",
+              "electronic"
+            ],
+            "categoryId": "10",
+            "liveBroadcastContent": "none",
+            "localized": {
+              "title": "Cartoon - On & On (feat. Daniel Levi) [NCS Release]",
+              "description": "NCS: Music Without Limitations\n\nNCS Spotify: http://spoti.fi/NCS\n\nFree Download / Stream: http://ncs.io/onandon\n\n▽ Connect with NCS\nFacebook http://facebook.com/NoCopyrightSounds\nTwitch http://twitch.tv/nocopyrightsounds\nTwitter http://twitter.com/NCSounds\nSpotify http://spoti.fi/NCS\nSoundCloud http://soundcloud.com/nocopyrightsounds\nGoogle+ http://google.com/+nocopyrightsounds\nInstagram http://instagram.com/nocopyrightsounds_\n\n▽ Follow Cartoon\nSoundCloud https://soundcloud.com/cartoonbaboon\nFacebook https://www.facebook.com/cartoondband\n\n▽ Follow Daniel Levi (vocalist)\nYoutube https://www.youtube.com/user/danielleviband/\nFacebook http://facebook.com/daniellevimusic\nInstagram https://www.instagram.com/danielleviviinalass/\nYouTube https://www.youtube.com/user/danielleviband/\nSpotify https://spoti.fi/2S8Jf5Y \n\n▽ NCS YouTube Playlists\nALL NCS Music Playlist: http://bit.ly/ALLNCSmusic\nNCS Drumstep:  http://bit.ly/NCSdrumstep\nNCS Melodic Dubstep:  http://bit.ly/MelodicDubstepNCS\nNCS House: http://bit.ly/NCShouse\nNCS Dubstep: http://bit.ly/NCSdubstep\nNCS Drum&Bass: http://bit.ly/NCSdrumandbass\nNCS Trap: http://bit.ly/NCStrap\nNCS Hardstyle: http://bit.ly/NCShardstyle\n\n🔑 Become a SuperFan → http://ncs.io/SuperFan\n🛍 NCS Merchandise → http://ncs.io/StoreID\n\n© Check out our Usage Policy on how to use NCS music in your videos: http://ncs.io/UsagePolicy\n\nTo request a commercial license visit: http://ncs.io/Commercial"
+            },
+            "defaultAudioLanguage": "en-US"
+          },
+          "contentDetails": {
+            "duration": "PT3M28S",
+            "dimension": "2d",
+            "definition": "hd",
+            "caption": "false",
+            "licensedContent": true,
+            "projection": "rectangular"
+          }
+        },
+        "full": false,
+        "kind": "youtube#video",
+        "id": "UC_aEa8K-EOJ3D6gOs7HcyNg",
+        "title": "NoCopyrightSounds"
+      },
+      "duration": {
+        "weeks": 0,
+        "years": 0,
+        "months": 0,
+        "days": 0,
+        "hours": 0,
+        "minutes": 3,
+        "seconds": 28
+      }
+    },
+    {
+      "type": "video",
+      "raw": {
+        "kind": "youtube#video",
+        "etag": "\"ksCrgYQhtFrXgbHAhi9Fo5t0C2I/5z7a_8VKb2vY1BxOjmf9L0LajfU\"",
+        "id": "IIrCDAV3EgI",
+        "snippet": {
+          "publishedAt": "2015-02-09T16:48:05.000Z",
+          "channelId": "UC_aEa8K-EOJ3D6gOs7HcyNg",
+          "title": "Tobu - Candyland [NCS Release]",
+          "description": "NCS: Music Without Limitations\n\nNCS Spotify: http://spoti.fi/NCS\n\nFree Download / Stream: http://ncs.io/candyland\n\nNCS\n➞ Twitch http://twitch.tv/nocopyrightsounds\n➞ Spotify http://spoti.fi/NCS\n➞ SoundCloud http://soundcloud.com/nocopyrightsounds\n➞ Facebook http://facebook.com/NoCopyrightSounds\n➞ Twitter http://twitter.com/NCSounds\n➞ Google+ http://google.com/+nocopyrightsounds\n➞ Instagram http://instagram.com/nocopyrightsounds_\n\nTobu\n➞ SoundCloud https://soundcloud.com/7obu\n➞ Facebook https://www.facebook.com/tobuofficial\n➞ Twitter http://www.twitter.com/tobuofficial\n➞ Spotify http://smarturl.it/Tobu_Spotify\n\nNCS Playlists:\nhttp://bit.ly/NCSdrumstep\nhttp://bit.ly/MelodicDubstepNCS\nhttp://bit.ly/NCShouse\nhttp://bit.ly/NCSdubstep\nhttp://bit.ly/NCSdrumandbass\nhttp://bit.ly/NCStrap\nhttp://bit.ly/NCShardstyle\n\n🔑 Become a SuperFan → http://ncs.io/SuperFan\n🛍 NCS Merchandise → http://ncs.io/StoreID\n\n© Check out our Usage Policy on how to use NCS music in your videos: http://ncs.io/UsagePolicy\n\nTo request a commercial license visit: http://ncs.io/Commercial\n\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\nBackground Image 'Milky Way & Mount Baker' Provided by DollarPhotoClub:\nhttps://www.dollarphotoclub.com/stock-photo/Milky%20Way%20and%20Mount%20Baker/44186185",
+          "thumbnails": {
+            "default": {
+              "url": "https://i.ytimg.com/vi/IIrCDAV3EgI/default.jpg",
+              "width": 120,
+              "height": 90
+            },
+            "medium": {
+              "url": "https://i.ytimg.com/vi/IIrCDAV3EgI/mqdefault.jpg",
+              "width": 320,
+              "height": 180
+            },
+            "high": {
+              "url": "https://i.ytimg.com/vi/IIrCDAV3EgI/hqdefault.jpg",
+              "width": 480,
+              "height": 360
+            },
+            "standard": {
+              "url": "https://i.ytimg.com/vi/IIrCDAV3EgI/sddefault.jpg",
+              "width": 640,
+              "height": 480
+            },
+            "maxres": {
+              "url": "https://i.ytimg.com/vi/IIrCDAV3EgI/maxresdefault.jpg",
+              "width": 1280,
+              "height": 720
+            }
+          },
+          "channelTitle": "NoCopyrightSounds",
+          "tags": [
+            "Tobu - Candyland",
+            "Tobu",
+            "Candyland",
+            "tobu candyland",
+            "nocopyrightsounds",
+            "ncs",
+            "house"
+          ],
+          "categoryId": "10",
+          "liveBroadcastContent": "none",
+          "localized": {
+            "title": "Tobu - Candyland [NCS Release]",
+            "description": "NCS: Music Without Limitations\n\nNCS Spotify: http://spoti.fi/NCS\n\nFree Download / Stream: http://ncs.io/candyland\n\nNCS\n➞ Twitch http://twitch.tv/nocopyrightsounds\n➞ Spotify http://spoti.fi/NCS\n➞ SoundCloud http://soundcloud.com/nocopyrightsounds\n➞ Facebook http://facebook.com/NoCopyrightSounds\n➞ Twitter http://twitter.com/NCSounds\n➞ Google+ http://google.com/+nocopyrightsounds\n➞ Instagram http://instagram.com/nocopyrightsounds_\n\nTobu\n➞ SoundCloud https://soundcloud.com/7obu\n➞ Facebook https://www.facebook.com/tobuofficial\n➞ Twitter http://www.twitter.com/tobuofficial\n➞ Spotify http://smarturl.it/Tobu_Spotify\n\nNCS Playlists:\nhttp://bit.ly/NCSdrumstep\nhttp://bit.ly/MelodicDubstepNCS\nhttp://bit.ly/NCShouse\nhttp://bit.ly/NCSdubstep\nhttp://bit.ly/NCSdrumandbass\nhttp://bit.ly/NCStrap\nhttp://bit.ly/NCShardstyle\n\n🔑 Become a SuperFan → http://ncs.io/SuperFan\n🛍 NCS Merchandise → http://ncs.io/StoreID\n\n© Check out our Usage Policy on how to use NCS music in your videos: http://ncs.io/UsagePolicy\n\nTo request a commercial license visit: http://ncs.io/Commercial\n\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\nBackground Image 'Milky Way & Mount Baker' Provided by DollarPhotoClub:\nhttps://www.dollarphotoclub.com/stock-photo/Milky%20Way%20and%20Mount%20Baker/44186185"
+          },
+          "defaultAudioLanguage": "en-US"
+        },
+        "contentDetails": {
+          "duration": "PT3M19S",
+          "dimension": "2d",
+          "definition": "hd",
+          "caption": "false",
+          "licensedContent": true,
+          "projection": "rectangular"
+        }
+      },
+      "full": true,
+      "kind": "youtube#video",
+      "id": "IIrCDAV3EgI",
+      "title": "Tobu - Candyland [NCS Release]",
+      "description": "NCS: Music Without Limitations\n\nNCS Spotify: http://spoti.fi/NCS\n\nFree Download / Stream: http://ncs.io/candyland\n\nNCS\n➞ Twitch http://twitch.tv/nocopyrightsounds\n➞ Spotify http://spoti.fi/NCS\n➞ SoundCloud http://soundcloud.com/nocopyrightsounds\n➞ Facebook http://facebook.com/NoCopyrightSounds\n➞ Twitter http://twitter.com/NCSounds\n➞ Google+ http://google.com/+nocopyrightsounds\n➞ Instagram http://instagram.com/nocopyrightsounds_\n\nTobu\n➞ SoundCloud https://soundcloud.com/7obu\n➞ Facebook https://www.facebook.com/tobuofficial\n➞ Twitter http://www.twitter.com/tobuofficial\n➞ Spotify http://smarturl.it/Tobu_Spotify\n\nNCS Playlists:\nhttp://bit.ly/NCSdrumstep\nhttp://bit.ly/MelodicDubstepNCS\nhttp://bit.ly/NCShouse\nhttp://bit.ly/NCSdubstep\nhttp://bit.ly/NCSdrumandbass\nhttp://bit.ly/NCStrap\nhttp://bit.ly/NCShardstyle\n\n🔑 Become a SuperFan → http://ncs.io/SuperFan\n🛍 NCS Merchandise → http://ncs.io/StoreID\n\n© Check out our Usage Policy on how to use NCS music in your videos: http://ncs.io/UsagePolicy\n\nTo request a commercial license visit: http://ncs.io/Commercial\n\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\nBackground Image 'Milky Way & Mount Baker' Provided by DollarPhotoClub:\nhttps://www.dollarphotoclub.com/stock-photo/Milky%20Way%20and%20Mount%20Baker/44186185",
+      "thumbnails": {
+        "default": {
+          "url": "https://i.ytimg.com/vi/IIrCDAV3EgI/default.jpg",
+          "width": 120,
+          "height": 90
+        },
+        "medium": {
+          "url": "https://i.ytimg.com/vi/IIrCDAV3EgI/mqdefault.jpg",
+          "width": 320,
+          "height": 180
+        },
+        "high": {
+          "url": "https://i.ytimg.com/vi/IIrCDAV3EgI/hqdefault.jpg",
+          "width": 480,
+          "height": 360
+        },
+        "standard": {
+          "url": "https://i.ytimg.com/vi/IIrCDAV3EgI/sddefault.jpg",
+          "width": 640,
+          "height": 480
+        },
+        "maxres": {
+          "url": "https://i.ytimg.com/vi/IIrCDAV3EgI/maxresdefault.jpg",
+          "width": 1280,
+          "height": 720
+        }
+      },
+      "publishedAt": "2015-02-09T16:48:05.000Z",
+      "channel": {
+        "type": "channel",
+        "raw": {
+          "kind": "youtube#video",
+          "etag": "\"ksCrgYQhtFrXgbHAhi9Fo5t0C2I/5z7a_8VKb2vY1BxOjmf9L0LajfU\"",
+          "id": "IIrCDAV3EgI",
+          "snippet": {
+            "publishedAt": "2015-02-09T16:48:05.000Z",
+            "channelId": "UC_aEa8K-EOJ3D6gOs7HcyNg",
+            "title": "Tobu - Candyland [NCS Release]",
+            "description": "NCS: Music Without Limitations\n\nNCS Spotify: http://spoti.fi/NCS\n\nFree Download / Stream: http://ncs.io/candyland\n\nNCS\n➞ Twitch http://twitch.tv/nocopyrightsounds\n➞ Spotify http://spoti.fi/NCS\n➞ SoundCloud http://soundcloud.com/nocopyrightsounds\n➞ Facebook http://facebook.com/NoCopyrightSounds\n➞ Twitter http://twitter.com/NCSounds\n➞ Google+ http://google.com/+nocopyrightsounds\n➞ Instagram http://instagram.com/nocopyrightsounds_\n\nTobu\n➞ SoundCloud https://soundcloud.com/7obu\n➞ Facebook https://www.facebook.com/tobuofficial\n➞ Twitter http://www.twitter.com/tobuofficial\n➞ Spotify http://smarturl.it/Tobu_Spotify\n\nNCS Playlists:\nhttp://bit.ly/NCSdrumstep\nhttp://bit.ly/MelodicDubstepNCS\nhttp://bit.ly/NCShouse\nhttp://bit.ly/NCSdubstep\nhttp://bit.ly/NCSdrumandbass\nhttp://bit.ly/NCStrap\nhttp://bit.ly/NCShardstyle\n\n🔑 Become a SuperFan → http://ncs.io/SuperFan\n🛍 NCS Merchandise → http://ncs.io/StoreID\n\n© Check out our Usage Policy on how to use NCS music in your videos: http://ncs.io/UsagePolicy\n\nTo request a commercial license visit: http://ncs.io/Commercial\n\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\nBackground Image 'Milky Way & Mount Baker' Provided by DollarPhotoClub:\nhttps://www.dollarphotoclub.com/stock-photo/Milky%20Way%20and%20Mount%20Baker/44186185",
+            "thumbnails": {
+              "default": {
+                "url": "https://i.ytimg.com/vi/IIrCDAV3EgI/default.jpg",
+                "width": 120,
+                "height": 90
+              },
+              "medium": {
+                "url": "https://i.ytimg.com/vi/IIrCDAV3EgI/mqdefault.jpg",
+                "width": 320,
+                "height": 180
+              },
+              "high": {
+                "url": "https://i.ytimg.com/vi/IIrCDAV3EgI/hqdefault.jpg",
+                "width": 480,
+                "height": 360
+              },
+              "standard": {
+                "url": "https://i.ytimg.com/vi/IIrCDAV3EgI/sddefault.jpg",
+                "width": 640,
+                "height": 480
+              },
+              "maxres": {
+                "url": "https://i.ytimg.com/vi/IIrCDAV3EgI/maxresdefault.jpg",
+                "width": 1280,
+                "height": 720
+              }
+            },
+            "channelTitle": "NoCopyrightSounds",
+            "tags": [
+              "Tobu - Candyland",
+              "Tobu",
+              "Candyland",
+              "tobu candyland",
+              "nocopyrightsounds",
+              "ncs",
+              "house"
+            ],
+            "categoryId": "10",
+            "liveBroadcastContent": "none",
+            "localized": {
+              "title": "Tobu - Candyland [NCS Release]",
+              "description": "NCS: Music Without Limitations\n\nNCS Spotify: http://spoti.fi/NCS\n\nFree Download / Stream: http://ncs.io/candyland\n\nNCS\n➞ Twitch http://twitch.tv/nocopyrightsounds\n➞ Spotify http://spoti.fi/NCS\n➞ SoundCloud http://soundcloud.com/nocopyrightsounds\n➞ Facebook http://facebook.com/NoCopyrightSounds\n➞ Twitter http://twitter.com/NCSounds\n➞ Google+ http://google.com/+nocopyrightsounds\n➞ Instagram http://instagram.com/nocopyrightsounds_\n\nTobu\n➞ SoundCloud https://soundcloud.com/7obu\n➞ Facebook https://www.facebook.com/tobuofficial\n➞ Twitter http://www.twitter.com/tobuofficial\n➞ Spotify http://smarturl.it/Tobu_Spotify\n\nNCS Playlists:\nhttp://bit.ly/NCSdrumstep\nhttp://bit.ly/MelodicDubstepNCS\nhttp://bit.ly/NCShouse\nhttp://bit.ly/NCSdubstep\nhttp://bit.ly/NCSdrumandbass\nhttp://bit.ly/NCStrap\nhttp://bit.ly/NCShardstyle\n\n🔑 Become a SuperFan → http://ncs.io/SuperFan\n🛍 NCS Merchandise → http://ncs.io/StoreID\n\n© Check out our Usage Policy on how to use NCS music in your videos: http://ncs.io/UsagePolicy\n\nTo request a commercial license visit: http://ncs.io/Commercial\n\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\nBackground Image 'Milky Way & Mount Baker' Provided by DollarPhotoClub:\nhttps://www.dollarphotoclub.com/stock-photo/Milky%20Way%20and%20Mount%20Baker/44186185"
+            },
+            "defaultAudioLanguage": "en-US"
+          },
+          "contentDetails": {
+            "duration": "PT3M19S",
+            "dimension": "2d",
+            "definition": "hd",
+            "caption": "false",
+            "licensedContent": true,
+            "projection": "rectangular"
+          }
+        },
+        "full": false,
+        "kind": "youtube#video",
+        "id": "UC_aEa8K-EOJ3D6gOs7HcyNg",
+        "title": "NoCopyrightSounds"
+      },
+      "duration": {
+        "weeks": 0,
+        "years": 0,
+        "months": 0,
+        "days": 0,
+        "hours": 0,
+        "minutes": 3,
+        "seconds": 19
+      }
+    },
+    {
+      "type": "video",
+      "raw": {
+        "kind": "youtube#video",
+        "etag": "\"ksCrgYQhtFrXgbHAhi9Fo5t0C2I/HMwVABB5sxAEaRAnGKZsFtH11sw\"",
+        "id": "bM7SZ5SBzyY",
+        "snippet": {
+          "publishedAt": "2014-11-19T17:02:54.000Z",
+          "channelId": "UC_aEa8K-EOJ3D6gOs7HcyNg",
+          "title": "Alan Walker - Fade [NCS Release]",
+          "description": "NCS: Music Without Limitations\n\nNCS Spotify: http://spoti.fi/NCS\n\nAlan Walker - Fade is included in our debut compilation NCS: Uplifting \nSupport on iTunes: http://smarturl.it/ncsuplifting\nListen on Spotify: http://smarturl.it/ncsupliftingspotify\nListen on Soundcloud: http://smarturl.it/ncsupliftingsc\nSupport on Google Play: http://smarturl.it/ncsupliftinggplay\nSupport on Amazon: http://smarturl.it/ncsamazon\n\nNCS\n➞ Spotify http://spoti.fi/NCS\n➞ SoundCloud http://soundcloud.com/nocopyrightsounds\n➞ Facebook http://facebook.com/NoCopyrightSounds\n➞ Twitter http://twitter.com/NCSounds\n➞ Google+ http://google.com/+nocopyrightsounds\n➞ Instagram http://instagram.com/nocopyrightsounds_\n\nAlan Walker\n➞ Facebook https://www.facebook.com/alanwalkermusic/\n➞ SoundCloud https://soundcloud.com/alanwalker\n➞ Twitter https://twitter.com/IAmAlanWalker\n➞ YouTube https://www.youtube.com/user/DjWalkzz \n➞ Instagram https://www.instagram.com/alanwalkermusic/\n\nNCS Playlists:\nhttp://bit.ly/NCSdrumstep\nhttp://bit.ly/MelodicDubstepNCS\nhttp://bit.ly/NCShouse\nhttp://bit.ly/NCSdubstep\nhttp://bit.ly/NCSdrumandbass\nhttp://bit.ly/NCStrap\nhttp://bit.ly/NCShardstyle\n\n🛍 NCS Merchandise → http://ncs.io/StoreID\n\n© Check out our Usage Policy on how to use NCS music in your videos: http://ncs.io/UsagePolicy\n\nTo request a commercial license visit: http://ncs.io/Commercial",
+          "thumbnails": {
+            "default": {
+              "url": "https://i.ytimg.com/vi/bM7SZ5SBzyY/default.jpg",
+              "width": 120,
+              "height": 90
+            },
+            "medium": {
+              "url": "https://i.ytimg.com/vi/bM7SZ5SBzyY/mqdefault.jpg",
+              "width": 320,
+              "height": 180
+            },
+            "high": {
+              "url": "https://i.ytimg.com/vi/bM7SZ5SBzyY/hqdefault.jpg",
+              "width": 480,
+              "height": 360
+            },
+            "standard": {
+              "url": "https://i.ytimg.com/vi/bM7SZ5SBzyY/sddefault.jpg",
+              "width": 640,
+              "height": 480
+            }
+          },
+          "channelTitle": "NoCopyrightSounds",
+          "tags": [
+            "Alan Walker - Fade",
+            "Alan Walker",
+            "Fade",
+            "Alan",
+            "Walker",
+            "Alan Walker Fade",
+            "House",
+            "fade alan walker",
+            "House Music (Musical Genre)",
+            "Electronic Dance Music (Musical Genre)",
+            "norwegian russ",
+            "norwegian russ music",
+            "norwegian house music",
+            "alan walker norwegian",
+            "alan walker norwegian russ"
+          ],
+          "categoryId": "10",
+          "liveBroadcastContent": "none",
+          "localized": {
+            "title": "Alan Walker - Fade [NCS Release]",
+            "description": "NCS: Music Without Limitations\n\nNCS Spotify: http://spoti.fi/NCS\n\nAlan Walker - Fade is included in our debut compilation NCS: Uplifting \nSupport on iTunes: http://smarturl.it/ncsuplifting\nListen on Spotify: http://smarturl.it/ncsupliftingspotify\nListen on Soundcloud: http://smarturl.it/ncsupliftingsc\nSupport on Google Play: http://smarturl.it/ncsupliftinggplay\nSupport on Amazon: http://smarturl.it/ncsamazon\n\nNCS\n➞ Spotify http://spoti.fi/NCS\n➞ SoundCloud http://soundcloud.com/nocopyrightsounds\n➞ Facebook http://facebook.com/NoCopyrightSounds\n➞ Twitter http://twitter.com/NCSounds\n➞ Google+ http://google.com/+nocopyrightsounds\n➞ Instagram http://instagram.com/nocopyrightsounds_\n\nAlan Walker\n➞ Facebook https://www.facebook.com/alanwalkermusic/\n➞ SoundCloud https://soundcloud.com/alanwalker\n➞ Twitter https://twitter.com/IAmAlanWalker\n➞ YouTube https://www.youtube.com/user/DjWalkzz \n➞ Instagram https://www.instagram.com/alanwalkermusic/\n\nNCS Playlists:\nhttp://bit.ly/NCSdrumstep\nhttp://bit.ly/MelodicDubstepNCS\nhttp://bit.ly/NCShouse\nhttp://bit.ly/NCSdubstep\nhttp://bit.ly/NCSdrumandbass\nhttp://bit.ly/NCStrap\nhttp://bit.ly/NCShardstyle\n\n🛍 NCS Merchandise → http://ncs.io/StoreID\n\n© Check out our Usage Policy on how to use NCS music in your videos: http://ncs.io/UsagePolicy\n\nTo request a commercial license visit: http://ncs.io/Commercial"
+          },
+          "defaultAudioLanguage": "en-US"
+        },
+        "contentDetails": {
+          "duration": "PT4M21S",
+          "dimension": "2d",
+          "definition": "hd",
+          "caption": "false",
+          "licensedContent": true,
+          "projection": "rectangular"
+        }
+      },
+      "full": true,
+      "kind": "youtube#video",
+      "id": "bM7SZ5SBzyY",
+      "title": "Alan Walker - Fade [NCS Release]",
+      "description": "NCS: Music Without Limitations\n\nNCS Spotify: http://spoti.fi/NCS\n\nAlan Walker - Fade is included in our debut compilation NCS: Uplifting \nSupport on iTunes: http://smarturl.it/ncsuplifting\nListen on Spotify: http://smarturl.it/ncsupliftingspotify\nListen on Soundcloud: http://smarturl.it/ncsupliftingsc\nSupport on Google Play: http://smarturl.it/ncsupliftinggplay\nSupport on Amazon: http://smarturl.it/ncsamazon\n\nNCS\n➞ Spotify http://spoti.fi/NCS\n➞ SoundCloud http://soundcloud.com/nocopyrightsounds\n➞ Facebook http://facebook.com/NoCopyrightSounds\n➞ Twitter http://twitter.com/NCSounds\n➞ Google+ http://google.com/+nocopyrightsounds\n➞ Instagram http://instagram.com/nocopyrightsounds_\n\nAlan Walker\n➞ Facebook https://www.facebook.com/alanwalkermusic/\n➞ SoundCloud https://soundcloud.com/alanwalker\n➞ Twitter https://twitter.com/IAmAlanWalker\n➞ YouTube https://www.youtube.com/user/DjWalkzz \n➞ Instagram https://www.instagram.com/alanwalkermusic/\n\nNCS Playlists:\nhttp://bit.ly/NCSdrumstep\nhttp://bit.ly/MelodicDubstepNCS\nhttp://bit.ly/NCShouse\nhttp://bit.ly/NCSdubstep\nhttp://bit.ly/NCSdrumandbass\nhttp://bit.ly/NCStrap\nhttp://bit.ly/NCShardstyle\n\n🛍 NCS Merchandise → http://ncs.io/StoreID\n\n© Check out our Usage Policy on how to use NCS music in your videos: http://ncs.io/UsagePolicy\n\nTo request a commercial license visit: http://ncs.io/Commercial",
+      "thumbnails": {
+        "default": {
+          "url": "https://i.ytimg.com/vi/bM7SZ5SBzyY/default.jpg",
+          "width": 120,
+          "height": 90
+        },
+        "medium": {
+          "url": "https://i.ytimg.com/vi/bM7SZ5SBzyY/mqdefault.jpg",
+          "width": 320,
+          "height": 180
+        },
+        "high": {
+          "url": "https://i.ytimg.com/vi/bM7SZ5SBzyY/hqdefault.jpg",
+          "width": 480,
+          "height": 360
+        },
+        "standard": {
+          "url": "https://i.ytimg.com/vi/bM7SZ5SBzyY/sddefault.jpg",
+          "width": 640,
+          "height": 480
+        }
+      },
+      "publishedAt": "2014-11-19T17:02:54.000Z",
+      "channel": {
+        "type": "channel",
+        "raw": {
+          "kind": "youtube#video",
+          "etag": "\"ksCrgYQhtFrXgbHAhi9Fo5t0C2I/HMwVABB5sxAEaRAnGKZsFtH11sw\"",
+          "id": "bM7SZ5SBzyY",
+          "snippet": {
+            "publishedAt": "2014-11-19T17:02:54.000Z",
+            "channelId": "UC_aEa8K-EOJ3D6gOs7HcyNg",
+            "title": "Alan Walker - Fade [NCS Release]",
+            "description": "NCS: Music Without Limitations\n\nNCS Spotify: http://spoti.fi/NCS\n\nAlan Walker - Fade is included in our debut compilation NCS: Uplifting \nSupport on iTunes: http://smarturl.it/ncsuplifting\nListen on Spotify: http://smarturl.it/ncsupliftingspotify\nListen on Soundcloud: http://smarturl.it/ncsupliftingsc\nSupport on Google Play: http://smarturl.it/ncsupliftinggplay\nSupport on Amazon: http://smarturl.it/ncsamazon\n\nNCS\n➞ Spotify http://spoti.fi/NCS\n➞ SoundCloud http://soundcloud.com/nocopyrightsounds\n➞ Facebook http://facebook.com/NoCopyrightSounds\n➞ Twitter http://twitter.com/NCSounds\n➞ Google+ http://google.com/+nocopyrightsounds\n➞ Instagram http://instagram.com/nocopyrightsounds_\n\nAlan Walker\n➞ Facebook https://www.facebook.com/alanwalkermusic/\n➞ SoundCloud https://soundcloud.com/alanwalker\n➞ Twitter https://twitter.com/IAmAlanWalker\n➞ YouTube https://www.youtube.com/user/DjWalkzz \n➞ Instagram https://www.instagram.com/alanwalkermusic/\n\nNCS Playlists:\nhttp://bit.ly/NCSdrumstep\nhttp://bit.ly/MelodicDubstepNCS\nhttp://bit.ly/NCShouse\nhttp://bit.ly/NCSdubstep\nhttp://bit.ly/NCSdrumandbass\nhttp://bit.ly/NCStrap\nhttp://bit.ly/NCShardstyle\n\n🛍 NCS Merchandise → http://ncs.io/StoreID\n\n© Check out our Usage Policy on how to use NCS music in your videos: http://ncs.io/UsagePolicy\n\nTo request a commercial license visit: http://ncs.io/Commercial",
+            "thumbnails": {
+              "default": {
+                "url": "https://i.ytimg.com/vi/bM7SZ5SBzyY/default.jpg",
+                "width": 120,
+                "height": 90
+              },
+              "medium": {
+                "url": "https://i.ytimg.com/vi/bM7SZ5SBzyY/mqdefault.jpg",
+                "width": 320,
+                "height": 180
+              },
+              "high": {
+                "url": "https://i.ytimg.com/vi/bM7SZ5SBzyY/hqdefault.jpg",
+                "width": 480,
+                "height": 360
+              },
+              "standard": {
+                "url": "https://i.ytimg.com/vi/bM7SZ5SBzyY/sddefault.jpg",
+                "width": 640,
+                "height": 480
+              }
+            },
+            "channelTitle": "NoCopyrightSounds",
+            "tags": [
+              "Alan Walker - Fade",
+              "Alan Walker",
+              "Fade",
+              "Alan",
+              "Walker",
+              "Alan Walker Fade",
+              "House",
+              "fade alan walker",
+              "House Music (Musical Genre)",
+              "Electronic Dance Music (Musical Genre)",
+              "norwegian russ",
+              "norwegian russ music",
+              "norwegian house music",
+              "alan walker norwegian",
+              "alan walker norwegian russ"
+            ],
+            "categoryId": "10",
+            "liveBroadcastContent": "none",
+            "localized": {
+              "title": "Alan Walker - Fade [NCS Release]",
+              "description": "NCS: Music Without Limitations\n\nNCS Spotify: http://spoti.fi/NCS\n\nAlan Walker - Fade is included in our debut compilation NCS: Uplifting \nSupport on iTunes: http://smarturl.it/ncsuplifting\nListen on Spotify: http://smarturl.it/ncsupliftingspotify\nListen on Soundcloud: http://smarturl.it/ncsupliftingsc\nSupport on Google Play: http://smarturl.it/ncsupliftinggplay\nSupport on Amazon: http://smarturl.it/ncsamazon\n\nNCS\n➞ Spotify http://spoti.fi/NCS\n➞ SoundCloud http://soundcloud.com/nocopyrightsounds\n➞ Facebook http://facebook.com/NoCopyrightSounds\n➞ Twitter http://twitter.com/NCSounds\n➞ Google+ http://google.com/+nocopyrightsounds\n➞ Instagram http://instagram.com/nocopyrightsounds_\n\nAlan Walker\n➞ Facebook https://www.facebook.com/alanwalkermusic/\n➞ SoundCloud https://soundcloud.com/alanwalker\n➞ Twitter https://twitter.com/IAmAlanWalker\n➞ YouTube https://www.youtube.com/user/DjWalkzz \n➞ Instagram https://www.instagram.com/alanwalkermusic/\n\nNCS Playlists:\nhttp://bit.ly/NCSdrumstep\nhttp://bit.ly/MelodicDubstepNCS\nhttp://bit.ly/NCShouse\nhttp://bit.ly/NCSdubstep\nhttp://bit.ly/NCSdrumandbass\nhttp://bit.ly/NCStrap\nhttp://bit.ly/NCShardstyle\n\n🛍 NCS Merchandise → http://ncs.io/StoreID\n\n© Check out our Usage Policy on how to use NCS music in your videos: http://ncs.io/UsagePolicy\n\nTo request a commercial license visit: http://ncs.io/Commercial"
+            },
+            "defaultAudioLanguage": "en-US"
+          },
+          "contentDetails": {
+            "duration": "PT4M21S",
+            "dimension": "2d",
+            "definition": "hd",
+            "caption": "false",
+            "licensedContent": true,
+            "projection": "rectangular"
+          }
+        },
+        "full": false,
+        "kind": "youtube#video",
+        "id": "UC_aEa8K-EOJ3D6gOs7HcyNg",
+        "title": "NoCopyrightSounds"
+      },
+      "duration": {
+        "weeks": 0,
+        "years": 0,
+        "months": 0,
+        "days": 0,
+        "hours": 0,
+        "minutes": 4,
+        "seconds": 21
+      }
+    }
+  ]
+}

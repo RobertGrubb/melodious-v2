@@ -8,7 +8,7 @@ export default {
     currentTrack: false,
     currentTime: 0,
     volume: 0.75,
-    audio: null
+    audio: new Audio()
   },
 
   trackData: {
