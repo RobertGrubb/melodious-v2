@@ -1,10 +1,12 @@
 import React from 'react';
 import Home from './screens/home';
-import Test from './screens/browse';
+import Browse from './screens/browse';
+import Test from './screens/test';
 
 const routes = {
   '/': () => <Home />,
-  '/browse': () => <Test />
+  '/browse': () => <Browse />,
+  '/test': () => <Test />
 };
 
 export default routes;
