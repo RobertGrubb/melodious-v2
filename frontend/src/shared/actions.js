@@ -1,3 +1,30 @@
+import cookies from 'react-cookies';
+
+/**
+ * ==============================
+ * Session Actions
+ * ==============================
+ */
+
+export const setSession = userData => state => {
+  cookies.save('userId', userData.id, { path: '/' })
+
+  return {
+    session: {
+      ...userData,
+      loggedIn: true
+    }
+  }
+}
+
+export const destroySession = () => state => {
+  cookies.remove('userId', { path: '/' })
+
+  return {
+    session: { loggedIn: false }
+  }
+}
+
 /**
  * ==============================
  * Track Actions

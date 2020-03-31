@@ -1,19 +1,29 @@
 import React from 'react';
-import { PageHeader, Button } from 'antd';
+import { subscribe } from 'react-contextual';
+import { navigate } from 'hookrouter';
+import { PageHeader, Button, Avatar } from 'antd';
 import './toolbar.scss';
 
 const Toolbar = props => {
+  let buttons = [
+    <Button key="1" type="primary" onClick={() => navigate('/oauth/twitch')}>Login</Button>
+  ];
+
+  if (props.session.loggedIn) {
+    buttons = [
+      <Avatar src={props.session.userData.profile_image_url} />,
+      <Button key="1" onClick={() => navigate('/user/logout')}>Logout</Button>
+    ];
+  }
+
   return (
     <PageHeader
       ghost={false}
       title="Popular Songs"
       className="toolbar__container"
-      extra={[
-        <Button key="1">Sign Up</Button>,
-        <Button key="2" type="primary">Login</Button>
-      ]}
+      extra={buttons}
     />
   );
 }
 
-export default Toolbar;
+export default subscribe()(Toolbar);

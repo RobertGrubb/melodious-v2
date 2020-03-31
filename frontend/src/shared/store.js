@@ -3,6 +3,10 @@ import * as actions from './actions';
 export default {
   appTitle: 'Melodious',
 
+  session: {
+    loggedIn: false
+  },
+
   player: {
     state: 'stopped',
     currentTrack: false,

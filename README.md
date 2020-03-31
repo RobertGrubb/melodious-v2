@@ -4,8 +4,8 @@ A platform for twitch users to have easy access to no copyright music that they 
 
 # Todo Items
 
-- [ ] Twitch Authentication
-- [ ] Login / Logout
+- [X] Twitch Authentication
+- [X] Login / Logout
 - [ ] Browse Screen
 - [ ] Playlist logic
 
@@ -15,8 +15,25 @@ A platform for twitch users to have easy access to no copyright music that they 
 
 After `ffpmeg` is successfully installed, follow the following instructions:
 
-- Create `.env` in `backend/api` with `YOUTUBE_API_KEY=""` as an environment variable (You can retrieve a youtube key via the google developer console)
-- Create `.env` in `frontend` with the following variable: `REACT_APP_API_URL="http://localhost:3007"`
+1. Create `.env` in `backend/api` with the following:
+
+```
+REACT_APP_API_URL="http://localhost:3007"
+REACT_APP_TWITCH_CLIENT_ID=""
+REACT_APP_TWITCH_REDIRECT_URL=""
+```
+
+2. Create `.env` in `frontend` with the following:
+
+```
+YOUTUBE_API_KEY=""
+TWITCH_CLIENT_ID=""
+TWITCH_CLIENT_SECRET=""
+TWITCH_REDIRECT_URL="http://localhost:3000/oauth/twitch"
+```
+
+3. Run the following commands from the root directory:
+
 - `cp backend/api/db.json.example db.json`
 - `cd backend/api && yarn`
 - `cd backend/api && yarn start`
