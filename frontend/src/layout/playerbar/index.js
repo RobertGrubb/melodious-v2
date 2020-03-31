@@ -1,11 +1,13 @@
 import React from 'react';
 import { Row, Col } from 'antd';
+
 import Controls from './controls';
 import Info from './info';
 import Volume from './volume';
 import './playerbar.scss';
 
 const PlayerBar = props => {
+
   return (
     <div className="playerbar__container">
       <Row type="flex" style={{alignItems: 'center'}}>

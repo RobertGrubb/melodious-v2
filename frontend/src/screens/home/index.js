@@ -41,6 +41,10 @@ const Home = props => {
     }
   });
 
+  /**
+   * Setup the columns array for the table
+   * to read.
+   */
   const columns = [
     {
       title: '',

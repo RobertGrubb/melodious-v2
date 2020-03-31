@@ -17,9 +17,7 @@ const Controls = props => {
   };
 
   // Pause the track
-  const pause = async () => {
-    props.pause();
-  }
+  const pause = async () => props.pause();
 
   // Go to next track
   const next = async () => {

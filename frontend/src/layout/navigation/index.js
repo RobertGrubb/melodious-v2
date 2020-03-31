@@ -25,13 +25,9 @@ const Navigation = props => {
           <HomeOutlined />
           <span>Home</span>
         </Menu.Item>
-        <Menu.Item key="2" onClick={goTo.bind(this, '/test')}>
+        <Menu.Item key="2" onClick={goTo.bind(this, '/browse')}>
           <SearchOutlined />
           <span>Browse</span>
-        </Menu.Item>
-        <Menu.Item key="3">
-          <PlayCircleOutlined />
-          <span>Radio</span>
         </Menu.Item>
       </Menu>
     </div>
