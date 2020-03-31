@@ -12,7 +12,11 @@
     display: inline-block;
 
     .title {
-      font-size: 18px;
+      font-size: 15px;
+      font-weight: bold;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .artist {

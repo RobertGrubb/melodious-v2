@@ -13,7 +13,7 @@ const Controls = props => {
 
   // Play the track
   const play = async () => {
-    const res = await props.setTrack(props.player.currentTrack ? props.player.currentTrack : 0);
+    await props.setTrack(props.player.currentTrack ? props.player.currentTrack : 0);
   };
 
   // Pause the track
@@ -91,9 +91,15 @@ const Controls = props => {
    * Format the current
    */
   let formattedTime = time;
-  if (time) {
+  if (formattedTime) {
     const duration = moment.duration({ seconds: time });
     formattedTime = duration.format('mm:ss');
+
+    if (!formattedTime.includes(':')) {
+      formattedTime = `00:${formattedTime}`;
+    }
+  } else {
+    formattedTime = `00:00`;
   }
 
   /**
@@ -114,7 +120,7 @@ const Controls = props => {
         <Col span={24} style={{textAlign: 'center'}}>
           <BackwardOutlined className="previous" onClick={previous} />
           {
-            props.player.state == 'play' ?
+            props.player.state === 'play' ?
             (
               <PauseCircleOutlined className="pause" onClick={pause} />
             ) : (
@@ -125,7 +131,7 @@ const Controls = props => {
         </Col>
       </Row>
       <Row type="flex" style={{alignItems: 'center'}}>
-        <Col span={6} style={{fontSize: 9}}>{formattedTime}</Col>
+        <Col span={6} style={{fontSize: 9}}>{(formattedTime !== '00:00' ? formattedTime : '')}</Col>
         <Col span={12}>
           <Slider
             tooltipVisible={false}
@@ -136,7 +142,7 @@ const Controls = props => {
             max={props.player.currentTrack ? props.trackData.tracks[props.player.currentTrack].duration : 0}
           />
         </Col>
-        <Col span={6} style={{textAlign: 'right', fontSize: 9}}><span>{length}</span></Col>
+        <Col span={6} style={{textAlign: 'right', fontSize: 9}}><span>{(length !== '00:00' ? length : '')}</span></Col>
       </Row>
     </div>
   );

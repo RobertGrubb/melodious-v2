@@ -9,13 +9,34 @@ const PlayerBar = props => {
   return (
     <div className="playerbar__container">
       <Row type="flex" style={{alignItems: 'center'}}>
-        <Col span={6} className="playerbar__column info">
+        <Col
+          xs={{span: 0}}
+          md={{span: 0}}
+          lg={{span: 6}}
+          xl={{span: 6}}
+          xxl={{span: 6}}
+          className="playerbar__column info"
+        >
           <Info />
         </Col>
-        <Col span={12} className="playerbar__column controls">
+        <Col
+          xs={{span: 24}}
+          md={{span: 24}}
+          lg={{span: 12}}
+          xl={{span: 12}}
+          xxl={{span: 12}}
+          className="playerbar__column controls"
+        >
           <Controls />
         </Col>
-        <Col span={6} className="playerbar__column volume">
+        <Col
+          xs={{span: 0}}
+          md={{span: 0}}
+          lg={{span: 6}}
+          xl={{span: 6}}
+          xxl={{span: 6}}
+          className="playerbar__column volume"
+        >
           <Volume />
         </Col>
       </Row>

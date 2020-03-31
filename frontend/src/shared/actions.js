@@ -42,11 +42,8 @@ export const updateTime = seconds => state => {
 
 export const nextTrack = () => state => {
   let player = state.player;
-
   if (player.audio) player.audio.pause();
-
   let currentTrack = player.currentTrack;
-
   if (currentTrack === false) currentTrack = 0;
   else currentTrack++;
   if (currentTrack > (state.trackData.tracks.length - 1)) currentTrack = 0;
@@ -65,9 +62,7 @@ export const nextTrack = () => state => {
 export const previousTrack = () => state => {
   let player = state.player;
   let currentTrack = player.currentTrack;
-
   if (player.audio) player.audio.pause();
-
   if (currentTrack === false) currentTrack = 0;
   else currentTrack--;
   if (currentTrack < 0) currentTrack = (state.trackData.tracks.length -1);
@@ -85,7 +80,6 @@ export const previousTrack = () => state => {
 
 export const play = () => state => {
   let currentTrack = state.player.currentTrack;
-
   if (currentTrack === false) currentTrack = 0;
 
   return {

@@ -6,28 +6,31 @@ import moment from 'moment';
 import './home.scss';
 
 const Home = props => {
+  // Loading based on tracks being fetched
   const [loading, setLoading] = useState(!props.trackData.fetched);
 
-  const setTrack = key => {
-    props.setTrack(key);
-  }
+  // Sets a track based on key
+  const setTrack = key => props.setTrack(key);
 
+  // Set loading if fetched has changed.
   useEffect(() => {
     setLoading(!props.trackData.fetched)
   }, [props.trackData.fetched])
 
-  if (loading) {
-    return (<Loader />);
-  }
+  // If loading, return the loader component
+  if (loading) return (<Loader />);
 
+  // Format the dataSource array.
   const dataSource = props.trackData.tracks.map((track, index) => {
     let length = '00:00';
 
+    // if it has a duration, format it.
     if (track.duration) {
       const duration = moment.duration({seconds: track.duration});
       length = duration.format('mm:ss');
     }
 
+    // Return the data in an object that columns can easily use.
     return {
       key: index,
       track: track.title,
@@ -42,7 +45,7 @@ const Home = props => {
       title: '',
       dataIndex: 'cover',
       key: 'cover',
-      render: image => <img src={image} height={24} width={24} />
+      render: image => <img alt="cover" src={image} height={24} width={24} />
     },
     {
       title: 'Track',
@@ -66,7 +69,7 @@ const Home = props => {
       dataSource={dataSource}
       columns={columns}
       onRow={(record) => ({
-          onClick: () => { setTrack(record.key) }
+          onClick: () => setTrack(record.key)
       })}
     />
   );
