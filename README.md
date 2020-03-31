@@ -2,6 +2,13 @@
 
 A platform for twitch users to have easy access to no copyright music that they can play on their stream without fear of infringing copyrights.
 
+# Todo Items
+
+- [ ] Twitch Authentication
+- [ ] Login / Logout
+- [ ] Browse Screen
+- [ ] Playlist logic
+
 # Installation
 
 `ffmpeg` is required for the backend services to run correctly. Please look up how to install it based on the intended operating system.
@@ -10,6 +17,7 @@ After `ffpmeg` is successfully installed, follow the following instructions:
 
 - Create `.env` in `backend/api` with `YOUTUBE_API_KEY=""` as an environment variable (You can retrieve a youtube key via the google developer console)
 - Create `.env` in `frontend` with the following variable: `REACT_APP_API_URL="http://localhost:3007"`
+- `cp backend/api/db.json.example db.json`
 - `cd backend/api && yarn`
 - `cd backend/api && yarn start`
 - `cd frontend && yarn`
