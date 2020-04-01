@@ -129,7 +129,7 @@ const Controls = props => {
         </Col>
       </Row>
       <Row type="flex" style={{alignItems: 'center'}}>
-        <Col span={6} style={{fontSize: 9}}>{(formattedTime !== '00:00' ? formattedTime : '')}</Col>
+        <Col span={6} style={{textAlign: 'center', fontSize: 9}}>{(formattedTime !== '00:00' ? formattedTime : '')}</Col>
         <Col span={12}>
           <Slider
             tooltipVisible={false}
@@ -140,7 +140,7 @@ const Controls = props => {
             max={props.player.currentTrack !== false ? props.trackData.tracks[props.player.currentTrack].duration : 0}
           />
         </Col>
-        <Col span={6} style={{textAlign: 'right', fontSize: 9}}><span>{(length !== '00:00' ? length : '')}</span></Col>
+        <Col span={6} style={{textAlign: 'center', fontSize: 9}}><span>{(length !== '00:00' ? length : '')}</span></Col>
       </Row>
     </div>
   );

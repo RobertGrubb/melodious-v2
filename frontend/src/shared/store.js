@@ -1,13 +1,14 @@
 import * as actions from './actions';
 
 export default {
-  appTitle: 'Melodious',
+  title: 'Melodious',
 
   session: {
     loggedIn: false
   },
 
   player: {
+    playlistKey: false,
     state: 'stopped',
     currentTrack: false,
     currentTime: 0,
@@ -16,8 +17,9 @@ export default {
   },
 
   trackData: {
+    source: false, // false || popular || playlist
     fetched: false,
-    tracks: []
+    tracks: false
   },
 
   ...actions

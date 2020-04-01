@@ -27,22 +27,10 @@ const App = props => {
   }
 
   /**
-   * Retrieves tracks from the api and sets
-   * them in the app state.
-   */
-  const retrieveTracks = async () => {
-    if (!props.trackData.fetched) {
-      const trackData = await api.tracks();
-      props.setTracks(trackData);
-    }
-  }
-
-  /**
    * Only run once and do not look for
    * any changes.
    */
   useEffect(() => {
-    retrieveTracks();
     checkSession();
   }, []);
 

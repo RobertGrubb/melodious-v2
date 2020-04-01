@@ -19,4 +19,27 @@ const session = async () => {
   return res.data;
 }
 
-export default { tracks, login, session };
+const playlist = async id => {
+  const res = await axios.get(`${apiUrl}/playlist/${id}`);
+  return res.data;
+}
+
+const addTrackToPlaylist = async (trackId, playlistId) => {
+  const userId = cookies.load('userId');
+  const res = await axios.post(`${apiUrl}/playlist/${playlistId}/track/${trackId}`);
+  return res.data;
+}
+
+const createPlaylist = async (title, description) => {
+  const userId = cookies.load('userId');
+
+  const res = await axios.post(`${apiUrl}/playlist`, {
+    title,
+    description,
+    userId
+  });
+
+  return res.data;
+}
+
+export default { tracks, login, session, createPlaylist, playlist, addTrackToPlaylist };

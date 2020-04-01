@@ -21,7 +21,7 @@ const adapter = new FileSync('db.json');
 const db = low(adapter);
 
 // Database defaults if file is empty.
-db.defaults({ tracks: [], users: [] }).write();
+db.defaults({ tracks: [], users: [], playlists: [] }).write();
 
 // Whitelist for API routes
 const whitelist = [
@@ -99,9 +99,76 @@ app.get('/session/:id', cors(corsOptions), async (req, res) => {
     id: user.id,
     login: user.login,
     userData: user.userData,
+    playlists: user.playlists,
     success: true
   });
 })
+
+app.get('/playlist/:id', cors(corsOptions), async (req, res) => {
+  const playlistId = req.params.id;
+  const playlist = db.get('playlists').find({ id: playlistId }).value();
+
+  res.status(200).json({
+    success: true,
+    playlist
+  });
+});
+
+app.post('/playlist/:playlistId/track/:trackId', cors(corsOptions), async (req, res) => {
+  const playlistId = req.params.playlistId;
+  const trackId = req.params.trackId;
+
+  const track = db.get('tracks').find({ id: trackId }).value();
+  const playlist = db.get('playlists').find({ id: playlistId }).value();
+
+  playlist.tracks.push(track);
+
+  db.get('playlists').find({ id: playlistId }).assign({ tracks: playlist.tracks }).write();
+
+  res.status(200).json({
+    success: true,
+    playlist
+  });
+});
+
+app.post('/playlist', cors(corsOptions), async (req, res) => {
+  const { userId, title, description } = req.body;
+  if (!userId || !title || !description) return errors.parameters(res);
+
+  const user = db.get('users').find({ id: userId }).value();
+  const playlists = user.playlists;
+
+  const playlistId = shortid.generate();
+
+  playlists.push({
+    id: playlistId,
+    userId: userId,
+    title,
+    description
+  });
+
+  // Update user's playlists
+  db.get('users')
+    .find({ id: userId })
+    .assign({ playlists })
+    .write();
+
+  // Add to playlists
+  db.get('playlists')
+    .push({
+      id: playlistId,
+      userId: userId,
+      title,
+      description,
+      tracks: []
+    })
+    .write();
+
+  res.status(200).json({
+    success: true,
+    playlists: playlists
+  })
+});
 
 /**
  * Login using Twitch API v5.
@@ -151,6 +218,7 @@ app.post('/login', cors(corsOptions), async (req, res) => {
           .push({
             login: u.login,
             userData: u,
+            playlists: [],
             id,
             accessToken,
             refreshToken,
@@ -170,7 +238,8 @@ app.post('/login', cors(corsOptions), async (req, res) => {
         id: id,
         login: u.login,
         userData: u,
-        success: true
+        success: true,
+        playlists: []
       });
     } catch (error) {
 

@@ -9,6 +9,7 @@ const Toolbar = props => {
     <Button key="1" type="primary" onClick={() => navigate('/oauth/twitch')}>Login</Button>
   ];
 
+  // If logged in, show logged in data.
   if (props.session.loggedIn) {
     buttons = [
       <Avatar src={props.session.userData.profile_image_url} />,
@@ -16,11 +17,7 @@ const Toolbar = props => {
     ];
   }
 
-  let title = "Popular Songs";
-
-  if (props.trackData.fetched && props.trackData.tracks) {
-    title += ` (${props.trackData.tracks.length})`;
-  }
+  const { title } = props;
 
   return (
     <PageHeader

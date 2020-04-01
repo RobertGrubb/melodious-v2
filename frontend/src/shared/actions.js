@@ -1,10 +1,23 @@
 import cookies from 'react-cookies';
 
+export const setTitle = title => state => {
+  return { title };
+}
+
 /**
  * ==============================
  * Session Actions
  * ==============================
  */
+
+ export const setPlaylists = playlists => state => {
+   return {
+     session: {
+       ...state.session,
+       playlists
+     }
+   }
+ }
 
 export const setSession = userData => state => {
   cookies.save('userId', userData.id, { path: '/' })
@@ -65,6 +78,25 @@ export const updateTime = seconds => state => {
   let player = state.player;
   player.currentTime = seconds;
   return { player };
+}
+
+export const updateSource = (source, tracks, key) => state => {
+  if (state.player.audio) state.player.audio.pause();
+
+  let trackData = state.trackData;
+  trackData.source = source;
+  trackData.tracks = tracks;
+
+  return {
+    player: {
+      ...state.player,
+      currentTrack: key,
+      currentTime: 0,
+      state: 'play',
+      audio: new Audio(`${process.env.REACT_APP_API_URL}/stream/${state.trackData.tracks[key].id}`)
+    },
+    trackData
+  }
 }
 
 export const nextTrack = () => state => {
