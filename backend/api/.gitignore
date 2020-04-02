@@ -2,3 +2,4 @@
 .env
 db.json
 /tracks/*.mp3
+/release

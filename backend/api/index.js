@@ -25,7 +25,8 @@ db.defaults({ tracks: [], users: [], playlists: [] }).write();
 
 // Whitelist for API routes
 const whitelist = [
-  'http://localhost:3000'
+  'http://localhost:3000',
+  'https://melodious.live'
 ];
 
 // corsOptions logic based on whitelist

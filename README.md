@@ -6,14 +6,16 @@ A platform for twitch users to have easy access to no copyright music that they 
 
 - [X] Twitch Authentication
 - [X] Login / Logout
+- [X] Playlist logic
+- [X] Ability to link directly to playlist.
 - [ ] Browse Screen
-- [ ] Playlist logic
+- [ ] Ability to remove playlists
+- [ ] Shuffle ability
+
+# Bugs
+- [ ] Actionable Menu should not show if not logged in & no playlists.
 
 # Installation
-
-`ffmpeg` is required for the backend services to run correctly. Please look up how to install it based on the intended operating system.
-
-After `ffpmeg` is successfully installed, follow the following instructions:
 
 1. Create `.env` in `backend/api` with the following:
 
@@ -37,7 +39,7 @@ REACT_APP_TWITCH_REDIRECT_URL=""
 
 3. Run the following commands from the root directory:
 
-- `cp backend/api/db.json.example db.json`
+- `cp backend/api/melodious.json.example melodious.json`
 - `cd backend/api && yarn`
 - `cd backend/api && yarn start`
 - `cd frontend && yarn`
@@ -47,8 +49,14 @@ REACT_APP_TWITCH_REDIRECT_URL=""
 
 For the ease of spinning up a development API service, the API is using `lowdb`, a flat file json database api.
 
+# Note about watch
+
+Make sure when you are running the server, if you are running it with anything that watches files, ignore `melodious.json`. If you do not, the server will constantly loop beause of changes to the file.
+
 # How to add tracks to your playlist:
 
 Run `backend/api/download.js --limit=25 --genre="Dance Electronic"` to download songs from the YouTube Audio Library. Both `limit` and `genre` are optional arguments.
 
 NOTE: `COOKIES` in `backend/api/.env` is required for this script to run. (It will throw an error if it's not present.)
+
+NOTE 2: Make sure to shut down your server during the running of the above script. If you do not, anything that happens during this time on the frontend (ex. new user login) will override during the download script being ran.
