@@ -2,6 +2,8 @@
 
 A platform for twitch users to have easy access to no copyright music that they can play on their stream without fear of infringing copyrights.
 
+[View the Demo](https://melodious.live)
+
 # Todo Items
 
 - [X] Twitch Authentication
