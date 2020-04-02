@@ -23,7 +23,7 @@ const Info = props => {
         props.player.currentTrack !== false &&
         (
           <div className="info__container">
-            <img className="cover" src={props.trackData.tracks[props.player.currentTrack].cover.url} height={50} width="auto" />
+            <div className="cover" />
             <div className="label">
               <div className="title">{title}</div>
               <div className="artist">{artist}</div>

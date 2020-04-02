@@ -1,8 +1,8 @@
 const http = require('http');
 const express = require('express');
 const bodyParser = require('body-parser');
+const fs = require('fs');
 const cors = require('cors');
-const youtubeAudioStream = require('@isolution/youtube-audio-stream');
 const low = require('lowdb');
 const shortid = require('shortid');
 const FileSync = require('lowdb/adapters/FileSync');
@@ -17,7 +17,7 @@ const app = express();
 const port = 3007;
 
 // Database variables
-const adapter = new FileSync('db.json');
+const adapter = new FileSync('melodious.json');
 const db = low(adapter);
 
 // Database defaults if file is empty.
@@ -53,35 +53,45 @@ app.get('/tracks', cors(corsOptions), async (req, res) => {
 })
 
 /**
- * Adds a youtube video as a track to
- * the database.
- * @param {string} req.params.id Youtube video id
- */
-app.get('/track/add/:id', cors(corsOptions), async (req, res) => {
-  const id = req.params.id;
-  const data = await youtube.data(id);
-  db.get('tracks').push(data).write();
-  return res.status(200).json({success: true});
-})
-
-/**
  * Streams a YouTube video in audio form.
  * Use an Audio Object from JavaScript or HTML and connect it to
  * http://localhost:3007/stream/iadh23t89h (video id)
  */
 app.get('/stream/:id', async (req, res) => {
-  const requestUrl = `http://youtube.com/watch?v=${req.params.id}`;
-  youtubeAudioStream(requestUrl)
-    .then(stream => {
-      console.log('test');
-      stream.emitter.on('error', err => {
-        console.log(err);
-      });
-      stream.pipe(res);
-    })
-    .catch(err => {
-      console.log(err);
+  const music = `${__dirname}/tracks/${req.params.id}.mp3`;
+  var stat = fs.statSync(music);
+  range = req.headers.range;
+  var readStream;
+
+  if (range !== undefined) {
+    var parts = range.replace(/bytes=/, "").split("-");
+
+    var partial_start = parts[0];
+    var partial_end = parts[1];
+
+    if ((isNaN(partial_start) && partial_start.length > 1) || (isNaN(partial_end) && partial_end.length > 1)) {
+      return res.sendStatus(500); //ERR_INCOMPLETE_CHUNKED_ENCODING
+    }
+
+    var start = parseInt(partial_start, 10);
+    var end = partial_end ? parseInt(partial_end, 10) : stat.size - 1;
+    var content_length = (end - start) + 1;
+
+    res.status(206).header({
+      'Content-Type': 'audio/mpeg',
+      'Content-Length': content_length,
+      'Content-Range': "bytes " + start + "-" + end + "/" + stat.size
     });
+
+    readStream = fs.createReadStream(music, {start: start, end: end});
+  } else {
+    res.header({
+      'Content-Type': 'audio/mpeg',
+      'Content-Length': stat.size
+    });
+    readStream = fs.createReadStream(music);
+  }
+  readStream.pipe(res);
 })
 
 /**

@@ -92,10 +92,10 @@ const Home = props => {
     return {
       key: index,
       id: track.id,
-      track: track.title,
+      title: track.title,
       artist: track.artist,
       duration: length,
-      cover: track.cover.url
+      genre: track.genre
     }
   });
 
@@ -105,20 +105,19 @@ const Home = props => {
    */
   const columns = [
     {
-      title: '',
-      dataIndex: 'cover',
-      key: 'cover',
-      render: image => <img alt="cover" src={image} height={24} width="auto" />
-    },
-    {
       title: 'Track',
-      dataIndex: 'track',
-      key: 'track',
+      dataIndex: 'title',
+      key: 'title',
     },
     {
       title: 'Artist',
       dataIndex: 'artist',
       key: 'artist',
+    },
+    {
+      title: 'Genre',
+      dataIndex: 'genre',
+      key: 'genre',
     },
     {
       title: 'Duration',
