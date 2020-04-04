@@ -25,7 +25,17 @@ export const setSession = userData => state => {
   return {
     session: {
       ...userData,
-      loggedIn: true
+      loggedIn: true,
+      fetched: true
+    }
+  }
+}
+
+export const setSessionFetched = () => state => {
+  return {
+    session: {
+      ...state.session,
+      fetched: true
     }
   }
 }

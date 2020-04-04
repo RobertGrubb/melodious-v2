@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { subscribe } from 'react-contextual';
 import { navigate } from 'hookrouter';
+
 import './navigation.scss';
 import api from '../../shared/libs/api';
 import { Menu, Modal, Input, message } from 'antd';
@@ -9,7 +10,8 @@ import {
   SearchOutlined,
   PlayCircleOutlined,
   PlusOutlined,
-  UnorderedListOutlined
+  UnorderedListOutlined,
+  SettingOutlined
 } from '@ant-design/icons';
 
 const { SubMenu } = Menu;
@@ -67,6 +69,23 @@ const Navigation = props => {
           <SearchOutlined />
           <span>Browse</span>
         </Menu.Item>
+
+        {
+          props.session.loggedIn === true && props.session.userLevel === "admin" &&
+          (
+            <SubMenu
+              key="admin"
+              title={
+                <span>
+                  <SettingOutlined />
+                  <span>Admin</span>
+                </span>
+              }
+            >
+              <Menu.Item onClick={goTo.bind(this, '/admin/genres')} key={'admin-1'}>Genres</Menu.Item>
+            </SubMenu>
+          )
+        }
 
         {
           props.session.loggedIn === true &&

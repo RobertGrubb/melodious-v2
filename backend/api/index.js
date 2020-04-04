@@ -6,6 +6,10 @@ const cors = require('cors');
 const low = require('lowdb');
 const shortid = require('shortid');
 const FileSync = require('lowdb/adapters/FileSync');
+const { config } = require('dotenv');
+
+// Load the .env file
+config();
 
 // Local imports
 const errors = require('./errors');
@@ -14,7 +18,7 @@ const twitch = require('./libs/twitch');
 
 // Server variables
 const app = express();
-const port = 3007;
+const port = process.env.SERVER_PORT || 3007;
 
 // Database variables
 const adapter = new FileSync('melodious.json');
@@ -22,6 +26,12 @@ const db = low(adapter);
 
 // Database defaults if file is empty.
 db.defaults({ tracks: [], users: [], playlists: [] }).write();
+
+let adminAccounts = [];
+if (process.env.ADMIN_ACCOUNTS) {
+  adminAccounts = process.env.ADMIN_ACCOUNTS.split(',');
+  console.log('Loaded admin accounts', adminAccounts);
+}
 
 // Whitelist for API routes
 const whitelist = [
@@ -59,24 +69,25 @@ app.get('/tracks', cors(corsOptions), async (req, res) => {
  * http://localhost:3007/stream/iadh23t89h (video id)
  */
 app.get('/stream/:id', async (req, res) => {
+  const range = req.headers.range;
   const music = `${__dirname}/tracks/${req.params.id}.mp3`;
-  var stat = fs.statSync(music);
-  range = req.headers.range;
-  var readStream;
+  const stat = fs.statSync(music);
+  let readStream;
 
   if (range !== undefined) {
-    var parts = range.replace(/bytes=/, "").split("-");
+    const parts = range.replace(/bytes=/, "").split("-");
 
-    var partial_start = parts[0];
-    var partial_end = parts[1];
+    const partial_start = parts[0];
+    const partial_end = parts[1];
 
-    if ((isNaN(partial_start) && partial_start.length > 1) || (isNaN(partial_end) && partial_end.length > 1)) {
-      return res.sendStatus(500); //ERR_INCOMPLETE_CHUNKED_ENCODING
+    if ((isNaN(partial_start) && partial_start.length > 1) ||
+      (isNaN(partial_end) && partial_end.length > 1)) {
+      return res.sendStatus(500);
     }
 
-    var start = parseInt(partial_start, 10);
-    var end = partial_end ? parseInt(partial_end, 10) : stat.size - 1;
-    var content_length = (end - start) + 1;
+    const start = parseInt(partial_start, 10);
+    const end = partial_end ? parseInt(partial_end, 10) : stat.size - 1;
+    const content_length = (end - start) + 1;
 
     res.status(206).header({
       'Content-Type': 'audio/mpeg',
@@ -84,7 +95,7 @@ app.get('/stream/:id', async (req, res) => {
       'Content-Range': "bytes " + start + "-" + end + "/" + stat.size
     });
 
-    readStream = fs.createReadStream(music, {start: start, end: end});
+    readStream = fs.createReadStream(music, { start, end });
   } else {
     res.header({
       'Content-Type': 'audio/mpeg',
@@ -93,26 +104,6 @@ app.get('/stream/:id', async (req, res) => {
     readStream = fs.createReadStream(music);
   }
   readStream.pipe(res);
-})
-
-/**
- * Login using Twitch API v5.
- */
-app.get('/session/:id', cors(corsOptions), async (req, res) => {
-  if (!req.params.id) return errors.unauthorized(res);
-
-  // Attempt to find a user that matches login in database.
-  const user = db.get('users').find({ id: req.params.id }).value();
-
-  if (!user) return errors.unauthorized(res);
-
-  return res.status(200).json({
-    id: user.id,
-    login: user.login,
-    userData: user.userData,
-    playlists: user.playlists,
-    success: true
-  });
 })
 
 app.get('/playlist/:id', cors(corsOptions), async (req, res) => {
@@ -250,7 +241,8 @@ app.post('/login', cors(corsOptions), async (req, res) => {
         login: u.login,
         userData: u,
         success: true,
-        playlists: []
+        playlists: [],
+        userLevel: adminAccounts.includes(u.login) ? 'admin' : 'user'
       });
     } catch (error) {
 
@@ -262,6 +254,43 @@ app.post('/login', cors(corsOptions), async (req, res) => {
     // Thrown if accessCredentials throws an error.
     return res.status(400).json({error: true});
   }
+})
+
+/**
+ * Session handling route
+ */
+app.get('/session/:id', cors(corsOptions), async (req, res) => {
+  if (!req.params.id) return errors.unauthorized(res);
+
+  // Attempt to find a user that matches login in database.
+  const user = db.get('users').find({ id: req.params.id }).value();
+
+  if (!user) return errors.unauthorized(res);
+
+  return res.status(200).json({
+    id: user.id,
+    login: user.login,
+    userData: user.userData,
+    playlists: user.playlists,
+    success: true,
+    userLevel: adminAccounts.includes(user.login) ? 'admin' : 'user'
+  });
+})
+
+/**
+ * ADMIN ROUTES
+ */
+app.post('/tracks/add', cors(corsOptions), async (req, res) => {
+  if (!req.body.id) return errors.unauthorized(res);
+
+  // Attempt to find a user that matches login in database.
+  const user = db.get('users').find({ id: req.body.id }).value();
+
+  if (!user) return errors.unauthorized(res);
+
+  if (!adminAccounts.includes(user.login)) return errors.unauthorized(res);
+
+  return res.status(200).json({ success: true });
 })
 
 // ===================================
