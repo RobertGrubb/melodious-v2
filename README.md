@@ -21,7 +21,11 @@ A platform for twitch users to have easy access to no copyright music that they 
 
 1. Create `.env` in `backend/api` with the following:
 
+*NOTE* Admin accounts should be based on the login username for Twitch. When you login via twitch, if it matches the login, it will give you admin privelages.
+
 ```
+SERVER_PORT=3007
+ADMIN_ACCOUNTS="twitchUsername1,twitchUsername2"
 YOUTUBE_API_KEY=""
 TWITCH_CLIENT_ID=""
 TWITCH_CLIENT_SECRET=""
