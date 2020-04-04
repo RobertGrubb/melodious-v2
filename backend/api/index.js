@@ -279,19 +279,38 @@ app.get('/session/:id', cors(corsOptions), async (req, res) => {
 
 /**
  * ADMIN ROUTES
+ *
+ * Example of an admin route.
+ *
+ * @param { string } authId (Required for admin validation)
+ *
  */
-app.post('/tracks/add', cors(corsOptions), async (req, res) => {
-  if (!req.body.id) return errors.unauthorized(res);
+app.post('/admin/tracks/add', cors(corsOptions), async (req, res) => {
+  // If no authId was provided, error out.
+  if (!req.body.authId) return errors.unauthorized(res);
+
+  // Route params validation
+  const { type, title, artist, url } = req.body;
+  if (!type || !title || !artist || !url) return errors.parameters(res);
 
   // Attempt to find a user that matches login in database.
-  const user = db.get('users').find({ id: req.body.id }).value();
-
+  const user = db.get('users').find({ id: req.body.authId }).value();
   if (!user) return errors.unauthorized(res);
 
+  // Are they an admin?
   if (!adminAccounts.includes(user.login)) return errors.unauthorized(res);
 
+  // Return a success status.
   return res.status(200).json({ success: true });
 })
+
+// Routes:
+// /admin/tracks/edit/:id
+// /admin/tracks/delete/:id
+//
+// /admin/genre/add
+// /admin/genre/remove/:id
+// /admin/genre/edit/:id
 
 // ===================================
 // Status route
