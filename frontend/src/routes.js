@@ -5,6 +5,7 @@ import Home from './screens/home';
 import Browse from './screens/browse';
 import Oauth from './screens/oauth';
 import Playlist from './screens/playlist';
+import TracksAdmin from './screens/admin/tracks';
 import UserLogout from './screens/user/logout';
 import Loader from './shared/components/loader';
 
@@ -13,6 +14,7 @@ const routes = {
   '/browse': () => <Browse />,
   '/playlist/:id': params => <AuthedRoute authLevel="user" params={params} component={Playlist} />,
   '/oauth/:platform': ({ platform }) => <Oauth platform={platform} />,
+  '/admin/tracks': params => <AuthedRoute authLevel="admin" params={params} component={TracksAdmin} />,
   '/user/logout': () => <UserLogout />,
 };
 

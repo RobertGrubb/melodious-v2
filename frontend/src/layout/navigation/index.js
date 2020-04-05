@@ -83,7 +83,7 @@ const Navigation = props => {
               }
             >
               <Menu.Item onClick={goTo.bind(this, '/admin/genres')} key={'admin-1'}>Genres</Menu.Item>
-              <Menu.Item onClick={goTo.bind(this, '/admin/tracks')} key={'admin-1'}>Tracks</Menu.Item>
+              <Menu.Item onClick={goTo.bind(this, '/admin/tracks')} key={'admin-2'}>Tracks</Menu.Item>
             </SubMenu>
           )
         }
