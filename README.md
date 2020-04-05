@@ -59,6 +59,20 @@ Make sure when you are running the server, if you are running it with anything t
 
 # How to add tracks to your playlist:
 
+There are a few ways to add tracks to your melodious application. Look below for more information.
+
+## Melodious Admin
+
+To access Melodious Admin from within the melodious application, you must first add your Twitch username to the `ADMIN_ACCOUNTS=""` environment variable in `/backend/api/.env` (Refer to installation above.)
+
+Once you have done this, run the frontend application, login with your Twitch account, then navigate to "Admin -> Tracks". From there, you can add tracks via a YouTube Video, or upload your own MP3.
+
+## YT Video Command Line
+
+Run `backend/api/video-to-track.js --videoId="<VIDEO_ID>"` to convert a YouTube video to an MP3 track, and add it to your lowdb melodious database.
+
+## YT Audio Library
+
 Run `backend/api/download.js --limit=25 --genre="Dance Electronic"` to download songs from the YouTube Audio Library. Both `limit` and `genre` are optional arguments.
 
 NOTE: `COOKIES` in `backend/api/.env` is required for this script to run. (It will throw an error if it's not present.)
