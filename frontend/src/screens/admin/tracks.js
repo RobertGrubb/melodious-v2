@@ -130,7 +130,7 @@ const TracksAdmin = props => {
   const menu = id => (
     <Menu>
       <Menu.Item key="1" onClick={setEditVisible.bind(this, true)}>Edit Track</Menu.Item>
-      <Menu.Item key="2">Remove Track</Menu.Item>
+      {/**<Menu.Item key="2">Remove Track</Menu.Item>**/}
     </Menu>
   );
 
