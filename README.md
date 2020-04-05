@@ -15,9 +15,6 @@ A platform for twitch users to have easy access to no copyright music that they 
 - [ ] Ability to remove playlists
 - [ ] Shuffle ability
 
-# Bugs
-- [ ] Actionable Menu should not show if not logged in & no playlists.
-
 # Installation
 
 1. Create `.env` in `backend/api` with the following:
@@ -58,7 +55,7 @@ For the ease of spinning up a development API service, the API is using `lowdb`,
 
 # Note about watch
 
-Make sure when you are running the server, if you are running it with anything that watches files, ignore `melodious.json`. If you do not, the server will constantly loop beause of changes to the file.
+Make sure when you are running the server, if you are running it with anything that watches files, ignore `melodious.json`. If you do not, the server will constantly loop because of changes to the file.
 
 # How to add tracks to your playlist:
 
