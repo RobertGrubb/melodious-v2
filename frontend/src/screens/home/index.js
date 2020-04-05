@@ -103,7 +103,7 @@ const Home = props => {
    * Setup the columns array for the table
    * to read.
    */
-  const columns = [
+  let columns = [
     {
       title: 'Track',
       dataIndex: 'title',
@@ -123,14 +123,17 @@ const Home = props => {
       title: 'Duration',
       dataIndex: 'duration',
       key: 'duration',
-    },
-    {
+    }
+  ];
+
+  if (props.session.loggedIn) {
+    columns.push({
       title: '',
       dataIndex: 'id',
       key: 'id',
       render: id => <Dropdown trigger="click" overlay={menu.bind(this, id)}><Button shape="circle"><EllipsisOutlined /></Button></Dropdown>
-    },
-  ];
+    });
+  }
 
   return (
     <Table

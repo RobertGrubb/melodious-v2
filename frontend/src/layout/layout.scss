@@ -22,3 +22,18 @@ body {
   clear: both;
   width: 100%;
 }
+
+.mel-icon {
+  position: relative;
+  top: 1px;
+}
+
+.test {
+  color: #fff !important;
+  background-color: #9147ff !important;
+
+  &:hover, &:active, &:focus {
+    color: #fff !important;
+    border-color: #000 !important;
+  }
+}

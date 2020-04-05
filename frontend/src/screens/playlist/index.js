@@ -75,6 +75,7 @@ const Playlist = props => {
       id: track.id,
       title: track.title,
       artist: track.artist,
+      genre: track.genre,
       duration: length
     }
   });

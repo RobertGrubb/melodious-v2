@@ -1,5 +1,7 @@
 /node_modules
 .env
 db.json
+melodious.json
 /tracks/*.mp3
 /release
+.DS_Store

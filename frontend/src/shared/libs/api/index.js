@@ -42,4 +42,22 @@ const createPlaylist = async (title, description) => {
   return res.data;
 }
 
-export default { tracks, login, session, createPlaylist, playlist, addTrackToPlaylist };
+const createTrack = async (data) => {
+  const userId = cookies.load('userId');
+
+  let postData = {
+    type: data.type,
+    title: data.title,
+    artist: data.artist,
+    genre: data.genre,
+    authId: userId
+  };
+
+  if (data.type === 'youtube') postData.videoId = data.videoId;
+  if (data.type === 'mp3') postData.trackData = data.trackData;
+
+  const res = await axios.post(`${apiUrl}/admin/tracks/add`, postData);
+  return res.data;
+}
+
+export default { tracks, login, session, createPlaylist, playlist, addTrackToPlaylist, createTrack };

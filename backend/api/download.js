@@ -1,3 +1,4 @@
+// Imports
 const shortid = require('shortid');
 const fs = require('fs');
 const request = require('request');
@@ -7,8 +8,10 @@ const low = require('lowdb');
 const { config } = require('dotenv');
 const FileSync = require('lowdb/adapters/FileSync');
 
+// Load the dotenv config
 config();
 
+// If the cookie string is not provided for audio library, error out.
 if (!process.env.YOUTUBE_AUDIO_LIBRARY_COOKIES) throw new Error('process.env.COOKIES is not set. Please create .env file.');
 
 // Database variables
@@ -18,13 +21,19 @@ const db = low(adapter);
 // Database defaults if file is empty.
 db.defaults({ tracks: [], users: [], playlists: [] }).write();
 
+// Set the track specific variables.
 const trackPath = `${__dirname}/tracks/`;
 const audioFileType = '.mp3';
 
+/**
+ * Will retrieve tracks from the audio library.
+ */
 const tracks = async () => {
+  // Set optionals
   const genre = (argv.genre ? argv.genre : false);
   const limit = (argv.limit ? argv.limit : 25);
 
+  // Build the params object.
   const params = {
     dl: true,
     s: 'music',
@@ -34,12 +43,16 @@ const tracks = async () => {
     sh: true
   };
 
+  // If there is a genre, add it to the object.
   if (genre) params.g = genre;
 
+  // Build the request URL
   let url = 'https://www.youtube.com/audioswap_ajax?action_get_tracks=1&';
   url += Object.keys(params).map(key => `${key}=${params[key]}`).join('&');
 
   try {
+
+    // Send the request
     const res = await axios.get(url, {
       headers: {
         'accept': '*/*',
@@ -50,6 +63,7 @@ const tracks = async () => {
       }
     });
 
+    // Return the data
     return res.data;
   } catch (error) {
     console.log(error);
@@ -57,9 +71,14 @@ const tracks = async () => {
   }
 }
 
+/**
+ * Adds a specific track to the database.
+ */
 const addTrack = async (track) => {
+  // Generate the track ID
   const trackId = shortid.generate();
 
+  // Setup the data structure for the database.
   const dataStructure = {
     id: trackId,
     fileName: `${trackId}${audioFileType}`,
@@ -72,16 +91,20 @@ const addTrack = async (track) => {
     duration: track.len
   };
 
+  // Add it to the database.
   db.get('tracks').push(dataStructure).write();
 
+  // Create a write stream
   const writer = fs.createWriteStream(`${trackPath}${trackId}${audioFileType}`)
 
+  // Send a request for the audio file
   const response = await axios({
     url: track.download_url,
     method: 'GET',
     responseType: 'stream'
   })
 
+  // Pipe the stream
   response.data.pipe(writer);
 
   return new Promise((resolve, reject) => {
@@ -89,8 +112,6 @@ const addTrack = async (track) => {
     writer.on('error', reject)
   })
 }
-
-// const track = data.tracks[0];
 
 
 const trackData = tracks().then(async (data) => {

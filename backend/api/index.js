@@ -6,15 +6,29 @@ const cors = require('cors');
 const low = require('lowdb');
 const shortid = require('shortid');
 const FileSync = require('lowdb/adapters/FileSync');
+const { config } = require('dotenv');
+const fileUpload = require('express-fileupload');
+const mp3Duration = require('mp3-duration');
+
+// Load the .env file
+config();
 
 // Local imports
 const errors = require('./errors');
 const youtube = require('./libs/youtube');
 const twitch = require('./libs/twitch');
+const YoutubeDownloader = require('./libs/downloader');
+
+// Instantiate the YouTube downloader
+const downloader = new YoutubeDownloader({
+  ffmpegPath: 'ffmpeg',
+  fileSavePath: `${__dirname}/tracks/`,
+  apiKey: process.env.YOUTUBE_API_KEY
+});
 
 // Server variables
 const app = express();
-const port = 3007;
+const port = process.env.SERVER_PORT || 3007;
 
 // Database variables
 const adapter = new FileSync('melodious.json');
@@ -22,6 +36,15 @@ const db = low(adapter);
 
 // Database defaults if file is empty.
 db.defaults({ tracks: [], users: [], playlists: [] }).write();
+
+/**
+ * Define adminAccounts based on env variables.
+ */
+let adminAccounts = [];
+if (process.env.ADMIN_ACCOUNTS) {
+  adminAccounts = process.env.ADMIN_ACCOUNTS.split(',');
+  console.log('Loaded admin accounts', adminAccounts);
+}
 
 // Whitelist for API routes
 const whitelist = [
@@ -37,7 +60,11 @@ const corsOptions = {
   }
 };
 
+// Use body Parser to retrieve POST variables
 app.use(bodyParser.json());
+
+// Use fileUpload middle ware to support files
+app.use(fileUpload());
 
 // For preflight requests
 app.options('*', cors(corsOptions));
@@ -59,24 +86,25 @@ app.get('/tracks', cors(corsOptions), async (req, res) => {
  * http://localhost:3007/stream/iadh23t89h (video id)
  */
 app.get('/stream/:id', async (req, res) => {
+  const range = req.headers.range;
   const music = `${__dirname}/tracks/${req.params.id}.mp3`;
-  var stat = fs.statSync(music);
-  range = req.headers.range;
-  var readStream;
+  const stat = fs.statSync(music);
+  let readStream;
 
   if (range !== undefined) {
-    var parts = range.replace(/bytes=/, "").split("-");
+    const parts = range.replace(/bytes=/, "").split("-");
 
-    var partial_start = parts[0];
-    var partial_end = parts[1];
+    const partial_start = parts[0];
+    const partial_end = parts[1];
 
-    if ((isNaN(partial_start) && partial_start.length > 1) || (isNaN(partial_end) && partial_end.length > 1)) {
-      return res.sendStatus(500); //ERR_INCOMPLETE_CHUNKED_ENCODING
+    if ((isNaN(partial_start) && partial_start.length > 1) ||
+      (isNaN(partial_end) && partial_end.length > 1)) {
+      return res.sendStatus(500);
     }
 
-    var start = parseInt(partial_start, 10);
-    var end = partial_end ? parseInt(partial_end, 10) : stat.size - 1;
-    var content_length = (end - start) + 1;
+    const start = parseInt(partial_start, 10);
+    const end = partial_end ? parseInt(partial_end, 10) : stat.size - 1;
+    const content_length = (end - start) + 1;
 
     res.status(206).header({
       'Content-Type': 'audio/mpeg',
@@ -84,7 +112,7 @@ app.get('/stream/:id', async (req, res) => {
       'Content-Range': "bytes " + start + "-" + end + "/" + stat.size
     });
 
-    readStream = fs.createReadStream(music, {start: start, end: end});
+    readStream = fs.createReadStream(music, { start, end });
   } else {
     res.header({
       'Content-Type': 'audio/mpeg',
@@ -96,25 +124,8 @@ app.get('/stream/:id', async (req, res) => {
 })
 
 /**
- * Login using Twitch API v5.
+ * Retrieves a specific playlist
  */
-app.get('/session/:id', cors(corsOptions), async (req, res) => {
-  if (!req.params.id) return errors.unauthorized(res);
-
-  // Attempt to find a user that matches login in database.
-  const user = db.get('users').find({ id: req.params.id }).value();
-
-  if (!user) return errors.unauthorized(res);
-
-  return res.status(200).json({
-    id: user.id,
-    login: user.login,
-    userData: user.userData,
-    playlists: user.playlists,
-    success: true
-  });
-})
-
 app.get('/playlist/:id', cors(corsOptions), async (req, res) => {
   const playlistId = req.params.id;
   const playlist = db.get('playlists').find({ id: playlistId }).value();
@@ -125,15 +136,22 @@ app.get('/playlist/:id', cors(corsOptions), async (req, res) => {
   });
 });
 
+/**
+ * Adds a specific track to a specific playlist.
+ */
 app.post('/playlist/:playlistId/track/:trackId', cors(corsOptions), async (req, res) => {
+  // Variables that are needed to move forward
   const playlistId = req.params.playlistId;
   const trackId = req.params.trackId;
 
+  // Get the track and the playlist data
   const track = db.get('tracks').find({ id: trackId }).value();
   const playlist = db.get('playlists').find({ id: playlistId }).value();
 
+  // Push the track to the playlist[tracks]
   playlist.tracks.push(track);
 
+  // Write to the database.
   db.get('playlists').find({ id: playlistId }).assign({ tracks: playlist.tracks }).write();
 
   res.status(200).json({
@@ -142,15 +160,24 @@ app.post('/playlist/:playlistId/track/:trackId', cors(corsOptions), async (req, 
   });
 });
 
+/**
+ * Create a playlist for the current session.
+ */
 app.post('/playlist', cors(corsOptions), async (req, res) => {
+  // Get body params
   const { userId, title, description } = req.body;
+
+  // If any are not present, return an error.
   if (!userId || !title || !description) return errors.parameters(res);
 
+  // Find the user
   const user = db.get('users').find({ id: userId }).value();
   const playlists = user.playlists;
 
+  // Generate a new playlist id
   const playlistId = shortid.generate();
 
+  // Add the play list to the database
   playlists.push({
     id: playlistId,
     userId: userId,
@@ -250,7 +277,8 @@ app.post('/login', cors(corsOptions), async (req, res) => {
         login: u.login,
         userData: u,
         success: true,
-        playlists: []
+        playlists: [],
+        userLevel: adminAccounts.includes(u.login) ? 'admin' : 'user'
       });
     } catch (error) {
 
@@ -262,6 +290,164 @@ app.post('/login', cors(corsOptions), async (req, res) => {
     // Thrown if accessCredentials throws an error.
     return res.status(400).json({error: true});
   }
+})
+
+/**
+ * Session handling route
+ */
+app.get('/session/:id', cors(corsOptions), async (req, res) => {
+  if (!req.params.id) return errors.unauthorized(res);
+
+  // Attempt to find a user that matches login in database.
+  const user = db.get('users').find({ id: req.params.id }).value();
+
+  // If no user was found, return unauthorized
+  if (!user) return errors.unauthorized(res);
+
+  // Return all session data.
+  return res.status(200).json({
+    id: user.id,
+    login: user.login,
+    userData: user.userData,
+    playlists: user.playlists,
+    success: true,
+    userLevel: adminAccounts.includes(user.login) ? 'admin' : 'user'
+  });
+})
+
+/**
+ * ADMIN ROUTES
+ *
+ * Example of an admin route.
+ *
+ * @param { string } authId (Required for admin validation)
+ *
+ */
+app.post('/admin/tracks/add', cors(corsOptions), async (req, res) => {
+  // If no authId was provided, error out.
+  if (!req.body.authId) return errors.unauthorized(res);
+
+  // Route params validation
+  const { type, title, artist, genre } = req.body;
+  if (!type || !title || !artist || !genre) return errors.parameters(res);
+
+  // List of valid types for adding
+  const validTypes = ['youtube', 'mp3'];
+
+  // If not in the valid types.
+  if (!validTypes.includes(type)) return res.status(400).json({error: 'INVALID_TYPE'});
+
+  // Attempt to find a user that matches login in database.
+  const user = db.get('users').find({ id: req.body.authId }).value();
+  if (!user) return errors.unauthorized(res);
+
+  // Are they an admin?
+  if (!adminAccounts.includes(user.login)) return errors.unauthorized(res);
+
+  // If fetch type is youtube.
+  if (type === 'youtube') {
+    // If no video id is provided, return error status.
+    if (!req.body.videoId) return errors.parameters(res);
+
+    // Initial data structure
+    const data = { videoId: req.body.videoId };
+
+    // Depending on what's provided, add it to the data object.
+    if (title) data.title = title;
+    if (artist) data.artist = artist;
+    if (genre) data.genre = genre;
+
+    // Start downloading the YouTube video as mp3.
+    downloader.download(data, (error, response) => {
+
+      // If an error was hit, return bad status.
+      if (error)
+        return res.status(400).json({ error });
+
+      // All is well, add it to the database.
+      db.get('tracks').push(response).write();
+
+      // Return a 200 status with track data.
+      return res.status(200).json({ success: true, track: response });
+    });
+
+  // MP3 Type Addition
+  } else if (type === 'mp3') {
+    // TrackData should be accessible before hitting this endpoint.
+    if (!req.body.trackData) return errors.parameters(res);
+
+    // Setup the data structure
+    const data = {
+      id: req.body.trackData.trackId,
+      title: title,
+      fileName: req.body.trackData.filename,
+      artist: artist,
+      artistUrl: '',
+      album: 'None',
+      genre: genre,
+      mood: 'None',
+      duration: req.body.trackData.duration
+    }
+
+    // Add it to the database.
+    db.get('tracks').push(data).write();
+
+    // Return 200 with track data.
+    return res.status(200).json({ success: true, track: data });
+
+  // This type is unknown and is not supported.
+  } else {
+    return res.status(400).json({ error: 'TYPE_NOT_SUPPORTED' });
+  }
+})
+
+/**
+ * Upload an MP3, assign it an id that is returned
+ * as well as the duration of the mp3.
+ */
+app.post('/admin/tracks/upload', cors(corsOptions), async (req, res) => {
+
+  // If no files are present, error out.
+  if (!req.files || Object.keys(req.files).length === 0) return res.status(400).json({
+    error: 'NO_MP3_FILE'
+  });
+
+  // Get the mp3 file
+  let file = req.files.file;
+
+  // Generate a track id
+  const trackId = shortid.generate();
+
+  // Set the file name based on the track id.
+  const filename = `${trackId}.mp3`;
+
+  // Move the mp3 to the right destination.
+  file.mv(`${__dirname}/tracks/${filename}`, async (err) => {
+
+    // If there is an error, return a 500.
+    if (err)
+      return res.status(500).json({ error: err });
+
+    // Set a default duration
+    let duration = 0;
+
+    // Attempt to retrieve the duration, or just return 0.
+    try {
+      const durationRes = await mp3Duration(`${__dirname}/tracks/${filename}`);
+      duration = durationRes;
+    } catch (error) {
+      // Do nothing.
+      console.log(error);
+    }
+
+    // Respond with the correct data.
+    res.status(200).json({
+      success: true,
+      trackId,
+      filename,
+      duration
+    })
+  });
 })
 
 // ===================================

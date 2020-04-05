@@ -4,7 +4,9 @@ export default {
   title: 'Melodious',
 
   session: {
-    loggedIn: false
+    loggedIn: false,
+    userLevel: 'guest',
+    fetched: false
   },
 
   player: {

@@ -23,6 +23,8 @@ const App = props => {
       } catch (error) {
         console.log(error);
       }
+    } else {
+      props.setSessionFetched();
     }
   }
 

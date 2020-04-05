@@ -10,18 +10,20 @@ A platform for twitch users to have easy access to no copyright music that they 
 - [X] Login / Logout
 - [X] Playlist logic
 - [X] Ability to link directly to playlist.
+- [ ] Create TrackTable component for less redundancy.
 - [ ] Browse Screen
 - [ ] Ability to remove playlists
 - [ ] Shuffle ability
-
-# Bugs
-- [ ] Actionable Menu should not show if not logged in & no playlists.
 
 # Installation
 
 1. Create `.env` in `backend/api` with the following:
 
+*NOTE* Admin accounts should be based on the login username for Twitch. When you login via twitch, if it matches the login, it will give you admin privelages.
+
 ```
+SERVER_PORT=3007
+ADMIN_ACCOUNTS="twitchUsername1,twitchUsername2"
 YOUTUBE_API_KEY=""
 TWITCH_CLIENT_ID=""
 TWITCH_CLIENT_SECRET=""
@@ -53,7 +55,7 @@ For the ease of spinning up a development API service, the API is using `lowdb`,
 
 # Note about watch
 
-Make sure when you are running the server, if you are running it with anything that watches files, ignore `melodious.json`. If you do not, the server will constantly loop beause of changes to the file.
+Make sure when you are running the server, if you are running it with anything that watches files, ignore `melodious.json`. If you do not, the server will constantly loop because of changes to the file.
 
 # How to add tracks to your playlist:
 
