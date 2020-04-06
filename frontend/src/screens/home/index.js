@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { subscribe } from 'react-contextual';
 import { Table, Button, Menu, Dropdown, message } from 'antd';
-import Loader from '../../shared/components/loader';
-import TrackTable from '../../shared/components/track-table';
-import api from '../../shared/libs/api';
 import moment from 'moment';
-import './home.scss';
 
 import {
   EllipsisOutlined
 } from '@ant-design/icons';
+
+import Loader from '../../shared/components/loader';
+import TrackTable from '../../shared/components/track-table';
+import api from '../../shared/libs/api';
+import './home.scss';
 
 const { SubMenu } = Menu;
 

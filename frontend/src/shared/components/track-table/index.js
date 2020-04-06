@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { subscribe } from 'react-contextual';
 import { Table, Button, Menu, Dropdown, Popover, message } from 'antd';
-import Loader from '../loader';
-import api from '../../libs/api';
 import moment from 'moment';
 import * as linkify from 'linkifyjs';
 import linkifyHtml from 'linkifyjs/html';
@@ -10,6 +8,9 @@ import linkifyHtml from 'linkifyjs/html';
 import {
   EllipsisOutlined
 } from '@ant-design/icons';
+
+import Loader from '../loader';
+import api from '../../libs/api';
 
 const { SubMenu } = Menu;
 

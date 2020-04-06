@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { subscribe } from 'react-contextual';
 import { navigate } from 'hookrouter';
 
-import './navigation.scss';
-import api from '../../shared/libs/api';
 import { Menu, Modal, Input, message } from 'antd';
 import {
   HomeOutlined,
@@ -12,6 +10,9 @@ import {
   UnorderedListOutlined,
   SettingOutlined
 } from '@ant-design/icons';
+
+import './navigation.scss';
+import api from '../../shared/libs/api';
 
 const { SubMenu } = Menu;
 const { TextArea } = Input;

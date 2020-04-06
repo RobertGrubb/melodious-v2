@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { subscribe } from 'react-contextual';
+import moment from 'moment';
+import { Table, message } from 'antd';
+
 import api from '../../shared/libs/api';
 import Loader from '../../shared/components/loader';
 import TrackTable from '../../shared/components/track-table';
-import moment from 'moment';
-import { Table, message } from 'antd';
 
 const Playlist = props => {
   const [loading, setLoading] = useState(true);
@@ -59,11 +60,11 @@ const Playlist = props => {
 
   // Render the track table
   return (<TrackTable
-            tracks={playlist.tracks}
-            loading={loading}
-            onSetTrack={setTrack.bind(this)}
-            options={false}
-          />);
+    tracks={playlist.tracks}
+    loading={loading}
+    onSetTrack={setTrack.bind(this)}
+    options={false}
+  />);
 }
 
 export default subscribe()(Playlist);

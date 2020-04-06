@@ -2,6 +2,7 @@ import React from 'react';
 import { subscribe } from 'react-contextual';
 import { navigate } from 'hookrouter';
 import { PageHeader, Button, Avatar } from 'antd';
+
 import './toolbar.scss';
 
 const Toolbar = props => {

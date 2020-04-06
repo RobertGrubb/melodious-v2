@@ -1,10 +1,11 @@
 import React from 'react';
+import 'antd/dist/antd.css';
+import { subscribe } from 'react-contextual';
+
 import Content from './content';
 import Navigation from './navigation';
 import PlayerBar from './playerbar';
 import './layout.scss';
-import 'antd/dist/antd.css';
-import { subscribe } from 'react-contextual';
 
 const Layout = props => {
   return (

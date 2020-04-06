@@ -4,8 +4,9 @@ import momentDurationFormatSetup from 'moment-duration-format';
 import { subscribe } from 'react-contextual';
 import { Row, Col, Slider } from 'antd';
 import { PauseCircleOutlined, PlayCircleOutlined, BackwardOutlined, ForwardOutlined } from '@ant-design/icons';
-import './controls.scss';
+
 import Loader from '../../../shared/components/loader';
+import './controls.scss';
 
 momentDurationFormatSetup(moment);
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect} from 'react';
 import { subscribe } from 'react-contextual';
 import { Slider, Row, Col} from 'antd';
 import { SoundOutlined } from '@ant-design/icons';
+
 import './volume.scss';
 
 const Volume = props => {

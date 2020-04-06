@@ -1,5 +1,6 @@
 import React from 'react';
 import { subscribe } from 'react-contextual';
+
 import './info.scss';
 
 const Info = props => {
