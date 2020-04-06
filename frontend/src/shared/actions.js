@@ -98,13 +98,18 @@ export const updateSource = (source, tracks, key) => state => {
   }
 }
 
-export const nextTrack = () => state => {
+export const nextTrack = shuffle => state => {
   let player = state.player;
   if (player.audio) player.audio.pause();
   let currentTrack = player.currentTrack;
-  if (currentTrack === false) currentTrack = 0;
-  else currentTrack++;
-  if (currentTrack > (state.trackData.tracks.length - 1)) currentTrack = 0;
+
+  if (shuffle) {
+    currentTrack = Math.floor(Math.random() * state.trackData.tracks.length);
+  } else {
+    if (currentTrack === false) currentTrack = 0;
+    else currentTrack++;
+    if (currentTrack > (state.trackData.tracks.length - 1)) currentTrack = 0;
+  }
 
   return {
     player: {

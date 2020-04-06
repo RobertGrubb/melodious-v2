@@ -40,7 +40,7 @@ const Controls = props => {
   const pause = async () => setCurrentState('pause');
 
   // Go to next track
-  const next = async () => props.nextTrack();
+  const next = async () => props.nextTrack(shuffle);
 
   // Go to previous track
   const previous = async () => props.previousTrack();
