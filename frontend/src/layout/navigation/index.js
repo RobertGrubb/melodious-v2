@@ -8,7 +8,6 @@ import { Menu, Modal, Input, message } from 'antd';
 import {
   HomeOutlined,
   SearchOutlined,
-  PlayCircleOutlined,
   PlusOutlined,
   UnorderedListOutlined,
   SettingOutlined

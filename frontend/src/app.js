@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useRoutes } from 'hookrouter';
 import { subscribe } from 'react-contextual';
 import cookies from 'react-cookies';

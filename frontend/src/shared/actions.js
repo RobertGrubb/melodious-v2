@@ -56,14 +56,12 @@ export const destroySession = () => state => {
 
 export const setTrack = key => state => {
   if (state.player.audio) state.player.audio.pause();
+  if (!state.trackData.tracks[key]) return state;
 
   return {
     player: {
       ...state.player,
-      currentTrack: key,
-      currentTime: 0,
-      state: 'play',
-      audio: new Audio(`${process.env.REACT_APP_API_URL}/stream/${state.trackData.tracks[key].id}`)
+      currentTrack: key
     }
   }
 }
@@ -84,12 +82,6 @@ export const setTrack = key => state => {
  * ==============================
  */
 
-export const updateTime = seconds => state => {
-  let player = state.player;
-  player.currentTime = seconds;
-  return { player };
-}
-
 export const updateSource = (source, tracks, key) => state => {
   if (state.player.audio) state.player.audio.pause();
 
@@ -100,10 +92,7 @@ export const updateSource = (source, tracks, key) => state => {
   return {
     player: {
       ...state.player,
-      currentTrack: key,
-      currentTime: 0,
-      state: 'play',
-      audio: new Audio(`${process.env.REACT_APP_API_URL}/stream/${state.trackData.tracks[key].id}`)
+      currentTrack: key
     },
     trackData
   }
@@ -120,10 +109,7 @@ export const nextTrack = () => state => {
   return {
     player: {
       ...state.player,
-      state: 'play',
-      currentTrack: currentTrack,
-      currentTime: 0,
-      audio: new Audio(`${process.env.REACT_APP_API_URL}/stream/${state.trackData.tracks[currentTrack].id}`)
+      currentTrack: currentTrack
     }
   };
 }
@@ -139,10 +125,7 @@ export const previousTrack = () => state => {
   return {
     player: {
       ...state.player,
-      state: 'play',
       currentTrack: currentTrack,
-      currentTime: 0,
-      audio: new Audio(`${process.env.REACT_APP_API_URL}/stream/${state.trackData.tracks[currentTrack].id}`)
     }
   };
 }
@@ -154,17 +137,16 @@ export const play = () => state => {
   return {
     player: {
       ...state.player,
-      state: 'play',
       currentTrack: currentTrack
     }
   };
 }
 
-export const pause = () => state => {
+export const setVolume = volume => state => {
   return {
     player: {
       ...state.player,
-      state: 'pause'
+      volume
     }
   };
 }

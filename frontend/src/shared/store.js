@@ -10,12 +10,10 @@ export default {
   },
 
   player: {
+    source: 'popular',
     playlistKey: false,
-    state: 'stopped',
     currentTrack: false,
-    currentTime: 0,
     volume: 0.75,
-    audio: new Audio()
   },
 
   trackData: {

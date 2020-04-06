@@ -38,6 +38,7 @@ const Home = props => {
   const retrieveTracks = async () => {
     const trackData = await api.tracks();
     setTracks(trackData);
+    props.setTracks(trackData);
     setLoading(false);
   }
 

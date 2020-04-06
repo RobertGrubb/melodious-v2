@@ -4,6 +4,7 @@ import Navigation from './navigation';
 import PlayerBar from './playerbar';
 import './layout.scss';
 import 'antd/dist/antd.css';
+import { subscribe } from 'react-contextual';
 
 const Layout = props => {
   return (
@@ -18,4 +19,4 @@ const Layout = props => {
   );
 }
 
-export default Layout;
+export default subscribe()(Layout);

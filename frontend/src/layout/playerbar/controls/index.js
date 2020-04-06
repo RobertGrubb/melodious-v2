@@ -5,39 +5,49 @@ import { subscribe } from 'react-contextual';
 import { Row, Col, Slider } from 'antd';
 import { PauseCircleOutlined, PlayCircleOutlined, BackwardOutlined, ForwardOutlined } from '@ant-design/icons';
 import './controls.scss';
+import Loader from '../../../shared/components/loader';
 
 momentDurationFormatSetup(moment);
 
 const Controls = props => {
   const [time, setTime] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [audio] = useState(new Audio());
+  const [currentState, setCurrentState] = useState('stopped');
 
-  // Play the track
-  const play = async () => {
-    await props.setTrack(props.player.currentTrack !== false ? props.player.currentTrack : 0);
-  };
+  /**
+   * Do not load bar unless there are tracks.
+   */
+  useEffect(() => {
+    if (props.trackData.tracks.length >= 1) setLoading(false);
+  }, [props])
+
+  /**
+   * The following methods do not alter the
+   * actual audio object at all, however, they do
+   * update the state variables, both local and global.
+   */
+
+  // Sets the track state
+  const play = async () => props.setTrack(props.player.currentTrack !== false ? props.player.currentTrack : 0);
 
   // Pause the track
-  const pause = async () => props.pause();
+  const pause = async () => setCurrentState('pause');
 
   // Go to next track
-  const next = async () => {
-    removeAudioEvents();
-    props.nextTrack();
-  }
+  const next = async () => props.nextTrack();
 
   // Go to previous track
-  const previous = async () => {
-    removeAudioEvents();
-    props.previousTrack();
-  }
+  const previous = async () => props.previousTrack();
 
   /**
    * Set audio event listener
    */
   const setAudioEvents = () => {
-    if (props.player.audio) {
+    if (audio) {
       // Add event listener to get current time of audio
-      props.player.audio.addEventListener('timeupdate', handleTimeUpdate);
+      audio.addEventListener('timeupdate', handleTimeUpdate);
+      audio.addEventListener('ended', handleAudioOnEnded);
     }
   }
 
@@ -45,45 +55,73 @@ const Controls = props => {
    * Set the time to a specific time (controlled by slider)
    */
   const setAudioTime = (seconds) => {
-    if (props.player.audio) props.player.audio.currentTime = seconds;
+    if (audio) audio.currentTime = seconds;
   }
 
   /**
    * Handles the time update for an audio object.
    */
-  const handleTimeUpdate = () => {
-    // Move to next song
-    if (props.player.audio.currentTime === props.player.audio.duration) {
-      setTimeout(() => {
-        props.nextTrack();
-      }, 2000)
-    }
-
-    setTime(props.player.audio.currentTime);
-  }
+  const handleTimeUpdate = () => setTime(audio.currentTime);
+  const handleAudioOnEnded = () => next();
 
   /**
    * Removes any existing audio events that are listening.
    */
   const removeAudioEvents = () => {
-    if (props.player.audio) props.player.audio.removeEventListener('timeupdate', handleTimeUpdate);
+    if (audio) audio.removeEventListener('timeupdate', handleTimeUpdate);
+    if (audio) audio.removeEventListener('ended', handleAudioOnEnded);
   }
 
+  /**
+   * Plays the actual audio object.
+   *
+   * Will also set the source and currentTIme
+   * if a new src is passed.
+   */
+  const playAudio = (src = false) => {
+    if (src) audio.src = src;
+    if (src) audio.currentTime = 0;
+
+    setAudioEvents();
+    audio.play();
+    setCurrentState('play');
+  }
+
+  /**
+   * Stops the actual audio object.
+   */
+  const stopAudio = () => {
+    removeAudioEvents();
+    audio.pause();
+    setCurrentState('pause');
+  }
+
+  const setAudioVolume = () => {
+    if (audio) audio.volume = props.player.volume;
+  }
+
+  /**
+   * Listens for a change in the current audio state.
+   * Plays or stops based on the change.
+   */
   useEffect(() => {
+    if (currentState === 'play') playAudio();
+    else if (currentState === 'pause') stopAudio();
+  }, [currentState]);
 
-    // If state is playing and there is audio, make sure play is called
-    // and the audio events are listening.
-    if (props.player.state === 'play' && props.player.audio) {
-      props.player.audio.play();
-      setAudioEvents();
+  useEffect(() => {
+    setAudioVolume();
+  }, [props.player.volume])
+
+  /**
+   * Plays new source based on the track passed.
+   */
+  useEffect(() => {
+    if (props.trackData.tracks.length) {
+      const src = `${process.env.REACT_APP_API_URL}/stream/${props.trackData.tracks[props.player.currentTrack].id}`;
+      playAudio(src);
     }
-
-    // If the state is paused, pause the audio.
-    if (props.player.state === 'pause' && props.player.audio) props.player.audio.pause();
-
-    // If currentTime changes, set it to local state.
-    if (props.player.currentTime) setTime(props.player.currentTime);
-  }, [props.player])
+  }, [props.player.currentTrack]);
 
   /**
    * Format the current
@@ -112,13 +150,15 @@ const Controls = props => {
     length = duration.format('mm:ss');
   }
 
+  if (loading) return (<div className="controls__container"><Loader /></div>);
+
   return (
     <div className="controls__container">
       <Row>
         <Col span={24} style={{textAlign: 'center'}}>
           <BackwardOutlined className="previous" onClick={previous} />
           {
-            props.player.state === 'play' ?
+            currentState === 'play' ?
             (
               <PauseCircleOutlined className="pause" onClick={pause} />
             ) : (
