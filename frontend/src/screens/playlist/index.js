@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { subscribe } from 'react-contextual';
 import api from '../../shared/libs/api';
 import Loader from '../../shared/components/loader';
+import TrackTable from '../../shared/components/track-table';
 import moment from 'moment';
 import { Table, message } from 'antd';
 
@@ -56,66 +57,13 @@ const Playlist = props => {
     if (playlist) props.setTitle(playlist.title);
   }, [playlist])
 
-  // Return loader if loading.
-  if (loading) return (<Loader />);
-
-  // Format the dataSource array.
-  const dataSource = playlist.tracks.map((track, index) => {
-    let length = '00:00';
-
-    // if it has a duration, format it.
-    if (track.duration) {
-      const duration = moment.duration({seconds: track.duration});
-      length = duration.format('mm:ss');
-    }
-
-    // Return the data in an object that columns can easily use.
-    return {
-      key: index,
-      id: track.id,
-      title: track.title,
-      artist: track.artist,
-      genre: track.genre,
-      duration: length
-    }
-  });
-
-  /**
-   * Setup the columns array for the table
-   * to read.
-   */
-  const columns = [
-    {
-      title: 'Track',
-      dataIndex: 'title',
-      key: 'title',
-    },
-    {
-      title: 'Artist',
-      dataIndex: 'artist',
-      key: 'artist',
-    },
-    {
-      title: 'Genre',
-      dataIndex: 'genre',
-      key: 'genre',
-    },
-    {
-      title: 'Duration',
-      dataIndex: 'duration',
-      key: 'duration',
-    }
-  ];
-
-  return (
-    <Table
-      dataSource={dataSource}
-      columns={columns}
-      onRow={(record) => ({
-          onClick: () => setTrack(record.key)
-      })}
-    />
-  );
+  // Render the track table
+  return (<TrackTable
+            tracks={playlist.tracks}
+            loading={loading}
+            onSetTrack={setTrack.bind(this)}
+            options={false}
+          />);
 }
 
 export default subscribe()(Playlist);

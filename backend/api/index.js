@@ -277,7 +277,7 @@ app.post('/login', cors(corsOptions), async (req, res) => {
         login: u.login,
         userData: u,
         success: true,
-        playlists: [],
+        playlists: u.playlists,
         userLevel: adminAccounts.includes(u.login) ? 'admin' : 'user'
       });
     } catch (error) {

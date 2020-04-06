@@ -10,10 +10,13 @@ A platform for twitch users to have easy access to no copyright music that they 
 - [X] Login / Logout
 - [X] Playlist logic
 - [X] Ability to link directly to playlist.
-- [ ] Create TrackTable component for less redundancy.
-- [ ] Browse Screen
+- [X] Create TrackTable component for less redundancy.
 - [ ] Ability to remove playlists
 - [ ] Shuffle ability
+
+# Known Bugs
+
+- None at the moment, please create an issue if you find one.
 
 # Installation
 
