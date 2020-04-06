@@ -6,7 +6,7 @@ import './toolbar.scss';
 
 const Toolbar = props => {
   let buttons = [
-    <Button key="1" className="test" onClick={() => navigate('/oauth/twitch')}><i className="fab fa-twitch mel-icon" />&nbsp; Login with Twitch</Button>
+    <Button key="1" onClick={() => navigate('/oauth/twitch')}><i className="fab fa-twitch mel-icon" />&nbsp; Login with Twitch</Button>
   ];
 
   // If logged in, show logged in data.

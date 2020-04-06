@@ -1,12 +1,18 @@
 .controls__container {
 
   .play, .pause {
-    font-size: 30px;
-    margin: 0 7.5px;
+    font-size: 38px;
+    margin: 0 12px;
+    cursor: pointer;
   }
 
-  .previous, .next {
-    font-size: 20px;
-    margin: 0 7.5px;
+  .previous, .next, .small-icon {
+    font-size: 18px;
+    margin: 0 12px;
+    cursor: pointer;
+
+    &.active {
+      color: #1890ff;
+    }
   }
 }

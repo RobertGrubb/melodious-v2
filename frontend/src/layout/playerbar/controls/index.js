@@ -14,6 +14,8 @@ const Controls = props => {
   const [loading, setLoading] = useState(true);
   const [audio] = useState(new Audio());
   const [currentState, setCurrentState] = useState('stopped');
+  const [shuffle, setShuffle] = useState(false);
+  const [repeat, setRepeat] = useState(false);
 
   /**
    * Do not load bar unless there are tracks.
@@ -164,16 +166,18 @@ const Controls = props => {
     <div className="controls__container">
       <Row>
         <Col span={24} style={{textAlign: 'center'}}>
-          <BackwardOutlined className="previous" onClick={previous} />
+          <i onClick={setRepeat.bind(this, !repeat)} class={"fas fa-redo small-icon " + (repeat ? 'active' : '')}></i>
+          <i class="fas fa-backward small-icon" onClick={previous}></i>
           {
             currentState === 'play' ?
             (
-              <PauseCircleOutlined className="pause" onClick={pause} />
+              <i class="far fa-pause-circle pause" onClick={pause}></i>
             ) : (
-              <PlayCircleOutlined className="play" onClick={play} />
+              <i class="far fa-play-circle play" onClick={play}></i>
             )
           }
-          <ForwardOutlined className="next" onClick={next} />
+          <i class="fas fa-forward small-icon" onClick={next}></i>
+          <i onClick={setShuffle.bind(this, !shuffle)} class={"fas fa-random small-icon " + (shuffle ? 'active' : '')}></i>
         </Col>
       </Row>
       <Row type="flex" style={{alignItems: 'center'}}>
