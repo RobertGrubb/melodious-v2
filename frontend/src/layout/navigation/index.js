@@ -64,11 +64,6 @@ const Navigation = props => {
           <span>Home</span>
         </Menu.Item>
 
-        <Menu.Item key="2" onClick={goTo.bind(this, '/browse')}>
-          <SearchOutlined />
-          <span>Browse</span>
-        </Menu.Item>
-
         {
           props.session.loggedIn === true && props.session.userLevel === "admin" &&
           (

@@ -11,8 +11,9 @@ A platform for twitch users to have easy access to no copyright music that they 
 - [X] Playlist logic
 - [X] Ability to link directly to playlist.
 - [X] Create TrackTable component for less redundancy.
+- [ ] Select row when a song is playing on table
+- [ ] Fix options menu on click (Right now it plays the song as well)
 - [ ] Ability to remove playlists
-- [ ] Shuffle ability
 
 # Known Bugs
 
