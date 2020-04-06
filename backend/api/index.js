@@ -328,7 +328,7 @@ app.post('/admin/tracks/add', cors(corsOptions), async (req, res) => {
   if (!req.body.authId) return errors.unauthorized(res);
 
   // Route params validation
-  const { type, title, artist, genre } = req.body;
+  const { type, title, artist, genre, credits } = req.body;
   if (!type || !title || !artist || !genre) return errors.parameters(res);
 
   // List of valid types for adding
@@ -364,6 +364,8 @@ app.post('/admin/tracks/add', cors(corsOptions), async (req, res) => {
       if (error)
         return res.status(400).json({ error });
 
+      response.credits = (credits ? credits : false);
+
       // All is well, add it to the database.
       db.get('tracks').push(response).write();
 
@@ -386,7 +388,8 @@ app.post('/admin/tracks/add', cors(corsOptions), async (req, res) => {
       album: 'None',
       genre: genre,
       mood: 'None',
-      duration: req.body.trackData.duration
+      duration: req.body.trackData.duration,
+      credits: (credits ? credits : false)
     }
 
     // Add it to the database.

@@ -50,7 +50,8 @@ const createTrack = async (data) => {
     title: data.title,
     artist: data.artist,
     genre: data.genre,
-    authId: userId
+    authId: userId,
+    credits: data.credits
   };
 
   if (data.type === 'youtube') postData.videoId = data.videoId;

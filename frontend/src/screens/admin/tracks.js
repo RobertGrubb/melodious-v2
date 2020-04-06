@@ -23,7 +23,8 @@ const defaultTrackData = {
   genre: '',
   videoId: '',
   trackData: false,
-  type: 'youtube'
+  type: 'youtube',
+  credits: false
 };
 
 const { TextArea } = Input;
@@ -213,6 +214,7 @@ const TracksAdmin = props => {
         <Input value={newTrackData.title} onChange={e => updateNewTrackData('title', e.target.value)} placeholder="Title" style={{marginBottom: 15}} />
         <Input value={newTrackData.artist} onChange={e => updateNewTrackData('artist', e.target.value)} placeholder="Artist" style={{marginBottom: 15}} />
         <Input value={newTrackData.genre} onChange={e => updateNewTrackData('genre', e.target.value)} placeholder="Genre" style={{marginBottom: 15}} />
+        <TextArea value={newTrackData.credits} onChange={e => updateNewTrackData('credits', e.target.value)} placeholder="Credits" style={{marginBottom: 15}} rows={5} />
         <Select value={newTrackData.type} onChange={val => updateNewTrackData('type', val)} style={{width: '100%', marginBottom: 15}}>
           <Option value="youtube">YouTube</Option>
           <Option value="mp3">MP3</Option>

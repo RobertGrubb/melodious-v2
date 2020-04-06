@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { subscribe } from 'react-contextual';
-import { Table, Button, Menu, Dropdown, message } from 'antd';
+import { Table, Button, Menu, Dropdown, Popover, message } from 'antd';
 import Loader from '../loader';
 import api from '../../libs/api';
 import moment from 'moment';
+import * as linkify from 'linkifyjs';
+import linkifyHtml from 'linkifyjs/html';
 
 import {
   EllipsisOutlined
@@ -26,6 +28,12 @@ const TrackTable = props => {
     } catch (error) {
       return message.error('Error adding track to playlist.');
     }
+  }
+
+  const creditContent = credits => {
+    let formattedCredits = credits.replace(/(?:\r\n|\r|\n)/g, "<br />");
+    formattedCredits = linkifyHtml(formattedCredits, { target: "_blank" });
+    return (<span dangerouslySetInnerHTML={{__html: formattedCredits}} />);
   }
 
   // On track select handler
@@ -64,7 +72,8 @@ const TrackTable = props => {
       title: track.title,
       artist: track.artist,
       duration: length,
-      genre: track.genre
+      genre: track.genre,
+      credits: (track.credits ? track.credits : 'Unknown')
     }
   });
 
@@ -87,6 +96,19 @@ const TrackTable = props => {
       title: 'Genre',
       dataIndex: 'genre',
       key: 'genre',
+    },
+    {
+      title: 'Credits',
+      dataIndex: 'credits',
+      key: 'credits',
+      render: credits => (
+        <Popover
+          content={creditContent(credits)}
+          title="Credits"
+        >
+          <Button type="primary">Credits</Button>
+        </Popover>
+      )
     },
     {
       title: 'Duration',
