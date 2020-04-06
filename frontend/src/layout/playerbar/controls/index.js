@@ -29,7 +29,10 @@ const Controls = props => {
    */
 
   // Sets the track state
-  const play = async () => props.setTrack(props.player.currentTrack !== false ? props.player.currentTrack : 0);
+  const play = async () => {
+    props.setTrack(props.player.currentTrack !== false ? props.player.currentTrack : 0);
+    setCurrentState('play');
+  };
 
   // Pause the track
   const pause = async () => setCurrentState('pause');
@@ -109,6 +112,11 @@ const Controls = props => {
     else if (currentState === 'pause') stopAudio();
   }, [currentState]);
 
+  /**
+   * Listens for changes in the player volume, then
+   * calls setAudioVolume which actually alters the audio
+   * object.
+   */
   useEffect(() => {
     setAudioVolume();
   }, [props.player.volume])
