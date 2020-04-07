@@ -14,16 +14,16 @@ const Controls = props => {
   const [time, setTime] = useState(0);
   const [loading, setLoading] = useState(true);
   const [audio] = useState(new Audio());
-  const [currentState, setCurrentState] = useState('stopped');
   const [shuffle, setShuffle] = useState(false);
   const [repeat, setRepeat] = useState(false);
+  const [playing, setPlaying] = useState(false);
 
   /**
    * Do not load bar unless there are tracks.
    */
   useEffect(() => {
     if (props.trackData.tracks.length >= 1) setLoading(false);
-  }, [props])
+  }, [props.trackData.tracks])
 
   /**
    * The following methods do not alter the
@@ -34,11 +34,8 @@ const Controls = props => {
   // Sets the track state
   const play = async () => {
     props.setTrack(props.player.currentTrack !== false ? props.player.currentTrack : 0);
-    setCurrentState('play');
   };
 
-  // Pause the track
-  const pause = async () => setCurrentState('pause');
 
   // Go to next track
   const next = async () => props.nextTrack(shuffle);
@@ -54,6 +51,8 @@ const Controls = props => {
       // Add event listener to get current time of audio
       audio.addEventListener('timeupdate', handleTimeUpdate);
       audio.addEventListener('ended', handleAudioOnEnded);
+      audio.addEventListener('play', handleAudioOnPlay);
+      audio.addEventListener('pause', handleAudioOnPause);
     }
   }
 
@@ -69,6 +68,8 @@ const Controls = props => {
    */
   const handleTimeUpdate = () => setTime(audio.currentTime);
   const handleAudioOnEnded = () => next();
+  const handleAudioOnPlay = () => setPlaying(true);
+  const handleAudioOnPause = () => setPlaying(false);
 
   /**
    * Removes any existing audio events that are listening.
@@ -76,6 +77,8 @@ const Controls = props => {
   const removeAudioEvents = () => {
     if (audio) audio.removeEventListener('timeupdate', handleTimeUpdate);
     if (audio) audio.removeEventListener('ended', handleAudioOnEnded);
+    if (audio) audio.removeEventListener('play', handleAudioOnPlay);
+    if (audio) audio.removeEventListener('pause', handleAudioOnPause);
   }
 
   /**
@@ -89,8 +92,7 @@ const Controls = props => {
     if (src) audio.currentTime = 0;
 
     setAudioEvents();
-    audio.play();
-    setCurrentState('play');
+    if (audio.paused) audio.play();
   }
 
   /**
@@ -98,22 +100,12 @@ const Controls = props => {
    */
   const stopAudio = () => {
     removeAudioEvents();
-    audio.pause();
-    setCurrentState('pause');
+    if (!audio.paused) audio.pause();
   }
 
   const setAudioVolume = () => {
     if (audio) audio.volume = props.player.volume;
   }
-
-  /**
-   * Listens for a change in the current audio state.
-   * Plays or stops based on the change.
-   */
-  useEffect(() => {
-    if (currentState === 'play') playAudio();
-    else if (currentState === 'pause') stopAudio();
-  }, [currentState]);
 
   /**
    * Listens for changes in the player volume, then
@@ -170,11 +162,11 @@ const Controls = props => {
           <i onClick={setRepeat.bind(this, !repeat)} class={"fas fa-redo small-icon " + (repeat ? 'active' : '')}></i>
           <i class="fas fa-backward small-icon" onClick={previous}></i>
           {
-            currentState === 'play' ?
+            playing ?
             (
-              <i class="far fa-pause-circle pause" onClick={pause}></i>
+              <i class="far fa-pause-circle pause" onClick={() => audio.pause()}></i>
             ) : (
-              <i class="far fa-play-circle play" onClick={play}></i>
+              <i class="far fa-play-circle play" onClick={() => audio.play()}></i>
             )
           }
           <i class="fas fa-forward small-icon" onClick={next}></i>
