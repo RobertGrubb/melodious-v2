@@ -1,12 +1,13 @@
 @import '../../shared/styles/variables';
 
 .navigation__container {
-  width: 250px;
+  width: 80px;
   height: calc(100vh - 100px);
   float: left;
-  background: #001529;
+  background: #1F1F1F;
 
   .logo {
+    background: rgba(255, 255, 255, 0.1);
     height: 62px;
     padding: 10px;
     text-align: center;

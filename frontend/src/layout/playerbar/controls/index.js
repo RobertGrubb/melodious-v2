@@ -159,18 +159,18 @@ const Controls = props => {
     <div className="controls__container">
       <Row>
         <Col span={24} style={{textAlign: 'center'}}>
-          <i onClick={setRepeat.bind(this, !repeat)} class={"fas fa-redo small-icon " + (repeat ? 'active' : '')}></i>
-          <i class="fas fa-backward small-icon" onClick={previous}></i>
+          <i onClick={setRepeat.bind(this, !repeat)} className={"fas fa-redo small-icon " + (repeat ? 'active' : '')}></i>
+          <i className="fas fa-backward small-icon" onClick={previous}></i>
           {
             playing ?
             (
-              <i class="far fa-pause-circle pause" onClick={() => audio.pause()}></i>
+              <i className="far fa-pause-circle pause" onClick={() => audio.pause()}></i>
             ) : (
-              <i class="far fa-play-circle play" onClick={() => audio.play()}></i>
+              <i className="far fa-play-circle play" onClick={() => props.player.currentTrack ? audio.play() : play()}></i>
             )
           }
-          <i class="fas fa-forward small-icon" onClick={next}></i>
-          <i onClick={setShuffle.bind(this, !shuffle)} class={"fas fa-random small-icon " + (shuffle ? 'active' : '')}></i>
+          <i className="fas fa-forward small-icon" onClick={next}></i>
+          <i onClick={setShuffle.bind(this, !shuffle)} className={"fas fa-random small-icon " + (shuffle ? 'active' : '')}></i>
         </Col>
       </Row>
       <Row type="flex" style={{alignItems: 'center'}}>

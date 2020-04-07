@@ -52,13 +52,13 @@ const Navigation = props => {
 
   return (
     <div className="navigation__container">
-      <div className="logo" onClick={goTo.bind(this, '/')}>melodious</div>
+      <div className="logo" onClick={goTo.bind(this, '/')}>m</div>
       <Menu
           defaultSelectedKeys={['1']}
-          defaultOpenKeys={['playlists']}
+          defaultOpenKeys={[]}
           mode="inline"
           theme="dark"
-          inlineCollapsed={false}
+          inlineCollapsed={true}
         >
         <Menu.Item key="1" onClick={goTo.bind(this, '/')}>
           <HomeOutlined />
@@ -68,17 +68,10 @@ const Navigation = props => {
         {
           props.session.loggedIn === true && props.session.userLevel === "admin" &&
           (
-            <SubMenu
-              key="admin"
-              title={
-                <span>
-                  <SettingOutlined />
-                  <span>Admin</span>
-                </span>
-              }
-            >
-              <Menu.Item onClick={goTo.bind(this, '/admin/tracks')} key={'admin-2'}>Tracks</Menu.Item>
-            </SubMenu>
+            <Menu.Item key="admin" onClick={goTo.bind(this, '/admin/tracks')}>
+              <SettingOutlined />
+              <span>Administrator</span>
+            </Menu.Item>
           )
         }
 

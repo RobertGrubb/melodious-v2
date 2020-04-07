@@ -9,7 +9,7 @@
 .loader,
 .loader:before,
 .loader:after {
-  background: #001529;
+  background: #fff;
   -webkit-animation: load1 1s infinite ease-in-out;
   animation: load1 1s infinite ease-in-out;
   width: 1em;
@@ -17,7 +17,7 @@
 }
 
 .loader {
-  color: #001529;
+  color: #fff;
   text-indent: -9999em;
   margin: 88px auto;
   position: relative;

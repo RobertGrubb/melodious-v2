@@ -3,14 +3,14 @@
 .playerbar__container {
   height: $playerBarHeight;
   width: 100%;
-  background: #002141;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+  background: #0A0A0A;
+  border-top: 1px solid #222;
   position: relative;
   z-index: 99;
 
   .playerbar__column {
     color: #fff;
-    padding: 20px;
+    padding: 15px 20px;
 
     &.info {
       text-align: left;

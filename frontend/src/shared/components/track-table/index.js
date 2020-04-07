@@ -107,7 +107,7 @@ const TrackTable = props => {
           content={creditContent(credits)}
           title="Credits"
         >
-          <Button type="primary">Credits</Button>
+          <Button>Credits</Button>
         </Popover>
       )
     },
@@ -136,6 +136,7 @@ const TrackTable = props => {
       onRow={(record) => ({
           onClick: () => onSetTrack(record.key)
       })}
+      pagination={false}
     />
   );
 }
