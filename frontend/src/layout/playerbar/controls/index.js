@@ -103,6 +103,13 @@ const Controls = props => {
     if (!audio.paused) audio.pause();
   }
 
+  const resetAudio = () => {
+    removeAudioEvents();
+    if (!audio.paused) audio.pause();
+    audio.src = '';
+    audio.currentTime = 0;
+  }
+
   const setAudioVolume = () => {
     if (audio) audio.volume = props.player.volume;
   }
@@ -122,7 +129,10 @@ const Controls = props => {
   useEffect(() => {
     if (props.trackData.tracks.length) {
       const src = `${process.env.REACT_APP_API_URL}/stream/${props.trackData.tracks[props.player.currentTrack].id}`;
-      playAudio(src);
+      resetAudio();
+      setTimeout(() => {
+        playAudio(src);
+      }, 200);
     }
   }, [props.player.currentTrack]);
 
