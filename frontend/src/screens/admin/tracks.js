@@ -37,10 +37,104 @@ const TracksAdmin = props => {
   const [tracks, setTracks] = useState(false);
   const [loading, setLoading] = useState(true);
   const [createLoading, setCreateLoading] = useState(false);
+  const [editLoading, setEditLoading] = useState(false);
   const [error, setError] = useState(false);
   const [visible, setVisible] = useState(false);
   const [editVisible, setEditVisible] = useState(false);
-  const [newTrackData, setNewTrackData] = useState(defaultTrackData)
+  const [editTrackData, setEditTrackData] = useState({});
+  const [newTrackData, setNewTrackData] = useState(defaultTrackData);
+
+  /**
+   * Confirms the delete action, if confirmed it will call the api
+   * and send the id of the track that needs to be deleted.
+   */
+  const handleRemoveTrack = async id => {
+    if (window.confirm("Do you really want to leave?")) {
+      try {
+        // Call the API
+        const res = await api.removeTrack(id);
+
+        // If successful, update all necessary states.
+        if (res.success) {
+          loadTracks();
+          return message.success('Track was deleted successfully.');
+        }
+
+        // If not successfull, return an error.
+        return message.error('Problem deleting track.');
+      } catch (error) {
+
+        // If not successfull, return an error.
+        return message.error('Problem deleting track.');
+      }
+    }
+
+    return;
+  }
+
+  /**
+   * Sends edited data to the API to update the database
+   * for a specific track.
+   */
+  const editTrack = async () => {
+    if (!editTrackData.title) return message.error('You must provide a track title.');
+    if (!editTrackData.artist) return message.error('You must provide an artist.');
+    if (!editTrackData.genre) return message.error('You must provide a genre.');
+
+    setEditLoading(true);
+
+    try {
+      // Call the API
+      const res = await api.editTrack(editTrackData);
+
+      // If successful, update all necessary states.
+      if (res.success) {
+        setEditVisible(false);
+        setEditTrackData({});
+        loadTracks();
+        setEditLoading(false);
+        return message.success('Track was edited successfully.');
+      }
+
+      // If not successfull, return an error.
+      setEditLoading(false);
+      return message.error('Problem editing track.');
+    } catch (error) {
+
+      // If not successfull, return an error.
+      console.log(error);
+      setEditLoading(false);
+      return message.error('Problem editing track.');
+    }
+  }
+
+  /**
+   * Opens the edit modal
+   */
+  const openEditModal = track => {
+    console.log(track);
+    setEditTrackData(track);
+    setEditVisible(true);
+  }
+
+  /**
+   * Closes the edit modal
+   */
+  const closeEditModal = () => {
+    setEditVisible(false);
+
+    setTimeout(() => {
+      setEditTrackData({});
+    }, 200);
+  }
+
+  // Updates track data state
+  const updateEditTrackData = (field, value) => {
+    setEditTrackData({
+      ...editTrackData,
+      [field]: value
+    });
+  }
 
   // Updates track data state
   const updateNewTrackData = (field, value) => {
@@ -128,12 +222,16 @@ const TracksAdmin = props => {
   if (loading) return <Loader />;
 
   // Menu for admin track options.
-  const menu = id => (
-    <Menu>
-      <Menu.Item key="1" onClick={setEditVisible.bind(this, true)}>Edit Track</Menu.Item>
-      {/**<Menu.Item key="2">Remove Track</Menu.Item>**/}
-    </Menu>
-  );
+  const menu = (id) => {
+    const track = tracks.find(track => track.id === id);
+
+    return (
+      <Menu>
+        <Menu.Item key="1" onClick={openEditModal.bind(this, track)}>Edit Track</Menu.Item>
+        <Menu.Item key="2" onClick={handleRemoveTrack.bind(this, id)}>Remove Track</Menu.Item>
+      </Menu>
+    )
+  };
 
   // Format the dataSource array.
   const dataSource = tracks.map((track, index) => {
@@ -240,10 +338,13 @@ const TracksAdmin = props => {
       <Modal
         title="Edit Track"
         visible={editVisible}
-        onOk={setEditVisible.bind(this, false)}
-        onCancel={setEditVisible.bind(this, false)}
+        onOk={editTrack.bind(this)}
+        onCancel={closeEditModal.bind(this)}
       >
-        Editing a track
+        <Input value={editTrackData.title} onChange={e => updateEditTrackData('title', e.target.value)} placeholder="Title" style={{marginBottom: 15}} />
+        <Input value={editTrackData.artist} onChange={e => updateEditTrackData('artist', e.target.value)} placeholder="Artist" style={{marginBottom: 15}} />
+        <Input value={editTrackData.genre} onChange={e => updateEditTrackData('genre', e.target.value)} placeholder="Genre" style={{marginBottom: 15}} />
+        <TextArea value={editTrackData.credits} onChange={e => updateEditTrackData('credits', e.target.value)} placeholder="Credits" style={{marginBottom: 15}} rows={5} />
       </Modal>
     </>
   );

@@ -405,6 +405,74 @@ app.post('/admin/tracks/add', cors(corsOptions), async (req, res) => {
 })
 
 /**
+ * ADMIN ROUTES
+ *
+ * Example of an admin route.
+ *
+ * @param { string } authId (Required for admin validation)
+ *
+ */
+app.post('/admin/tracks/edit/:id', cors(corsOptions), async (req, res) => {
+  // If no authId was provided, error out.
+  if (!req.body.authId) return errors.unauthorized(res);
+
+  // If id is not provided
+  if (!req.params.id) return errors.unauthorized(res);
+
+  // Route params validation
+  const { title, artist, genre, credits } = req.body;
+  if (!title || !artist || !genre) return errors.parameters(res);
+
+  // Attempt to find a user that matches login in database.
+  const user = db.get('users').find({ id: req.body.authId }).value();
+  if (!user) return errors.unauthorized(res);
+
+  // Are they an admin?
+  if (!adminAccounts.includes(user.login)) return errors.unauthorized(res);
+
+  db.get('tracks')
+    .find({ id: req.params.id })
+    .assign({
+      title,
+      artist,
+      genre,
+      credits
+    })
+    .write();
+
+  res.status(200).json({ success: true });
+})
+
+/**
+ * ADMIN ROUTES
+ *
+ * Example of an admin route.
+ *
+ * @param { string } authId (Required for admin validation)
+ *
+ */
+app.post('/admin/tracks/delete/:id', cors(corsOptions), async (req, res) => {
+  // If no authId was provided, error out.
+  if (!req.body.authId) return errors.unauthorized(res);
+
+  // If id is not provided
+  if (!req.params.id) return errors.unauthorized(res);
+
+  // Attempt to find a user that matches login in database.
+  const user = db.get('users').find({ id: req.body.authId }).value();
+  if (!user) return errors.unauthorized(res);
+
+  // Are they an admin?
+  if (!adminAccounts.includes(user.login)) return errors.unauthorized(res);
+
+  db.get('tracks')
+    .remove({ id: req.params.id })
+    .write();
+
+  res.status(200).json({ success: true });
+})
+
+/**
  * Upload an MP3, assign it an id that is returned
  * as well as the duration of the mp3.
  */

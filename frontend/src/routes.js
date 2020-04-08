@@ -20,6 +20,8 @@ const routes = {
 };
 
 const AuthedRoute = subscribe()(props => {
+
+  // Map auth levels to integers
   const levels = {
     admin: 3,
     user: 2,

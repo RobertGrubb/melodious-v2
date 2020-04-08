@@ -42,6 +42,34 @@ const createPlaylist = async (title, description) => {
   return res.data;
 }
 
+const editTrack = async data => {
+  const userId = cookies.load('userId');
+
+  let postData = {
+    id: data.id,
+    title: data.title,
+    artist: data.artist,
+    genre: data.genre,
+    authId: userId,
+    credits: data.credits
+  };
+
+  const res = await axios.post(`${apiUrl}/admin/tracks/edit/${data.id}`, postData);
+  return res.data;
+}
+
+const removeTrack = async id => {
+  const userId = cookies.load('userId');
+
+  let postData = {
+    id: id,
+    authId: userId,
+  };
+
+  const res = await axios.post(`${apiUrl}/admin/tracks/delete/${id}`, postData);
+  return res.data;
+}
+
 const createTrack = async (data) => {
   const userId = cookies.load('userId');
 
@@ -61,4 +89,14 @@ const createTrack = async (data) => {
   return res.data;
 }
 
-export default { tracks, login, session, createPlaylist, playlist, addTrackToPlaylist, createTrack };
+export default {
+  tracks,
+  login,
+  session,
+  createPlaylist,
+  playlist, 
+  addTrackToPlaylist,
+  createTrack,
+  editTrack,
+  removeTrack
+};
