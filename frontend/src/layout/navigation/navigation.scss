@@ -1,10 +1,19 @@
 @import '../../shared/styles/variables';
 
 .navigation__container {
-  width: 80px;
   height: calc(100vh - 100px);
-  float: left;
   background: #1F1F1F;
+  transition: .3s ease all;
+  width: 250px;
+
+  &.minimized {
+    width: 80px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    width: 100% !important;
+    height: auto !important;
+  }
 
   .logo {
     background: rgba(255, 255, 255, 0.1);
@@ -18,5 +27,9 @@
     cursor: pointer;
     transition: .3s ease all;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    @media only screen and (max-width: 600px) {
+      display: none;
+    }
   }
 }

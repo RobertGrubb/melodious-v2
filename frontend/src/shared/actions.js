@@ -4,6 +4,10 @@ export const setTitle = title => state => {
   return { title };
 }
 
+export const minimizeNavigation = navMinimized => state => {
+  return { navMinimized };
+}
+
 /**
  * ==============================
  * Session Actions

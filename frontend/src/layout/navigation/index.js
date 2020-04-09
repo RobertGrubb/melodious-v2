@@ -13,6 +13,7 @@ import {
 
 import './navigation.scss';
 import api from '../../shared/libs/api';
+import { useWindowSize } from '../../shared/hooks';
 
 const { SubMenu } = Menu;
 const { TextArea } = Input;
@@ -22,6 +23,9 @@ const Navigation = props => {
   const [visible, setVisible] = useState(false);
   const [playlistTitle, setPlaylistTitle] = useState('');
   const [playlistDescription, setPlaylistDescription] = useState('');
+  const size = useWindowSize();
+
+  console.log(size);
 
   // Navigation method
   const goTo = (url) => navigate(url);
@@ -51,14 +55,15 @@ const Navigation = props => {
   }
 
   return (
-    <div className="navigation__container">
+    <div className={"navigation__container " + (props.navMinimized && ' minimized ')}>
       <div className="logo" onClick={goTo.bind(this, '/')}>m</div>
       <Menu
           defaultSelectedKeys={['1']}
           defaultOpenKeys={[]}
-          mode="inline"
+          mode={(size.width < 600 ? 'horizontal' : 'inline')}
           theme="dark"
-          inlineCollapsed={true}
+          inlineCollapsed={size.width < 600 ? false : props.navMinimized ? true : false}
+          subMenuCloseDelay={0}
         >
         <Menu.Item key="1" onClick={goTo.bind(this, '/')}>
           <HomeOutlined />
@@ -66,27 +71,7 @@ const Navigation = props => {
         </Menu.Item>
 
         {
-          props.session.loggedIn === true && props.session.userLevel === "admin" &&
-          (
-            <Menu.Item key="admin" onClick={goTo.bind(this, '/admin/tracks')}>
-              <SettingOutlined />
-              <span>Administrator</span>
-            </Menu.Item>
-          )
-        }
-
-        {
           props.session.loggedIn === true &&
-          (
-            <Menu.Item key="3" onClick={() => setVisible(true)}>
-              <PlusOutlined />
-              <span>Create Playlist</span>
-            </Menu.Item>
-          )
-        }
-
-        {
-          props.session.loggedIn === true && props.session.playlists.length &&
           (
             <SubMenu
               key="playlists"
@@ -97,8 +82,21 @@ const Navigation = props => {
                 </span>
               }
             >
+              <Menu.Item key="create-playlist" onClick={() => setVisible(true)}>
+                Create Playlist
+              </Menu.Item>
               {props.session.playlists.map((playlist, index) => <Menu.Item onClick={goTo.bind(this, `/playlist/${playlist.id}`)} key={`playlist-${index}`}>{playlist.title}</Menu.Item>)}
             </SubMenu>
+          )
+        }
+
+        {
+          props.session.loggedIn === true && props.session.userLevel === "admin" &&
+          (
+            <Menu.Item key="admin" onClick={goTo.bind(this, '/admin/tracks')}>
+              <SettingOutlined />
+              <span>Admin</span>
+            </Menu.Item>
           )
         }
       </Menu>

@@ -6,18 +6,14 @@ A platform for twitch users to have easy access to no copyright music that they 
 
 # Todo Items
 
-- [X] Twitch Authentication
-- [X] Login / Logout
-- [X] Playlist logic
-- [X] Ability to link directly to playlist.
-- [X] Create TrackTable component for less redundancy.
 - [ ] Select row when a song is playing on table
 - [ ] Fix options menu on click (Right now it plays the song as well)
 - [ ] Ability to remove playlists
 
 # Known Bugs
 
-- None at the moment, please create an issue if you find one.
+- Multiple playlists are buggy. One playlist works fine, but switching between playlists is causing issues.
+- Play is being interrupted by new load requests. Make sure all load requests happen after music is paused.
 
 # Installation
 
@@ -79,6 +75,6 @@ Run `backend/api/video-to-track.js --videoId="<VIDEO_ID>"` to convert a YouTube 
 
 Run `backend/api/download.js --limit=25 --genre="Dance Electronic"` to download songs from the YouTube Audio Library. Both `limit` and `genre` are optional arguments.
 
-NOTE: `COOKIES` in `backend/api/.env` is required for this script to run. (It will throw an error if it's not present.)
+NOTE: `YOUTUBE_AUDIO_LIBRARY_COOKIES` in `backend/api/.env` is required for this script to run. (It will throw an error if it's not present.)
 
 NOTE 2: Make sure to shut down your server during the running of the above script. If you do not, anything that happens during this time on the frontend (ex. new user login) will override during the download script being ran.

@@ -2,11 +2,13 @@ import * as actions from './actions';
 
 export default {
   title: 'Melodious',
+  navMinimized: false,
 
   session: {
     loggedIn: false,
     userLevel: 'guest',
-    fetched: false
+    fetched: false,
+    playlists: []
   },
 
   player: {

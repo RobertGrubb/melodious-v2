@@ -91,12 +91,13 @@ const TrackTable = props => {
     {
       title: 'Artist',
       dataIndex: 'artist',
-      key: 'artist',
+      key: 'artist'
     },
     {
       title: 'Genre',
       dataIndex: 'genre',
       key: 'genre',
+      className: 'no-show-mobile'
     },
     {
       title: 'Credits',
@@ -115,6 +116,7 @@ const TrackTable = props => {
       title: 'Duration',
       dataIndex: 'duration',
       key: 'duration',
+      className: 'no-show-mobile'
     }
   ];
 
@@ -124,7 +126,8 @@ const TrackTable = props => {
       title: '',
       dataIndex: 'id',
       key: 'id',
-      render: id => <Dropdown trigger="click" overlay={menu.bind(this, id)}><Button shape="circle"><EllipsisOutlined /></Button></Dropdown>
+      render: id => <Dropdown trigger="click" overlay={menu.bind(this, id)}><Button shape="circle"><EllipsisOutlined /></Button></Dropdown>,
+      className: 'no-show-mobile'
     });
   }
 

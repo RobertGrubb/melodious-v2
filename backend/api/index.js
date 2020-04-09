@@ -19,6 +19,11 @@ const youtube = require('./libs/youtube');
 const twitch = require('./libs/twitch');
 const YoutubeDownloader = require('./libs/downloader');
 
+const logger = text => {
+  if (Array.isArray(text) || text instanceof Object) return console.log(text);
+  console.log(`[Melodious API]: ${text}`);
+}
+
 // Instantiate the YouTube downloader
 const downloader = new YoutubeDownloader({
   ffmpegPath: 'ffmpeg',
@@ -43,7 +48,8 @@ db.defaults({ tracks: [], users: [], playlists: [] }).write();
 let adminAccounts = [];
 if (process.env.ADMIN_ACCOUNTS) {
   adminAccounts = process.env.ADMIN_ACCOUNTS.split(',');
-  console.log('Loaded admin accounts', adminAccounts);
+  logger('Loaded admin accounts');
+  logger(adminAccounts);
 }
 
 // Whitelist for API routes
@@ -129,6 +135,8 @@ app.get('/stream/:id', async (req, res) => {
 app.get('/playlist/:id', cors(corsOptions), async (req, res) => {
   const playlistId = req.params.id;
   const playlist = db.get('playlists').find({ id: playlistId }).value();
+
+  logger(`Sending playlist data for Playlist:${req.params.id}`);
 
   res.status(200).json({
     success: true,
@@ -271,6 +279,8 @@ app.post('/login', cors(corsOptions), async (req, res) => {
         id = user.id;
       }
 
+      logger(`${u.login} has logged in successfully.`);
+
       // Return a 200 status along with user data.
       return res.status(200).json({
         id: id,
@@ -303,6 +313,8 @@ app.get('/session/:id', cors(corsOptions), async (req, res) => {
 
   // If no user was found, return unauthorized
   if (!user) return errors.unauthorized(res);
+
+  logger(`Retrieved session ${req.params.id} successfully.`);
 
   // Return all session data.
   return res.status(200).json({
@@ -440,6 +452,8 @@ app.post('/admin/tracks/edit/:id', cors(corsOptions), async (req, res) => {
     })
     .write();
 
+  logger(`Edited track ${req.params.id} successfully.`);
+
   res.status(200).json({ success: true });
 })
 
@@ -468,6 +482,8 @@ app.post('/admin/tracks/delete/:id', cors(corsOptions), async (req, res) => {
   db.get('tracks')
     .remove({ id: req.params.id })
     .write();
+
+  logger(`Deleted track ${req.params.id} successfully.`);
 
   res.status(200).json({ success: true });
 })
@@ -508,8 +524,10 @@ app.post('/admin/tracks/upload', cors(corsOptions), async (req, res) => {
       duration = durationRes;
     } catch (error) {
       // Do nothing.
-      console.log(error);
+      logger(error);
     }
+
+    logger(`Uploaded track ${trackId} successfully.`);
 
     // Respond with the correct data.
     res.status(200).json({
@@ -534,5 +552,5 @@ app.get('/status', (req, res) => {
 // HTTP Server initilization
 // ===================================
 http.createServer(app).listen(port, () => {
-  console.log(`Music API server running on ${port}`)
+  logger(`Music API server running on ${port}`)
 })

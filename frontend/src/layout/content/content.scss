@@ -7,8 +7,37 @@
   background: #141414;
   float: left;
 
+  @media only screen and (max-width: 600px) {
+    width: 100% !important;
+
+    .ant-page-header-heading-extra {
+        width: 30%;
+        float: right;
+    }
+  }
+
   .inner {
     height: calc(100% - 64px);
     padding: 15px;
+    padding-top: 30px;
+
+    @media only screen and (max-width: 600px) {
+      height: calc(100% - 65px);
+      margin-bottom: 80px;
+    }
+  }
+
+.ant-table {
+  display: block;
+
+    @media screen and (max-width: 600px) {
+      thead {
+        display: none;
+      }
+
+      td.no-show-mobile {
+        display: none;
+      }
+    }
   }
 }

@@ -2,7 +2,12 @@ import React from 'react';
 import { subscribe } from 'react-contextual';
 import { navigate } from 'hookrouter';
 import { PageHeader, Button, Avatar, Menu, Dropdown } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
+
+import {
+  MenuUnfoldOutlined,
+  MenuFoldOutlined,
+  DownOutlined
+} from '@ant-design/icons';
 
 import './toolbar.scss';
 
@@ -39,6 +44,8 @@ const Toolbar = props => {
       title={title}
       className="toolbar__container"
       extra={buttons}
+      backIcon={(props.navMinimized ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />)}
+      onBack={props.minimizeNavigation.bind(this, !props.navMinimized)}
     />
   );
 }
