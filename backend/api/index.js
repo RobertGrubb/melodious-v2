@@ -86,7 +86,7 @@ app.get('/tracks', cors(corsOptions), async (req, res) => {
   return res.status(200).json(data);
 })
 
-app.post('/event/load-track', (req, res) => {
+app.post('/event/load-track', cors(corsOptions), (req, res) => {
   // Get body params
   const { userId, id } = req.body;
 
