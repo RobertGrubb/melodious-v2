@@ -1,0 +1,150 @@
+<html>
+
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: transparent;
+      color: #fff;
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+    }
+
+    .box {
+      width: 300px;
+      height: 70px;
+      background: #555;
+    }
+
+    .box-main {
+      height: 70px;
+    }
+
+    .m {
+      float: left;
+      width: 70px;
+      height: 70px;
+      text-align: center;
+      background: #177ddc;
+    }
+
+    .m-text {
+      line-height: 70px;
+      color: #fff;
+      font-weight: bold;
+      font-size: 40px;
+    }
+
+    .content {
+      float: left;
+      display: inline-block;
+      width: 210px;
+      height: 70px;
+    }
+
+    .inner {
+      padding: 10px;
+      height: 50px;
+      width: 190px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .track-title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .track-artist {
+      font-size: 12px;
+      font-weight: light;
+    }
+
+    .marquee {
+      width: 100%;
+      height: 25px;
+      overflow: hidden;
+      position: relative;
+      color: #fff;
+      font-size: 10px;
+      background: rgba(0, 0, 0, 0.8);
+    }
+
+    .marquee p {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      line-height: 25px;
+      text-align: center;
+      -moz-transform: translateX(100%);
+      -webkit-transform: translateX(100%);
+      transform: translateX(100%);
+      -moz-animation: scroll-left 2s linear infinite;
+      -webkit-animation: scroll-left 2s linear infinite;
+      animation: scroll-left 20s linear infinite;
+    }
+
+    @-moz-keyframes scroll-left {
+      0% {
+        -moz-transform: translateX(100%);
+      }
+
+      100% {
+        -moz-transform: translateX(-100%);
+      }
+    }
+
+    @-webkit-keyframes scroll-left {
+      0% {
+        -webkit-transform: translateX(100%);
+      }
+
+      100% {
+        -webkit-transform: translateX(-100%);
+      }
+    }
+
+    @keyframes scroll-left {
+      0% {
+        -moz-transform: translateX(100%);
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+      }
+
+      100% {
+        -moz-transform: translateX(-100%);
+        -webkit-transform: translateX(-100%);
+        transform: translateX(-100%);
+      }
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="app.js"></script>
+</head>
+
+<body>
+  <div class="box">
+    <div class="box-main">
+      <div class="m">
+        <div class="m-text">m</div>
+      </div>
+      <div class="content">
+        <div class="inner">
+          <div>
+            <span id="track-title" class="track-title"></span><br />
+            <span id="track-artist" class="track-artist"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="credits">
+      <div class="marquee">
+        <p id="track-credits"></p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

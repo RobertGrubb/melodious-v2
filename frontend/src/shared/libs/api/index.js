@@ -70,6 +70,11 @@ const removeTrack = async id => {
   return res.data;
 }
 
+const loadTrack = async id => {
+  const userId = cookies.load('userId');
+  await axios.post(`${apiUrl}/event/load-track`, { userId, id });
+}
+
 const createTrack = async (data) => {
   const userId = cookies.load('userId');
 
@@ -94,9 +99,10 @@ export default {
   login,
   session,
   createPlaylist,
-  playlist, 
+  playlist,
   addTrackToPlaylist,
   createTrack,
   editTrack,
-  removeTrack
+  removeTrack,
+  loadTrack
 };

@@ -86,6 +86,50 @@ app.get('/tracks', cors(corsOptions), async (req, res) => {
   return res.status(200).json(data);
 })
 
+app.post('/event/load-track', (req, res) => {
+  // Get body params
+  const { userId, id } = req.body;
+
+  // If any are not present, return an error.
+  if (!userId) return errors.unauthorized(res);
+
+  // Find the user
+  const user = db.get('users').find({ id: userId }).value();
+
+  // Make sure user exists
+  if (!user) return errors.unauthorized(res);
+
+  // Find the user, assign new stream track id
+  db.get('users').find({ id: userId }).assign({ currentStreamTrackId: id }).write();
+
+  // Return success
+  return res.status(200).json({ success: true });
+});
+
+/**
+ * Handles getting the status of a streamer's latest
+ * song that they are listening to.
+ */
+app.get('/api/:username/stream', cors({ origin: '*' }), async (req, res) => {
+  const username = req.params.username;
+  if (!username) return errors.unauthorized(res);
+  const user = db.get('users').find({ login: username }).value();
+  if (!user)  return errors.unauthorized(res);
+  let stream = false;
+
+  if (user.currentStreamTrackId) {
+    const trackData = db.get('tracks').find({ id: user.currentStreamTrackId }).value();
+
+    stream = {
+      title: trackData.title,
+      artist: trackData.artist,
+      credits: trackData.credits
+    };
+  }
+
+  res.status(200).json({ stream });
+});
+
 /**
  * Streams a YouTube video in audio form.
  * Use an Audio Object from JavaScript or HTML and connect it to

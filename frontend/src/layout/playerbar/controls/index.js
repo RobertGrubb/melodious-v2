@@ -6,6 +6,7 @@ import { Row, Col, Slider } from 'antd';
 import { PauseCircleOutlined, PlayCircleOutlined, BackwardOutlined, ForwardOutlined } from '@ant-design/icons';
 
 import Loader from '../../../shared/components/loader';
+import api from '../../../shared/libs/api';
 import './controls.scss';
 
 momentDurationFormatSetup(moment);
@@ -87,12 +88,15 @@ const Controls = props => {
    * Will also set the source and currentTIme
    * if a new src is passed.
    */
-  const playAudio = (src = false) => {
+  const playAudio = async (src = false) => {
     if (src) audio.src = src;
     if (src) audio.currentTime = 0;
 
     setAudioEvents();
     if (audio.paused) audio.play();
+
+    // If logged in, update the API with the latest track played.
+    if (props.session.loggedIn) await api.loadTrack(props.trackData.tracks[props.player.currentTrack].id);
   }
 
   /**
