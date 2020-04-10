@@ -1,5 +1,18 @@
+const env = (window.location.href.includes('localhost') ? 'dev' : 'prod');
+const params = getUrlVars();
+
+const themeClasses = [
+  'body',
+  '.marquee',
+  '.box'
+];
+
 $(document).ready(function() {
-  var params = getUrlVars();
+  if (params.theme === 'light') {
+    themeClasses.forEach(function (c, i) {
+      $(c).addClass('light');
+    });
+  }
 
   if (!params.streamer) {
     $('#track-title').html('Not available');
@@ -15,7 +28,7 @@ $(document).ready(function() {
 });
 
 function getStreamInfo (username) {
-  var apiUrl = 'https://api.melodious.live/api/' + username + '/stream';
+  const apiUrl = (env === 'prod' ? 'https://api.melodious.live' : 'http://localhost:3007') + '/api/' + username + '/stream';
 
   $.ajax({
     url: apiUrl,

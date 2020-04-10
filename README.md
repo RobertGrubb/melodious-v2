@@ -13,7 +13,6 @@ A platform for twitch users to have easy access to no copyright music that they 
 # Known Bugs
 
 - Multiple playlists are buggy. One playlist works fine, but switching between playlists is causing issues.
-- Play is being interrupted by new load requests. Make sure all load requests happen after music is paused.
 
 # Installation
 
@@ -49,9 +48,19 @@ REACT_APP_TWITCH_REDIRECT_URL=""
 - `cd frontend && yarn`
 - `cd frontend && yarn start`
 
+4. Running the overlay service (Optional)
+
+- `cd overlay && yarn`
+- `yarn start`
+- `Access it via: http://localhost:3008/?streamer=username`
+
 # Database
 
 For the ease of spinning up a development API service, the API is using `lowdb`, a flat file json database api.
+
+# Overlay
+
+The overlay portion of melodious is for streamers. They would use the given url to add a browser source to their stream so they can properly give artists of the songs playing credit. This is to avoid any issues with copyrights.
 
 # Note about watch
 

@@ -420,13 +420,17 @@ app.post('/admin/tracks/add', cors(corsOptions), async (req, res) => {
       if (error)
         return res.status(400).json({ error });
 
-      response.credits = (credits ? credits : false);
+      if (typeof response !== undefined) {
+        response.credits = (credits ? credits : false);
 
-      // All is well, add it to the database.
-      db.get('tracks').push(response).write();
+        // All is well, add it to the database.
+        db.get('tracks').push(response).write();
 
-      // Return a 200 status with track data.
-      return res.status(200).json({ success: true, track: response });
+        // Return a 200 status with track data.
+        return res.status(200).json({ success: true, track: response });
+      } else {
+        return res.status(400).json({ error: true });
+      }
     });
 
   // MP3 Type Addition

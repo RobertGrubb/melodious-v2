@@ -56,7 +56,7 @@ const Navigation = props => {
 
   return (
     <div className={"navigation__container " + (props.navMinimized && ' minimized ')}>
-      <div className="logo" onClick={goTo.bind(this, '/')}>m</div>
+      <div className="logo" onClick={goTo.bind(this, '/')}>{(props.navMinimized ? 'm' : 'melodious')}</div>
       <Menu
           defaultSelectedKeys={['1']}
           defaultOpenKeys={[]}

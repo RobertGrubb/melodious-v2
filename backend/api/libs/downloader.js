@@ -40,7 +40,10 @@ class downloader {
           converter.toFormat('mp3');
           converter.saveToFile(this.fileSavePath + savedFileName);
 
-          converter.on('error', errorLog => reject(error))
+          converter.on('error', errorLog => {
+            console.log(errorLog);
+            callback(errorLog);
+          })
           converter.on('start', startCommandLog => console.log(startCommandLog));
 
           converter.on('end', () => {
