@@ -105,8 +105,6 @@ const Controls = props => {
   const playAudio = async (src = false) => {
     if (src) audio.src = src;
     if (src) audio.currentTime = 0;
-
-    setAudioEvents();
     if (audio.paused) audio.play();
 
     props.setAudioPlaying(true);
@@ -201,6 +199,8 @@ const Controls = props => {
       navigator.mediaSession.setActionHandler('previoustrack', props.previousTrack);
       navigator.mediaSession.setActionHandler('nexttrack', props.nextTrack);
     }
+
+    setAudioEvents();
   }, []);
 
   /**
