@@ -19,6 +19,8 @@ const Controls = props => {
   const [repeat, setRepeat] = useState(false);
   const [playing, setPlaying] = useState(false);
 
+  const originalDocumentTitle = 'Melodious';
+
   /**
    * Do not load bar unless there are tracks.
    */
@@ -74,12 +76,14 @@ const Controls = props => {
   const handleAudioOnPlay = () => {
     props.setAudioPlaying(true);
     setPlaying(true);
+    if (props.player.currentTrack) document.title = `${props.trackData.tracks[props.player.currentTrack].title} - ${props.trackData.tracks[props.player.currentTrack].artist}`;
   }
 
   // Update state in multiple places.
   const handleAudioOnPause = () => {
     props.setAudioPlaying(false);
     setPlaying(false)
+    document.title = originalDocumentTitle;
   };
 
   /**
@@ -190,6 +194,13 @@ const Controls = props => {
     return document.removeEventListener('player.resume', resumeAudio.bind(this));
   }, [])
 
+  useEffect(() => {
+    navigator.mediaSession.setActionHandler('play', playAudio);
+    navigator.mediaSession.setActionHandler('pause', pauseAudio);
+    navigator.mediaSession.setActionHandler('previoustrack', props.previousTrack);
+    navigator.mediaSession.setActionHandler('nexttrack', props.nextTrack);
+  }, []);
+
   /**
    * Plays new source based on the track passed.
    */
@@ -200,6 +211,18 @@ const Controls = props => {
       setTimeout(() => {
         playAudio(src);
       }, 200);
+
+      if ('mediaSession' in navigator) {
+
+        navigator.mediaSession.metadata = new window.MediaMetadata({
+          title: props.trackData.tracks[props.player.currentTrack].title,
+          artist: props.trackData.tracks[props.player.currentTrack].artist,
+          artwork: [
+            { src: '/m.jpg',   sizes: '96x96',   type: 'image/jpeg' },
+            { src: '/m.jpg', sizes: '128x128', type: 'image/jpeg' }
+          ]
+        });
+      }
     }
   }, [props.player.currentTrack, props.player.source]);
 

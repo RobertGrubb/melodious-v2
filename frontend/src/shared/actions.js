@@ -108,7 +108,7 @@ export const nextTrack = shuffle => state => {
   if (player.audio) player.audio.pause();
   let currentTrack = player.currentTrack;
 
-  if (shuffle) {
+  if (shuffle === true) {
     currentTrack = Math.floor(Math.random() * state.trackData.tracks.length);
   } else {
     if (currentTrack === false) currentTrack = 0;

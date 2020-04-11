@@ -21,7 +21,7 @@ const Info = props => {
   return (
     <>
       {
-        props.player.currentTrack !== false &&
+        props.player.currentTrack !== false ?
         (
           <div className="info__container">
             <div className="cover">
@@ -35,6 +35,9 @@ const Info = props => {
               <div className="artist">{artist}</div>
             </div>
           </div>
+        ):
+        (
+          <div className="info__container transparent" />
         )
       }
     </>
