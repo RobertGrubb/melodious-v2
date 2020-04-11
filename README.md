@@ -6,13 +6,11 @@ A platform for twitch users to have easy access to no copyright music that they 
 
 # Todo Items
 
-- [ ] Select row when a song is playing on table
-- [ ] Fix options menu on click (Right now it plays the song as well)
 - [ ] Ability to remove playlists
 
 # Known Bugs
 
-- Multiple playlists are buggy. One playlist works fine, but switching between playlists is causing issues.
+- None at the moment
 
 # Installation
 
