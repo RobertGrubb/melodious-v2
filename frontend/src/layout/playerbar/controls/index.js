@@ -195,10 +195,12 @@ const Controls = props => {
   }, [])
 
   useEffect(() => {
-    navigator.mediaSession.setActionHandler('play', playAudio);
-    navigator.mediaSession.setActionHandler('pause', pauseAudio);
-    navigator.mediaSession.setActionHandler('previoustrack', props.previousTrack);
-    navigator.mediaSession.setActionHandler('nexttrack', props.nextTrack);
+    if ('mediaSession' in navigator) {
+      navigator.mediaSession.setActionHandler('play', playAudio);
+      navigator.mediaSession.setActionHandler('pause', pauseAudio);
+      navigator.mediaSession.setActionHandler('previoustrack', props.previousTrack);
+      navigator.mediaSession.setActionHandler('nexttrack', props.nextTrack);
+    }
   }, []);
 
   /**
