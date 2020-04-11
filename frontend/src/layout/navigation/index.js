@@ -25,8 +25,6 @@ const Navigation = props => {
   const [playlistDescription, setPlaylistDescription] = useState('');
   const size = useWindowSize();
 
-  console.log(size);
-
   // Navigation method
   const goTo = (url) => navigate(url);
 

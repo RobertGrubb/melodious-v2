@@ -30,6 +30,24 @@
 .ant-table {
   display: block;
 
+    .show-on-hover {
+      opacity: 0;
+      transition: .2s ease all;
+      cursor: pointer;
+    }
+
+    tr.row-active {
+      td {
+        background: #262626;
+      }
+    }
+
+    tr:hover {
+      .show-on-hover {
+        opacity: 1;
+      }
+    }
+
     @media screen and (max-width: 600px) {
       thead {
         display: none;
@@ -38,6 +56,8 @@
       td.no-show-mobile {
         display: none;
       }
+
+
     }
   }
 }

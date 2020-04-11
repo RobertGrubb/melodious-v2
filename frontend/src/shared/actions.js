@@ -96,7 +96,8 @@ export const updateSource = (source, tracks, key) => state => {
   return {
     player: {
       ...state.player,
-      currentTrack: key
+      currentTrack: key,
+      source: source
     },
     trackData
   }
@@ -118,7 +119,8 @@ export const nextTrack = shuffle => state => {
   return {
     player: {
       ...state.player,
-      currentTrack: currentTrack
+      currentTrack: currentTrack,
+      audioPlaying: true
     }
   };
 }
@@ -135,6 +137,16 @@ export const previousTrack = () => state => {
     player: {
       ...state.player,
       currentTrack: currentTrack,
+      audioPlaying: true
+    }
+  };
+}
+
+export const setAudioPlaying = playing => state => {
+  return {
+    player: {
+      ...state.player,
+      audioPlaying: playing
     }
   };
 }

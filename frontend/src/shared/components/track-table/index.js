@@ -6,7 +6,9 @@ import * as linkify from 'linkifyjs';
 import linkifyHtml from 'linkifyjs/html';
 
 import {
-  EllipsisOutlined
+  EllipsisOutlined,
+  PauseCircleOutlined,
+  PlayCircleOutlined
 } from '@ant-design/icons';
 
 import Loader from '../loader';
@@ -31,6 +33,27 @@ const TrackTable = props => {
     }
   }
 
+  /**
+   * Dispatches the pause event so the controller
+   * can listen for it.
+   */
+  const dispatchPause = () => {
+    const event = new Event('player.pause');
+    document.dispatchEvent(event);
+  }
+
+  /**
+   * Dispatches custom event for the controller
+   * to listen for so it can pause the audio.
+   */
+  const dispatchResume = () => {
+    const event = new Event('player.resume');
+    document.dispatchEvent(event);
+  }
+
+  /**
+   * Formats the credits for the UI
+   */
   const creditContent = credits => {
     let formattedCredits = credits.replace(/(?:\r\n|\r|\n)/g, "<br />");
     formattedCredits = linkifyHtml(formattedCredits, { target: "_blank" });
@@ -84,6 +107,35 @@ const TrackTable = props => {
    */
   let columns = [
     {
+      title: '',
+      dataIndex: 'key',
+      key: 'options',
+      render: key => (
+        <>
+          {
+            props.player.source === props.source &&
+            props.player.currentTrack === key ?
+            (
+              <>
+                {
+                  props.player.audioPlaying === true ?
+                  (
+                    <PauseCircleOutlined onClick={dispatchPause.bind(this)} style={{fontSize: 24}} />
+                  ) :
+                  (
+                    <PlayCircleOutlined onClick={dispatchResume.bind(this)} className="show-on-hover" style={{fontSize: 24}} />
+                  )
+                }
+              </>
+            ) :
+            (
+              <PlayCircleOutlined onClick={onSetTrack.bind(this, key)} className="show-on-hover" style={{fontSize: 24}} />
+            )
+          }
+        </>
+      )
+    },
+    {
       title: 'Track',
       dataIndex: 'title',
       key: 'title',
@@ -136,10 +188,12 @@ const TrackTable = props => {
     <Table
       dataSource={dataSource}
       columns={columns}
-      onRow={(record) => ({
-          onClick: () => onSetTrack(record.key)
-      })}
       pagination={false}
+      rowClassName={(record) => {
+        return (props.player.source === props.source &&
+        props.player.currentTrack === record.key ?
+        'row-active' : '');
+      }}
     />
   );
 }

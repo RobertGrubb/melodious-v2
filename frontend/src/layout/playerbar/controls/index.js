@@ -69,8 +69,18 @@ const Controls = props => {
    */
   const handleTimeUpdate = () => setTime(audio.currentTime);
   const handleAudioOnEnded = () => next();
-  const handleAudioOnPlay = () => setPlaying(true);
-  const handleAudioOnPause = () => setPlaying(false);
+
+  // Update state in multiple places
+  const handleAudioOnPlay = () => {
+    props.setAudioPlaying(true);
+    setPlaying(true);
+  }
+
+  // Update state in multiple places.
+  const handleAudioOnPause = () => {
+    props.setAudioPlaying(false);
+    setPlaying(false)
+  };
 
   /**
    * Removes any existing audio events that are listening.
@@ -95,8 +105,34 @@ const Controls = props => {
     setAudioEvents();
     if (audio.paused) audio.play();
 
+    props.setAudioPlaying(true);
+
     // If logged in, update the API with the latest track played.
     if (props.session.loggedIn) await api.loadTrack(props.trackData.tracks[props.player.currentTrack].id);
+  }
+
+  /**
+   * Method handles pausing of the audio, as well
+   * as updated the state to playing = false.
+   *
+   * Mostly called by custom events passed from
+   * track table.
+   */
+  const pauseAudio = () => {
+    if (!audio.paused) audio.pause();
+    props.setAudioPlaying(false);
+  }
+
+  /**
+   * Method handles playing of the audio, as well
+   * as updated the state to playing = true.
+   *
+   * Mostly called by custom events passed from
+   * track table.
+   */
+  const resumeAudio = () => {
+    if (audio.paused) audio.play();
+    props.setAudioPlaying(true);
   }
 
   /**
@@ -105,15 +141,25 @@ const Controls = props => {
   const stopAudio = () => {
     removeAudioEvents();
     if (!audio.paused) audio.pause();
+    props.setAudioPlaying(false);
   }
 
+  /**
+   * Resets the audio, pauses it, sets the
+   * current time to 0, and updates state to
+   * not playing.
+   */
   const resetAudio = () => {
     removeAudioEvents();
     if (!audio.paused) audio.pause();
     audio.src = '';
     audio.currentTime = 0;
+    props.setAudioPlaying(false);
   }
 
+  /**
+   * Set the audio's volume to match the state
+   */
   const setAudioVolume = () => {
     if (audio) audio.volume = props.player.volume;
   }
@@ -128,6 +174,23 @@ const Controls = props => {
   }, [props.player.volume])
 
   /**
+   * Add event listener for player.pause from track table.
+   */
+  useEffect(() => {
+    document.addEventListener('player.pause', pauseAudio.bind(this));
+    return document.removeEventListener('player.pause', pauseAudio.bind(this));
+  }, [])
+
+
+  /**
+   * Add event listener for player.resume from track table.
+   */
+  useEffect(() => {
+    document.addEventListener('player.resume', resumeAudio.bind(this));
+    return document.removeEventListener('player.resume', resumeAudio.bind(this));
+  }, [])
+
+  /**
    * Plays new source based on the track passed.
    */
   useEffect(() => {
@@ -138,7 +201,7 @@ const Controls = props => {
         playAudio(src);
       }, 200);
     }
-  }, [props.player.currentTrack]);
+  }, [props.player.currentTrack, props.player.source]);
 
   /**
    * Format the current

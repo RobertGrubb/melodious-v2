@@ -41,8 +41,8 @@ const Playlist = props => {
    * Otherwise, just set the track key.
    */
   const setTrack = async key => {
-    if (!props.trackData.source || props.trackData.source === 'popular')
-      props.updateSource('playlist', playlist.tracks, key);
+    if (props.player.source !== props.id)
+      props.updateSource(props.id, playlist.tracks, key);
     else
       props.setTrack(key);
   };
@@ -60,6 +60,7 @@ const Playlist = props => {
 
   // Render the track table
   return (<TrackTable
+    source={props.id}
     tracks={playlist.tracks}
     loading={loading}
     onSetTrack={setTrack.bind(this)}

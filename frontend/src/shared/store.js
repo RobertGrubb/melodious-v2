@@ -15,6 +15,7 @@ export default {
     source: 'popular',
     playlistKey: false,
     currentTrack: false,
+    audioPlaying: false,
     volume: 0.75,
   },
 

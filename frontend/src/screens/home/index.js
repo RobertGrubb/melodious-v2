@@ -19,15 +19,18 @@ const Home = props => {
   const [loading, setLoading] = useState(!props.trackData.fetched);
   const [tracks, setTracks] = useState([]);
 
+  // Set the source
+  const source = 'popular';
+
   /**
    * Checks if source matches the page currently loaded.
    * Also, if it doesn't, set the source, the track list, and the key.
    * Otherwise, just set the track key.
    */
   const setTrack = async key => {
-    if (!props.trackData.source || props.trackData.source === 'playlist')  {
+    if (props.player.source !== source)  {
       const trackData = await api.tracks();
-      props.updateSource('popular', trackData, key);
+      props.updateSource(source, trackData, key);
     } else {
       props.setTrack(key);
     }
@@ -57,6 +60,7 @@ const Home = props => {
 
   // Render the track table
   return (<TrackTable
+            source={source}
             tracks={tracks}
             loading={loading}
             onSetTrack={setTrack.bind(this)}
