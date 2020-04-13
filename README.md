@@ -4,13 +4,19 @@ A platform for twitch users to have easy access to no copyright music that they 
 
 [View the Demo](https://melodious.live)
 
+# Disclaimer
+
+This project is actively being updated, and in no way tested for production release. Please keep this in mind as updates are always being pushed, and we do not endorse this application as "production ready" at all. We try our best to keep a list of actively known bugs below. If you find one, please create an issue.
+
 # Todo Items
 
+- [X] Ability to edit playlist
+- [X] Ability to upload custom tracks to your playlist
 - [ ] Ability to remove playlists
 
 # Known Bugs
 
-- None at the moment
+- If you switch from playlist to popular songs (home), then back, the active info on the info box (bottom left) screws up and pulls from the popular track list. (Thinking when you switch back to popular, it automatically sets the track list to that.)
 
 # Installation
 
