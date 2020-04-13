@@ -29,11 +29,25 @@
 
 .ant-table {
   display: block;
+  background: #0a0a0a;
 
     .show-on-hover {
       opacity: 0;
       transition: .2s ease all;
       cursor: pointer;
+    }
+
+    th {
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    td {
+      padding: 8px;
+    }
+
+    th.ant-table-cell {
+      background: transparent;
     }
 
     tr.row-active {

@@ -111,7 +111,7 @@ const TrackTable = props => {
       dataIndex: 'key',
       key: 'options',
       render: key => (
-        <>
+        <div style={{display: 'inline-block', position: 'relative', top: 2}}>
           {
             props.player.source === props.source &&
             props.player.currentTrack === key ?
@@ -132,7 +132,7 @@ const TrackTable = props => {
               <PlayCircleOutlined onClick={onSetTrack.bind(this, key)} className="show-on-hover" style={{fontSize: 24}} />
             )
           }
-        </>
+        </div>
       )
     },
     {
@@ -178,7 +178,7 @@ const TrackTable = props => {
       title: '',
       dataIndex: 'id',
       key: 'id',
-      render: id => <Dropdown trigger="click" overlay={menu.bind(this, id)}><Button shape="circle"><EllipsisOutlined /></Button></Dropdown>,
+      render: id => <Dropdown trigger="click" overlay={(props.menu ? props.menu(id) : menu.bind(this, id))}><Button shape="circle"><EllipsisOutlined /></Button></Dropdown>,
       className: 'no-show-mobile'
     });
   }

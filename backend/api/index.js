@@ -397,8 +397,14 @@ app.post('/admin/tracks/add', cors(corsOptions), async (req, res) => {
   const user = db.get('users').find({ id: req.body.authId }).value();
   if (!user) return errors.unauthorized(res);
 
-  // Are they an admin?
-  if (!adminAccounts.includes(user.login)) return errors.unauthorized(res);
+  if (req.body.playlistId) {
+    const playlist = db.get('playlists').find({ id: req.body.playlistId }).value();
+    if (!playlist) return errors.unauthorized(res);
+    if (playlist.userId !== req.body.authId) return errors.unauthorized(res);
+  } else {
+    // Are they an admin?
+    if (!adminAccounts.includes(user.login)) return errors.unauthorized(res);
+  }
 
   // If fetch type is youtube.
   if (type === 'youtube') {
@@ -423,8 +429,20 @@ app.post('/admin/tracks/add', cors(corsOptions), async (req, res) => {
       if (typeof response !== undefined) {
         response.credits = (credits ? credits : false);
 
-        // All is well, add it to the database.
-        db.get('tracks').push(response).write();
+        if (req.body.playlistId) {
+          let playlist = db.get('playlists').find({ id: req.body.playlistId }).value();
+          let tracks = playlist.tracks;
+          tracks.push(response);
+
+          db.get('playlists')
+            .find({ id: req.body.playlistId })
+            .assign({ tracks: [ ...tracks ]})
+            .write();
+
+        } else {
+          // All is well, add it to the database.
+          db.get('tracks').push(response).write();
+        }
 
         // Return a 200 status with track data.
         return res.status(200).json({ success: true, track: response });
@@ -452,8 +470,21 @@ app.post('/admin/tracks/add', cors(corsOptions), async (req, res) => {
       credits: (credits ? credits : false)
     }
 
-    // Add it to the database.
-    db.get('tracks').push(data).write();
+    if (req.body.playlistId) {
+
+      let playlist = db.get('playlists').find({ id: req.body.playlistId }).value();
+      let tracks = playlist.tracks;
+      tracks.push(data);
+
+      db.get('playlists')
+        .find({ id: req.body.playlistId })
+        assign({ tracks: [ ...tracks ]})
+        .write();
+
+    } else {
+      // All is well, add it to the database.
+      db.get('tracks').push(data).write();
+    }
 
     // Return 200 with track data.
     return res.status(200).json({ success: true, track: data });
@@ -487,20 +518,49 @@ app.post('/admin/tracks/edit/:id', cors(corsOptions), async (req, res) => {
   const user = db.get('users').find({ id: req.body.authId }).value();
   if (!user) return errors.unauthorized(res);
 
-  // Are they an admin?
-  if (!adminAccounts.includes(user.login)) return errors.unauthorized(res);
+  if (req.body.playlistId) {
+    const playlist = db.get('playlists').find({ id: req.body.playlistId }).value();
+    if (!playlist) return errors.unauthorized(res);
+    if (playlist.userId !== req.body.authId) return errors.unauthorized(res);
+    let tracks = playlist.tracks;
 
-  db.get('tracks')
-    .find({ id: req.params.id })
-    .assign({
+    let index = false;
+
+    for (let i = 0; i < playlist.tracks.length; i++)
+      if (playlist.tracks[i].id === req.params.id) index = i;
+
+    if (index === false)  return res.status(400).json({ error: 'TRACK_NOT_FOUND' });
+
+    playlist.tracks[index] = {
+      ...playlist.tracks[index],
       title,
       artist,
       genre,
       credits
-    })
-    .write();
+    };
 
-  logger(`Edited track ${req.params.id} successfully.`);
+    db.get('playlists')
+      .find({ id: playlist.id })
+      .assign( { tracks: [ ...playlist.tracks ]})
+      .write();
+
+    logger(`Edited playlist track ${req.params.id} successfully.`);
+  } else {
+    // Are they an admin?
+    if (!adminAccounts.includes(user.login)) return errors.unauthorized(res);
+
+    db.get('tracks')
+      .find({ id: req.params.id })
+      .assign({
+        title,
+        artist,
+        genre,
+        credits
+      })
+      .write();
+
+    logger(`Edited track ${req.params.id} successfully.`);
+  }
 
   res.status(200).json({ success: true });
 })
@@ -524,14 +584,74 @@ app.post('/admin/tracks/delete/:id', cors(corsOptions), async (req, res) => {
   const user = db.get('users').find({ id: req.body.authId }).value();
   if (!user) return errors.unauthorized(res);
 
-  // Are they an admin?
-  if (!adminAccounts.includes(user.login)) return errors.unauthorized(res);
+  if (req.body.playlistId) {
+    let playlist = db.get('playlists').find({ id: req.body.playlistId }).value();
+    if (!playlist) return errors.unauthorized(res);
+    if (playlist.userId !== req.body.authId) return errors.unauthorized(res);
 
-  db.get('tracks')
-    .remove({ id: req.params.id })
+    let index = false;
+
+    for (let i = 0; i < playlist.tracks.length; i++)
+      if (playlist.tracks[i].id === req.params.id) index = i;
+
+    if (index === false)  return res.status(400).json({ error: 'TRACK_NOT_FOUND' });
+
+    let newTrackData = playlist.tracks.splice(index, 1);
+
+    db.get('playlists')
+      .find({ id: playlist.id })
+      .assign( { tracks: [ ...newTrackData ]})
+      .write();
+
+    logger(`Deleted playlist track ${req.params.id} successfully.`);
+  } else {
+    // Are they an admin?
+    if (!adminAccounts.includes(user.login)) return errors.unauthorized(res);
+
+    db.get('tracks')
+      .remove({ id: req.params.id })
+      .write();
+
+    logger(`Deleted track ${req.params.id} successfully.`);
+  }
+
+  res.status(200).json({ success: true });
+})
+
+/**
+ * ADMIN ROUTES
+ *
+ * Example of an admin route.
+ *
+ * @param { string } authId (Required for admin validation)
+ *
+ */
+app.post('/admin/playlist/edit/:id', cors(corsOptions), async (req, res) => {
+  // If no authId was provided, error out.
+  if (!req.body.authId) return errors.unauthorized(res);
+
+  // If id is not provided
+  if (!req.params.id) return errors.unauthorized(res);
+
+  // Attempt to find a user that matches login in database.
+  const user = db.get('users').find({ id: req.body.authId }).value();
+  if (!user) return errors.unauthorized(res);
+
+  let playlist = db.get('playlists').find({ id: req.params.id }).value();
+  if (!playlist) return errors.unauthorized(res);
+
+  if (playlist.userId !== req.body.authId || !adminAccounts.includes(user.login))
+    return errors.unauthorized(res);
+
+  db.get('playlists')
+    .find({ id: playlist.id })
+    .assign({
+      title: req.body.title,
+      description: req.body.description
+    })
     .write();
 
-  logger(`Deleted track ${req.params.id} successfully.`);
+  logger(`Editied playlist ${req.params.id} successfully.`);
 
   res.status(200).json({ success: true });
 })

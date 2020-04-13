@@ -24,6 +24,20 @@ const playlist = async id => {
   return res.data;
 }
 
+const editPlaylist = async (data) => {
+  const userId = cookies.load('userId');
+
+  let postData = {
+    id: data.id,
+    title: data.title,
+    description: data.description,
+    authId: userId
+  };
+
+  const res = await axios.post(`${apiUrl}/admin/playlist/edit/${data.id}`, postData);
+  return res.data;
+}
+
 const addTrackToPlaylist = async (trackId, playlistId) => {
   const userId = cookies.load('userId');
   const res = await axios.post(`${apiUrl}/playlist/${playlistId}/track/${trackId}`);
@@ -42,7 +56,7 @@ const createPlaylist = async (title, description) => {
   return res.data;
 }
 
-const editTrack = async data => {
+const editTrack = async (data, playlistId) => {
   const userId = cookies.load('userId');
 
   let postData = {
@@ -54,17 +68,21 @@ const editTrack = async data => {
     credits: data.credits
   };
 
+  if (playlistId) postData.playlistId = playlistId;
+
   const res = await axios.post(`${apiUrl}/admin/tracks/edit/${data.id}`, postData);
   return res.data;
 }
 
-const removeTrack = async id => {
+const removeTrack = async (id, playlistId) => {
   const userId = cookies.load('userId');
 
   let postData = {
     id: id,
     authId: userId,
   };
+
+  if (playlistId) postData.playlistId = playlistId;
 
   const res = await axios.post(`${apiUrl}/admin/tracks/delete/${id}`, postData);
   return res.data;
@@ -75,7 +93,7 @@ const loadTrack = async id => {
   await axios.post(`${apiUrl}/event/load-track`, { userId, id });
 }
 
-const createTrack = async (data) => {
+const createTrack = async (data, playlistId) => {
   const userId = cookies.load('userId');
 
   let postData = {
@@ -90,6 +108,8 @@ const createTrack = async (data) => {
   if (data.type === 'youtube') postData.videoId = data.videoId;
   if (data.type === 'mp3') postData.trackData = data.trackData;
 
+  if (playlistId) postData.playlistId = playlistId;
+
   const res = await axios.post(`${apiUrl}/admin/tracks/add`, postData);
   return res.data;
 }
@@ -100,6 +120,7 @@ export default {
   session,
   createPlaylist,
   playlist,
+  editPlaylist,
   addTrackToPlaylist,
   createTrack,
   editTrack,

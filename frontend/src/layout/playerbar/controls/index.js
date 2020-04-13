@@ -207,7 +207,7 @@ const Controls = props => {
    * Plays new source based on the track passed.
    */
   useEffect(() => {
-    if (props.trackData.tracks.length) {
+    if (props.trackData.tracks.length && props.player.currentTrack !== false) {
       const src = `${process.env.REACT_APP_API_URL}/stream/${props.trackData.tracks[props.player.currentTrack].id}`;
       resetAudio();
       setTimeout(() => {

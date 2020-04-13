@@ -1,0 +1,36 @@
+.playlist__container {
+  background: linear-gradient(#222 0%, #0a0a0a 30%);
+  position: relative;
+
+  .info {
+    width: 100%;
+    padding: 50px 25px;
+    color: #fff;
+    float: left;
+    position: relative;
+    z-index: 2;
+
+    h1 {
+      margin-bottom: 5px;
+    }
+  }
+
+  .content {
+    padding-left: 100px;
+  }
+
+  .m {
+    float: left;
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    background: #177ddc;
+  }
+
+  .m-text {
+    line-height: 70px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 40px;
+  }
+}

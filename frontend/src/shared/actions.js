@@ -93,12 +93,15 @@ export const updateSource = (source, tracks, key) => state => {
   trackData.source = source;
   trackData.tracks = tracks;
 
+  let player = {
+    ...state.player,
+    source: source
+  };
+
+  if (typeof key !== 'undefined') player.currentTrack = key;
+
   return {
-    player: {
-      ...state.player,
-      currentTrack: key,
-      source: source
-    },
+    player,
     trackData
   }
 }

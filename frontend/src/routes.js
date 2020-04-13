@@ -13,7 +13,7 @@ import Loader from './shared/components/loader';
 const routes = {
   '/': () => <Home />,
   '/browse': () => <Browse />,
-  '/playlist/:id': params => <AuthedRoute authLevel="user" params={params} component={Playlist} />,
+  '/playlist/:id': params => <AuthedRoute authLevel="guest" params={params} component={Playlist} />,
   '/oauth/:platform': ({ platform }) => <Oauth platform={platform} />,
   '/admin/tracks': params => <AuthedRoute authLevel="admin" params={params} component={TracksAdmin} />,
   '/user/logout': () => <UserLogout />,

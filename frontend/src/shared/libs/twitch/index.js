@@ -6,6 +6,9 @@ const _proto = {
   returnUrl: '',
   scope: 'user_read',
 
+  /**
+   * Builds the auth link for twitch.
+   */
   authLink() {
     let url = 'https://api.twitch.tv/kraken/oauth2/authorize?response_type=code';
     if (this.clientId) url += '&client_id=' + this.clientId;
