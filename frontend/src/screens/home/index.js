@@ -55,7 +55,7 @@ const Home = props => {
   // Set loading if fetched has changed.
   useEffect(() => {
     setLoading(!props.trackData.fetched)
-    props.setTitle('Popular Songs');
+    props.setTitle('All Songs');
   }, [props.trackData.fetched])
 
   // Render the track table

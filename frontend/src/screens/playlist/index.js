@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { subscribe } from 'react-contextual';
+import { navigate } from 'hookrouter';
 import moment from 'moment';
 import { PageHeader, Table, Button, Menu, Dropdown, Modal, Input, Select, Upload, message } from 'antd';
 
@@ -9,7 +10,8 @@ import TrackTable from '../../shared/components/track-table';
 
 // Ant Design Icons
 import {
-  InboxOutlined
+  InboxOutlined,
+  EllipsisOutlined
 } from '@ant-design/icons';
 
 import './playlist.scss';
@@ -45,6 +47,18 @@ const Playlist = props => {
   const [editTrackData, setEditTrackData] = useState({});
   const [newTrackData, setNewTrackData] = useState(defaultTrackData);
   const [editPlaylistData, setEditPlaylistData] = useState({});
+
+  /**
+   * Reload session data
+   */
+  const reloadSession = async () => {
+    try {
+      const res = await api.session();
+      props.setSession(res);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   /**
    * Check if the current session user is the owner.
@@ -106,7 +120,7 @@ const Playlist = props => {
   // Update the page title on mount after playlist
   // is set.
   useEffect(() => {
-    if (playlist) props.setTitle(playlist.title);
+    if (playlist) props.setTitle('');
   }, [playlist])
 
 
@@ -165,6 +179,7 @@ const Playlist = props => {
          setEditPlaylistVisible(false);
          setEditPlaylistData({});
          await retrievePlaylist(true);
+         await reloadSession();
          setEditPlaylistLoading(false);
          return message.success('Playlist was edited successfully.');
        }
@@ -179,6 +194,35 @@ const Playlist = props => {
        setEditPlaylistLoading(false);
        return message.error('Problem editing playlist.');
      }
+   }
+
+   /**
+    * Confirms the delete action, if confirmed it will call the api
+    * and send the id of the playlist needing to be deleted.
+    */
+   const handleDelete = async id => {
+     if (window.confirm("Do you really want to remove this playlist?")) {
+       try {
+         // Call the API
+         const res = await api.removePlaylist(playlist.id);
+
+         // If successful, update all necessary states.
+         if (res.success) {
+           message.success('Playlist was deleted successfully.');
+           await reloadSession();
+           return navigate('/');
+         }
+
+         // If not successfull, return an error.
+         return message.error('Problem deleting playlist.');
+       } catch (error) {
+
+         // If not successfull, return an error.
+         return message.error('Problem deleting playlist.');
+       }
+     }
+
+     return;
    }
 
   /**
@@ -350,6 +394,14 @@ const Playlist = props => {
     )
   };
 
+  const playlistMenu = () => {
+    return (
+      <Menu>
+        <Menu.Item key="1" onClick={handleDelete.bind(this)}>Delete</Menu.Item>
+      </Menu>
+    )
+  };
+
   // Render the track table
   return (
     <div className="playlist__container">
@@ -363,7 +415,10 @@ const Playlist = props => {
             (
               <>
                 <Button onClick={openEditPlaylistModal.bind(this)}>Edit</Button>&nbsp;&nbsp;
-                <Button type="primary" onClick={setVisible.bind(this, true)}>Add Track</Button>
+                <Button type="primary" onClick={setVisible.bind(this, true)}>Add Track</Button>&nbsp;&nbsp;
+                <Dropdown trigger="click" overlay={playlistMenu.bind(this)}>
+                  <Button shape="circle"><EllipsisOutlined /></Button>
+                </Dropdown>
               </>
             )
           }

@@ -110,7 +110,10 @@ const Controls = props => {
     props.setAudioPlaying(true);
 
     // If logged in, update the API with the latest track played.
-    if (props.session.loggedIn) await api.loadTrack(props.trackData.tracks[props.player.currentTrack].id);
+    if (props.session.loggedIn) await api.loadTrack(
+      props.trackData.tracks[props.player.currentTrack].id,
+      props.player.source
+    );
   }
 
   /**

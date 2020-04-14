@@ -149,7 +149,8 @@ const TrackTable = props => {
       title: 'Genre',
       dataIndex: 'genre',
       key: 'genre',
-      className: 'no-show-mobile'
+      className: 'no-show-mobile',
+      align: 'center'
     },
     {
       title: 'Credits',
@@ -162,13 +163,15 @@ const TrackTable = props => {
         >
           <Button>Credits</Button>
         </Popover>
-      )
+      ),
+      align: 'center'
     },
     {
       title: 'Duration',
       dataIndex: 'duration',
       key: 'duration',
-      className: 'no-show-mobile'
+      className: 'no-show-mobile',
+      align: 'center'
     }
   ];
 

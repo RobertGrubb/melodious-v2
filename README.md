@@ -16,8 +16,7 @@ This project is actively being updated, and in no way tested for production rele
 
 # Known Bugs
 
-- If you switch from playlist to popular songs (home), then back, the active info on the info box (bottom left) screws up and pulls from the popular track list. (Thinking when you switch back to popular, it automatically sets the track list to that.)
-- Updating a playlist does not update the list in the userData section of the database. Must update info there as well, or change the way to pull playlist data for user nav.
+- None yet, please report them by opening an issue.
 
 # Installation
 

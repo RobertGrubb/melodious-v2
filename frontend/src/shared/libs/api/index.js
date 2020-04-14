@@ -56,6 +56,18 @@ const createPlaylist = async (title, description) => {
   return res.data;
 }
 
+const removePlaylist = async id => {
+  const userId = cookies.load('userId');
+
+  let postData = {
+    id: id,
+    authId: userId,
+  };
+
+  const res = await axios.post(`${apiUrl}/admin/playlist/delete/${id}`, postData);
+  return res.data;
+}
+
 const editTrack = async (data, playlistId) => {
   const userId = cookies.load('userId');
 
@@ -88,9 +100,9 @@ const removeTrack = async (id, playlistId) => {
   return res.data;
 }
 
-const loadTrack = async id => {
+const loadTrack = async (id, source) => {
   const userId = cookies.load('userId');
-  await axios.post(`${apiUrl}/event/load-track`, { userId, id });
+  await axios.post(`${apiUrl}/event/load-track`, { userId, id, source });
 }
 
 const createTrack = async (data, playlistId) => {
@@ -121,6 +133,7 @@ export default {
   createPlaylist,
   playlist,
   editPlaylist,
+  removePlaylist,
   addTrackToPlaylist,
   createTrack,
   editTrack,

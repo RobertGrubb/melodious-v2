@@ -88,7 +88,7 @@ app.get('/tracks', cors(corsOptions), async (req, res) => {
 
 app.post('/event/load-track', cors(corsOptions), (req, res) => {
   // Get body params
-  const { userId, id } = req.body;
+  const { userId, id, source } = req.body;
 
   // If any are not present, return an error.
   if (!userId) return errors.unauthorized(res);
@@ -100,7 +100,10 @@ app.post('/event/load-track', cors(corsOptions), (req, res) => {
   if (!user) return errors.unauthorized(res);
 
   // Find the user, assign new stream track id
-  db.get('users').find({ id: userId }).assign({ currentStreamTrackId: id }).write();
+  db.get('users').find({ id: userId }).assign({
+    currentStreamTrackId: id,
+    currentStreamSource: source
+  }).write();
 
   // Return success
   return res.status(200).json({ success: true });
@@ -118,13 +121,35 @@ app.get('/api/:username/stream', cors({ origin: '*' }), async (req, res) => {
   let stream = false;
 
   if (user.currentStreamTrackId) {
-    const trackData = db.get('tracks').find({ id: user.currentStreamTrackId }).value();
 
-    stream = {
-      title: trackData.title,
-      artist: trackData.artist,
-      credits: trackData.credits
-    };
+    /**
+     * If the source is the popular playlist,
+     * then just get the info from the tracks database.
+     */
+    if (user.currentStreamSource === 'popular') {
+      const trackData = db.get('tracks').find({ id: user.currentStreamTrackId }).value();
+
+      stream = {
+        title: trackData.title,
+        artist: trackData.artist,
+        credits: trackData.credits
+      };
+
+    /**
+     * If the source is a custom playlist, go a head
+     * and pull the track information from the playlist.tracks
+     * array.
+     */
+    } else {
+      const playlist = db.get('playlists').find({ id: user.currentStreamSource }).value();
+      const trackData = playlist.tracks.find(track => track.id === user.currentStreamTrackId);
+
+      stream = {
+        title: trackData.title,
+        artist: trackData.artist,
+        credits: trackData.credits
+      };
+    }
   }
 
   res.status(200).json({ stream });
@@ -643,6 +668,20 @@ app.post('/admin/playlist/edit/:id', cors(corsOptions), async (req, res) => {
   if (playlist.userId !== req.body.authId || !adminAccounts.includes(user.login))
     return errors.unauthorized(res);
 
+  let userPlaylists = user.playlists;
+
+  for (let i = 0; i < userPlaylists.length; i++) {
+    if (userPlaylists[i].id === req.params.id) {
+      userPlaylists[i].title = req.body.title;
+      userPlaylists[i].description = req.body.description;
+    }
+  }
+
+  db.get('users')
+    .find({ id: req.body.authId })
+    .assign({ playlists: [ ...userPlaylists ]})
+    .write();
+
   db.get('playlists')
     .find({ id: playlist.id })
     .assign({
@@ -652,6 +691,51 @@ app.post('/admin/playlist/edit/:id', cors(corsOptions), async (req, res) => {
     .write();
 
   logger(`Editied playlist ${req.params.id} successfully.`);
+
+  res.status(200).json({ success: true });
+})
+
+/**
+ * ADMIN ROUTES
+ *
+ * Example of an admin route.
+ *
+ * @param { string } authId (Required for admin validation)
+ *
+ */
+app.post('/admin/playlist/delete/:id', cors(corsOptions), async (req, res) => {
+  // If no authId was provided, error out.
+  if (!req.body.authId) return errors.unauthorized(res);
+
+  // If id is not provided
+  if (!req.params.id) return errors.unauthorized(res);
+
+  // Attempt to find a user that matches login in database.
+  const user = db.get('users').find({ id: req.body.authId }).value();
+  if (!user) return errors.unauthorized(res);
+
+  const playlist = db.get('playlists').find({ id: req.params.id }).value();
+  if (!playlist) return errors.unauthorized(res);
+
+  if (playlist.userId !== req.body.authId || !adminAccounts.includes(user.login))
+    return errors.unauthorized(res);
+
+  let userPlaylists = user.playlists;
+  let index = userPlaylists.findIndex(p => p.id === req.params.id);
+  if (index === false) return res.status(400).json({ error: 'PLAYLIST_NOT_FOUND' });
+
+  userPlaylists.splice(index, 1);
+
+  db.get('users')
+    .find({ id: req.body.authId })
+    .assign({ playlists: [ ...userPlaylists ]})
+    .write();
+
+  db.get('playlists')
+    .remove({ id: playlist.id })
+    .write();
+
+  logger(`Deleted playlist ${req.params.id} successfully.`);
 
   res.status(200).json({ success: true });
 })
