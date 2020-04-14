@@ -8,11 +8,16 @@ A platform for twitch users to have easy access to no copyright music that they 
 
 This project is actively being updated, and in no way tested for production release. Please keep this in mind as updates are always being pushed, and we do not endorse this application as "production ready" at all. We try our best to keep a list of actively known bugs below. If you find one, please create an issue.
 
+# Recent Big Win
+
+You can now control next, play/pause, and previous actions via your keyboard, or bluetooth.
+
 # Todo Items
 
 - [X] Ability to edit playlist
 - [X] Ability to upload custom tracks to your playlist
-- [ ] Ability to remove playlists
+- [X] Ability to remove playlists
+- [ ] Login page update (Accept more social networks, etc)
 
 # Known Bugs
 
@@ -78,16 +83,4 @@ There are a few ways to add tracks to your melodious application. Look below for
 
 To access Melodious Admin from within the melodious application, you must first add your Twitch username to the `ADMIN_ACCOUNTS=""` environment variable in `/backend/api/.env` (Refer to installation above.)
 
-Once you have done this, run the frontend application, login with your Twitch account, then navigate to "Admin -> Tracks". From there, you can add tracks via a YouTube Video, or upload your own MP3.
-
-## YT Video Command Line
-
-Run `backend/api/video-to-track.js --videoId="<VIDEO_ID>"` to convert a YouTube video to an MP3 track, and add it to your lowdb melodious database.
-
-## YT Audio Library
-
-Run `backend/api/download.js --limit=25 --genre="Dance Electronic"` to download songs from the YouTube Audio Library. Both `limit` and `genre` are optional arguments.
-
-NOTE: `YOUTUBE_AUDIO_LIBRARY_COOKIES` in `backend/api/.env` is required for this script to run. (It will throw an error if it's not present.)
-
-NOTE 2: Make sure to shut down your server during the running of the above script. If you do not, anything that happens during this time on the frontend (ex. new user login) will override during the download script being ran.
+Once you have done this, run the frontend application, login with your Twitch account, then navigate to "Admin -> Tracks". From there, you can add tracks.
