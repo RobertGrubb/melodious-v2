@@ -15,7 +15,7 @@
     "express": "^4.17.1",
     "express-fileupload": "^1.1.7-alpha.1",
     "fluent-ffmpeg": "^2.1.2",
-    "lodash": "4.17.13",
+    "lodash": "4.17.19",
     "lowdb": "^1.0.0",
     "mp3-duration": "^1.1.0",
     "node-fetch": "^2.6.0",
