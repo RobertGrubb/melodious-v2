@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react';
-import { useRoutes } from 'hookrouter';
-import { subscribe } from 'react-contextual';
-import cookies from 'react-cookies';
+import React, { useEffect } from "react";
+import { useRoutes } from "hookrouter";
+import { subscribe } from "react-contextual";
+import cookies from "react-cookies";
 
-import Layout from './layout';
-import routes from './routes';
-import api from './shared/libs/api';
+import Layout from "./layout";
+import routes from "./routes";
+import api from "./shared/libs/api";
 
-const App = props => {
-
+const App = (props) => {
   // Pull in the routes
   const route = useRoutes(routes);
 
@@ -16,7 +15,7 @@ const App = props => {
    * Checks if an existing session is set.
    */
   const checkSession = async () => {
-    if (cookies.load('userId')) {
+    if (cookies.load("userId")) {
       try {
         const res = await api.session();
         props.setSession(res);
@@ -26,7 +25,7 @@ const App = props => {
     } else {
       props.setSessionFetched();
     }
-  }
+  };
 
   /**
    * Only run once and do not look for
@@ -37,7 +36,7 @@ const App = props => {
   }, []);
 
   // Render the layout with the given route.
-  return (<Layout>{route}</Layout>);
-}
+  return <Layout>{route}</Layout>;
+};
 
 export default subscribe()(App);

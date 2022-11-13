@@ -1,18 +1,18 @@
-import * as actions from './actions';
+import * as actions from "./actions";
 
 export default {
-  title: 'Melodious',
+  title: "Melodious",
   navMinimized: false,
 
   session: {
     loggedIn: false,
-    userLevel: 'guest',
+    userLevel: "guest",
     fetched: false,
-    playlists: []
+    playlists: [],
   },
 
   player: {
-    source: 'popular',
+    source: "popular",
     playlistKey: false,
     currentTrack: false,
     audioPlaying: false,
@@ -22,8 +22,8 @@ export default {
   trackData: {
     source: false, // false || popular || playlist
     fetched: false,
-    tracks: false
+    tracks: false,
   },
 
-  ...actions
+  ...actions,
 };

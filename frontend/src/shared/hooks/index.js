@@ -1,2 +1,2 @@
-export { useQueryParameters } from './useQueryParameters';
-export { useWindowSize } from './useWindowSize';
+export { useQueryParameters } from "./useQueryParameters";
+export { useWindowSize } from "./useWindowSize";

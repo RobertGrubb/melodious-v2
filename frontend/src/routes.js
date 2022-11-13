@@ -1,40 +1,43 @@
-import React, { useState, useEffect } from 'react';
-import { subscribe } from 'react-contextual';
-import { navigate } from 'hookrouter';
+import React, { useState, useEffect } from "react";
+import { subscribe } from "react-contextual";
+import { navigate } from "hookrouter";
 
-import Home from './screens/home';
-import Browse from './screens/browse';
-import Oauth from './screens/oauth';
-import Playlist from './screens/playlist';
-import TracksAdmin from './screens/admin/tracks';
-import UserLogout from './screens/user/logout';
-import Loader from './shared/components/loader';
+import Home from "./screens/home";
+import Browse from "./screens/browse";
+import Oauth from "./screens/oauth";
+import Playlist from "./screens/playlist";
+import TracksAdmin from "./screens/admin/tracks";
+import UserLogout from "./screens/user/logout";
+import Loader from "./shared/components/loader";
 
 const routes = {
-  '/': () => <Home />,
-  '/browse': () => <Browse />,
-  '/playlist/:id': params => <AuthedRoute authLevel="guest" params={params} component={Playlist} />,
-  '/oauth/:platform': ({ platform }) => <Oauth platform={platform} />,
-  '/admin/tracks': params => <AuthedRoute authLevel="admin" params={params} component={TracksAdmin} />,
-  '/user/logout': () => <UserLogout />,
+  "/": () => <Home />,
+  "/browse": () => <Browse />,
+  "/playlist/:id": (params) => (
+    <AuthedRoute authLevel="guest" params={params} component={Playlist} />
+  ),
+  "/oauth/:platform": ({ platform }) => <Oauth platform={platform} />,
+  "/admin/tracks": (params) => (
+    <AuthedRoute authLevel="admin" params={params} component={TracksAdmin} />
+  ),
+  "/user/logout": () => <UserLogout />,
 };
 
-const AuthedRoute = subscribe()(props => {
-
+const AuthedRoute = subscribe()((props) => {
   // Map auth levels to integers
   const levels = {
     admin: 3,
     user: 2,
-    guest: 1
+    guest: 1,
   };
 
   const { params, component } = props;
 
-  const [ loading, setLoading ] = useState(true);
-  const [ loggedIn, setLoggedIn ] = useState(false);
-  const [ userLevel, setUserLevel ] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [userLevel, setUserLevel] = useState(false);
 
-  let authLevel = (props.authLevel ? props.authLevel : 'guest');
+  let authLevel = props.authLevel ? props.authLevel : "guest";
 
   const setAuth = () => {
     if (props.session.fetched) {
@@ -43,7 +46,7 @@ const AuthedRoute = subscribe()(props => {
       setUserLevel(props.session.userLevel);
       setLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
     setAuth();
@@ -51,11 +54,9 @@ const AuthedRoute = subscribe()(props => {
 
   if (!loading)
     if (levels[userLevel] < levels[authLevel])
-      return window.location.href = '/';
-    else
-      return (<props.component {...params} />);
-  else
-    return <Loader />;
-})
+      return (window.location.href = "/");
+    else return <props.component {...params} />;
+  else return <Loader />;
+});
 
 export default routes;

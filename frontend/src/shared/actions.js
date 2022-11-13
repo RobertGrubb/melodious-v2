@@ -1,12 +1,12 @@
-import cookies from 'react-cookies';
+import cookies from "react-cookies";
 
-export const setTitle = title => state => {
+export const setTitle = (title) => (state) => {
   return { title };
-}
+};
 
-export const minimizeNavigation = navMinimized => state => {
+export const minimizeNavigation = (navMinimized) => (state) => {
   return { navMinimized };
-}
+};
 
 /**
  * ==============================
@@ -14,43 +14,43 @@ export const minimizeNavigation = navMinimized => state => {
  * ==============================
  */
 
- export const setPlaylists = playlists => state => {
-   return {
-     session: {
-       ...state.session,
-       playlists
-     }
-   }
- }
+export const setPlaylists = (playlists) => (state) => {
+  return {
+    session: {
+      ...state.session,
+      playlists,
+    },
+  };
+};
 
-export const setSession = userData => state => {
-  cookies.save('userId', userData.id, { path: '/' })
+export const setSession = (userData) => (state) => {
+  cookies.save("userId", userData.id, { path: "/" });
 
   return {
     session: {
       ...userData,
       loggedIn: true,
-      fetched: true
-    }
-  }
-}
+      fetched: true,
+    },
+  };
+};
 
-export const setSessionFetched = () => state => {
+export const setSessionFetched = () => (state) => {
   return {
     session: {
       ...state.session,
-      fetched: true
-    }
-  }
-}
+      fetched: true,
+    },
+  };
+};
 
-export const destroySession = () => state => {
-  cookies.remove('userId', { path: '/' })
+export const destroySession = () => (state) => {
+  cookies.remove("userId", { path: "/" });
 
   return {
-    session: { loggedIn: false }
-  }
-}
+    session: { loggedIn: false },
+  };
+};
 
 /**
  * ==============================
@@ -58,27 +58,27 @@ export const destroySession = () => state => {
  * ==============================
  */
 
-export const setTrack = key => state => {
+export const setTrack = (key) => (state) => {
   if (state.player.audio) state.player.audio.pause();
   if (!state.trackData.tracks[key]) return state;
 
   return {
     player: {
       ...state.player,
-      currentTrack: key
-    }
-  }
-}
+      currentTrack: key,
+    },
+  };
+};
 
- export const setTracks = tracks => state => {
-   let newTracks = {
-     ...state.trackData,
-     fetched: true,
-     tracks: tracks
-   };
+export const setTracks = (tracks) => (state) => {
+  let newTracks = {
+    ...state.trackData,
+    fetched: true,
+    tracks: tracks,
+  };
 
-   return { trackData: newTracks };
- }
+  return { trackData: newTracks };
+};
 
 /**
  * ==============================
@@ -86,7 +86,7 @@ export const setTrack = key => state => {
  * ==============================
  */
 
-export const updateSource = (source, tracks, key) => state => {
+export const updateSource = (source, tracks, key) => (state) => {
   if (state.player.audio) state.player.audio.pause();
 
   let trackData = state.trackData;
@@ -95,18 +95,18 @@ export const updateSource = (source, tracks, key) => state => {
 
   let player = {
     ...state.player,
-    source: source
+    source: source,
   };
 
-  if (typeof key !== 'undefined') player.currentTrack = key;
+  if (typeof key !== "undefined") player.currentTrack = key;
 
   return {
     player,
-    trackData
-  }
-}
+    trackData,
+  };
+};
 
-export const nextTrack = shuffle => state => {
+export const nextTrack = (shuffle) => (state) => {
   let player = state.player;
   if (player.audio) player.audio.pause();
   let currentTrack = player.currentTrack;
@@ -116,61 +116,61 @@ export const nextTrack = shuffle => state => {
   } else {
     if (currentTrack === false) currentTrack = 0;
     else currentTrack++;
-    if (currentTrack > (state.trackData.tracks.length - 1)) currentTrack = 0;
+    if (currentTrack > state.trackData.tracks.length - 1) currentTrack = 0;
   }
 
   return {
     player: {
       ...state.player,
       currentTrack: currentTrack,
-      audioPlaying: true
-    }
+      audioPlaying: true,
+    },
   };
-}
+};
 
-export const previousTrack = () => state => {
+export const previousTrack = () => (state) => {
   let player = state.player;
   let currentTrack = player.currentTrack;
   if (player.audio) player.audio.pause();
   if (currentTrack === false) currentTrack = 0;
   else currentTrack--;
-  if (currentTrack < 0) currentTrack = (state.trackData.tracks.length -1);
+  if (currentTrack < 0) currentTrack = state.trackData.tracks.length - 1;
 
   return {
     player: {
       ...state.player,
       currentTrack: currentTrack,
-      audioPlaying: true
-    }
+      audioPlaying: true,
+    },
   };
-}
+};
 
-export const setAudioPlaying = playing => state => {
+export const setAudioPlaying = (playing) => (state) => {
   return {
     player: {
       ...state.player,
-      audioPlaying: playing
-    }
+      audioPlaying: playing,
+    },
   };
-}
+};
 
-export const play = () => state => {
+export const play = () => (state) => {
   let currentTrack = state.player.currentTrack;
   if (currentTrack === false) currentTrack = 0;
 
   return {
     player: {
       ...state.player,
-      currentTrack: currentTrack
-    }
+      currentTrack: currentTrack,
+    },
   };
-}
+};
 
-export const setVolume = volume => state => {
+export const setVolume = (volume) => (state) => {
   return {
     player: {
       ...state.player,
-      volume
-    }
+      volume,
+    },
   };
-}
+};
